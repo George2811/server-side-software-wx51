@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Models\" />
     <Folder Include="Domain\Persistence\Contexts\" />
     <Folder Include="Domain\Persistence\Repositories\" />
     <Folder Include="Domain\Services\Communications\" />
