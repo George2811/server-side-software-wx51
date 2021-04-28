@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\sanch\\Desktop\\George\\WebSites\\PeruStars\\wx51-web\\server-side-software\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {}
   },
   "projects": {
@@ -21,6 +22,28 @@
           "C:\\Users\\sanch\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
+    "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {}
+  },
+  "projects": {
+    "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
+        "projectName": "PERUSTARS",
+        "projectPath": "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
+        "packagesPath": "C:\\Users\\JOYCE\\.nuget\\packages\\",
+        "outputPath": "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\JOYCE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+>>>>>>> 9212123096c8a875ed55876b06f36a0cffe0b097
         ],
         "originalTargetFrameworks": [
           "net5.0"
