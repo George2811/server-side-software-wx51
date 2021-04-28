@@ -12,6 +12,7 @@ namespace PERUSTARS.Domain.Models
         Plastic_Art,
         Literature, 
         Digital_Art,
-        Audiovisual
+        Audiovisual,
+        Acting
     }
 }
