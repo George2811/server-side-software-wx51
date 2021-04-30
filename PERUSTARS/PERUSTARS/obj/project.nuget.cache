@@ -1,17 +1,5 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "Vj9G5TcpCDAZtnIyJPNhVCSJBxQW0NXe65z279w8mA3uDExn5dl3uvFV24g2a81ri5pviz20uSzOPKEfVTx2Hw==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\sanch\\Desktop\\George\\WebSites\\PeruStars\\wx51-web\\server-side-software\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\sanch\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
-    "C:\\Users\\sanch\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\sanch\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
-    "C:\\Users\\sanch\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
-    "C:\\Users\\sanch\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
-    "C:\\Users\\sanch\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
-=======
   "dgSpecHash": "Vd6NBDfrDJ6mTuBVFss4R+Ik3h0NiaVdHwnnSFrj53Fa3Qj5zrH1gPE1JeIvuDL6dL2VFBIl1IaLTaHigHngFg==",
   "success": true,
   "projectFilePath": "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
@@ -22,7 +10,13 @@
     "C:\\Users\\JOYCE\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
     "C:\\Users\\JOYCE\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
     "C:\\Users\\JOYCE\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
->>>>>>> 9212123096c8a875ed55876b06f36a0cffe0b097
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema al leer el archivo de caché D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
