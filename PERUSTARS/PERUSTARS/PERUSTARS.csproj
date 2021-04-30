@@ -5,16 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.6" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Persistence\Contexts\" />
-    <Folder Include="Domain\Persistence\Repositories\" />
-    <Folder Include="Domain\Services\Communications\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Persistence\Repositories\" />
-    <Folder Include="Services\" />
     <Folder Include="Resources\" />
   </ItemGroup>
 
