@@ -1,26 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {}
+    "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {}
   },
   "projects": {
-    "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {
+    "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
+        "projectUniqueName": "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
         "projectName": "PERUSTARS",
-        "projectPath": "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
-        "packagesPath": "C:\\Users\\JOYCE\\.nuget\\packages\\",
-        "outputPath": "D:\\Desktop\\Aplicaciones WEB\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\obj\\",
+        "projectPath": "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
+        "packagesPath": "C:\\Users\\Diego Alonso\\.nuget\\packages\\",
+        "outputPath": "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\JOYCE\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Diego Alonso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -45,6 +45,22 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
