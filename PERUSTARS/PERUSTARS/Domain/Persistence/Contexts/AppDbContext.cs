@@ -25,6 +25,8 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             /*Aca mejor lo acabamos cuando esten todos porque en la 
              parte de relaciones si pongo solo algunas y mas tarde tenemos
             actualizar de repente se nos olvida poner alguna y gg*/
+
+            //Probando gitignore
         }
     }
 }
