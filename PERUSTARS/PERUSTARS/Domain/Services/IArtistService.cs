@@ -10,9 +10,9 @@ namespace PERUSTARS.Domain.Services
     public interface IArtistService
     {
         Task<IEnumerable<Artist>> ListAsync();
-        Task<ArtistResponse> GetByIdAsync(int id);
+        Task<ArtistResponse> GetByIdAsync(long id);
         Task<ArtistResponse> SaveAsync(Artist artist);
-        Task<ArtistResponse> UpdateAsync(int id, Artist artist);
-        Task<ArtistResponse> DeleteAsync(int id);
+        Task<ArtistResponse> UpdateAsync(long id, Artist artist);
+        Task<ArtistResponse> DeleteAsync(long id);
     }
 }
