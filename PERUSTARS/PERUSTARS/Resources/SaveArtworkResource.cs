@@ -17,6 +17,9 @@ namespace PERUSTARS.Resources
         [MaxLength(250)]
         public string ArtDescription { get; set; }
 
+        public double ArtCost { get; set; }
+        public string LinkInfo { get; set; }
+
 
     }
 }

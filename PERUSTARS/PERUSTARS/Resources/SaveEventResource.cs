@@ -29,6 +29,7 @@ namespace PERUSTARS.Resources
         [MaxLength(250)]
         public string EventDescription { get; set; }
 
-       
+        public string EventAditionalInfo { get; set; }
+
     }
 }
