@@ -1,13 +1,16 @@
-﻿using System;
+﻿using PERUSTARS.Domain.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PERUSTARS.Domain.Persistence.Repositories
 {
     public interface IArtistRepository
     {
-        //Me detuve porque estoy haciendo demasiadas cosas fuera
-        //del artist service
+        Task<IEnumerable<Artist>> ListAsync();
+        Task AddAsync(Artist artist);
+        Task<Artist> FindById(long id);
+        void Update(Artist artist);
+        void Remove(Artist artist);
     }
 }
