@@ -41,11 +41,18 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             builder.Entity<Person>().Property(p => p.Lastname).IsRequired().HasMaxLength(20);
 
 
+            /*Una persona realiza muchos reportes*/
+            builder.Entity<Person>()
+                .HasMany(p => p.ClaimTickets)
+                .WithOne(p => p.ReportMadeBy)
+                .HasForeignKey(p => p.PersonId);
 
 
-            //*******************************************//
-            /*ARTITS ENTITY*/
-            //*******************************************//
+
+
+                                //*******************************************//
+                                                   /*ARTITS ENTITY*/
+                                //*******************************************//
 
             builder.Entity<Artist>().ToTable("Artists");
 
@@ -88,6 +95,8 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             builder.Entity<Event>().Property(p => p.EventAditionalInfo);
 
 
+
+
                                 //*******************************************//
                                                 /*ARTWORK ENTITY*/
                                 //*******************************************//
@@ -105,6 +114,88 @@ namespace PERUSTARS.Domain.Persistence.Contexts
 
 
 
+
+                                    //*******************************************//
+                                                  /*ClaimTicket*/
+                                    //*******************************************//
+
+            builder.Entity<ClaimTicket>().ToTable("ClaimTickets");
+            builder.Entity<ClaimTicket>().HasKey(p => p.ClaimId);
+            builder.Entity<ClaimTicket>().Property(p => p.ClaimId).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<ClaimTicket>().Property(p => p.ClaimSubject).IsRequired().HasMaxLength(40);
+            builder.Entity<ClaimTicket>().Property(p => p.ClaimDescription).IsRequired().HasMaxLength(300);
+            builder.Entity<ClaimTicket>().Property(p => p.IncedentDate).IsRequired();
+            builder.Entity<ClaimTicket>().Property(p => p.ReportedPerson).IsRequired();
+
+
+
+
+
+
+
+                            //*******************************************//
+                                         /*FAVORITE ARTWORK*/
+                            //*******************************************//
+
+            builder.Entity<FavoriteArtwork>().ToTable("FavoriteArtworks");
+
+            builder.Entity<FavoriteArtwork>().HasKey(pt => new { pt.HobyyistId, pt.ArtworkId });
+
+            //Relaciones
+            builder.Entity<FavoriteArtwork>()
+                .HasOne(pt => pt.Hobbyist)
+                .WithMany(p => p.FavoriteArtworks)
+                .HasForeignKey(pt => pt.HobyyistId);
+
+            builder.Entity<FavoriteArtwork>()
+                .HasOne(pt => pt.Artwork)
+                .WithMany(p => p.FavoriteArtworks)
+                .HasForeignKey(pt => pt.ArtworkId);
+
+
+
+
+
+
+                                //*******************************************//
+                                                /*Followers*/
+                                //*******************************************//
+
+            builder.Entity<Follower>().ToTable("Followers");
+
+            builder.Entity<Follower>().HasKey(pt => new { pt.HobbyistId, pt.ArtistId });
+
+            //Relaciones
+            builder.Entity<Follower>()
+                .HasOne(pt => pt.Hobbyist)
+                .WithMany(p => p.Followers)
+                .HasForeignKey(pt => pt.HobbyistId);
+
+            builder.Entity<Follower>()
+                .HasOne(pt => pt.Artist)
+                .WithMany(p => p.Followers)
+                .HasForeignKey(pt => pt.ArtistId);
+
+
+                                //*******************************************//
+                                               /*Booking*/
+                                //*******************************************//
+
+            builder.Entity<Booking>().ToTable("Bookings");
+            builder.Entity<Booking>().HasKey(pt => new { pt.HobbyistId, pt.EventId });
+            builder.Entity<Booking>().Property(pt => pt.AttendanceDay);
+            builder.Entity<Booking>().Property(pt => pt.Payment);
+
+            //Relaciones
+            builder.Entity<Booking>()
+                .HasOne(pt => pt.Hobbyist)
+                .WithMany(p => p.Assistance)
+                .HasForeignKey(pt => pt.HobbyistId);
+
+            builder.Entity<Booking>()
+                .HasOne(pt => pt.Event)
+                .WithMany(p => p.Assistance)
+                .HasForeignKey(pt => pt.EventId);
 
 
         }

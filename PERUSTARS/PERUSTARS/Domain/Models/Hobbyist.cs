@@ -7,11 +7,11 @@ namespace PERUSTARS.Domain.Models
 {
     public class Hobbyist : Person
     {
-        List<ESpecialty> Interest { get; set; }
-        List<FavoriteArtwork> FavoriteArtworks { get; set; }
+        public List<ESpecialty> Interest { get; set; }
+        public List<FavoriteArtwork> FavoriteArtworks { get; set; }
 
-        List<Follower> Followers { get; set; }
+        public List<Follower> Followers { get; set; }
 
-        List<Booking> Assistance { get; set; }
+        public List<Booking> Assistance { get; set; }
     }
 }
