@@ -15,10 +15,12 @@ namespace PERUSTARS.Domain.Models
 
         public ESpecialty SpecialtyArt { get; set; }
 
-        public List<Artwork> Artworks { get; set; }
+        public IList<Artwork> Artworks { get; set; } = new List<Artwork>();
 
         public List<Event> Events { get; set; }
 
         public List<Follower> Followers { get; set; }
+
+      
     }
 }

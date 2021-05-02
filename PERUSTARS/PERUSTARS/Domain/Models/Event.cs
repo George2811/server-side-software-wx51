@@ -14,6 +14,9 @@ namespace PERUSTARS.Domain.Models
         public DateTime DateEnd { get; set; }
         public string EventDescription { get; set; }
         public string EventAditionalInfo { get; set; }
+
+        //Un Artista tiene muchos eventos
+        public long ArtistId { get; set; }
         public Artist Artist { get; set; }
 
         public List<Booking>Assistance { get; set; }

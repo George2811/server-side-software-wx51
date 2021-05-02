@@ -10,6 +10,8 @@ namespace PERUSTARS.Domain.Models
         public string Firstname { get; set; }
         public string Lastname { get; set; }
 
-        public long Id { get; set; };
+        public long Id { get; set; }
+
+        public IList<ClaimTicket> ClaimTickets { get; set; } = new List<ClaimTicket>();
     }
 }
