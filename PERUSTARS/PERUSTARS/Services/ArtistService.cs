@@ -11,38 +11,84 @@ namespace PERUSTARS.Services
 {
     public class ArtistService : IArtistService
     {
-        private readonly IArtistRepository _artistService;
+        private readonly IArtistRepository _artistRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ArtistService(IArtistRepository artistService, IUnitOfWork unitOfWork)
+        public ArtistService(IArtistRepository artistRepository, IUnitOfWork unitOfWork)
         {
-            _artistService = artistService;
+            _artistRepository = artistRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public Task<ArtistResponse> DeleteAsync(int id)
+        public async Task<ArtistResponse> DeleteAsync(long id)
         {
-            throw new NotImplementedException();
+            var existingArtist = await _artistRepository.FindById(id);
+
+            if (existingArtist == null)
+                return new ArtistResponse("Artist not found");
+
+            try
+            {
+                _artistRepository.Remove(existingArtist);
+                await _unitOfWork.CompleteAsync();
+
+                return new ArtistResponse(existingArtist);
+            }
+            catch (Exception ex)
+            {
+                return new ArtistResponse($"An error ocurred while deleting the artist: {ex.Message}");
+            }
         }
 
-        public Task<ArtistResponse> GetByIdAsync(int id)
+        public async Task<ArtistResponse> GetByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            var existingArtist = await _artistRepository.FindById(id);
+
+            if (existingArtist == null)
+                return new ArtistResponse("Artist not found");
+            return new ArtistResponse(existingArtist);
         }
 
-        public Task<IEnumerable<Artist>> ListAsync()
+        public async Task<IEnumerable<Artist>> ListAsync()
         {
-            throw new NotImplementedException();
+            return await _artistRepository.ListAsync();
         }
 
-        public Task<ArtistResponse> SaveAsync(Artist artist)
+        public async Task<ArtistResponse> SaveAsync(Artist artist)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _artistRepository.AddAsync(artist);
+                await _unitOfWork.CompleteAsync();
+
+                return new ArtistResponse(artist);
+            }
+            catch (Exception ex)
+            {
+                return new ArtistResponse($"An error ocurred while saving the artist: {ex.Message}");
+            }
         }
 
-        public Task<ArtistResponse> UpdateAsync(int id, Artist artist)
+        public async Task<ArtistResponse> UpdateAsync(long id, Artist artist)
         {
-            throw new NotImplementedException();
+            var existingArtist = await _artistRepository.FindById(id);
+
+            if (existingArtist == null)
+                return new ArtistResponse("Artist not found");
+
+            existingArtist.BrandName = artist.BrandName;
+
+            try
+            {
+                _artistRepository.Update(existingArtist);
+                await _unitOfWork.CompleteAsync();
+
+                return new ArtistResponse(existingArtist);
+            }
+            catch (Exception ex)
+            {
+                return new ArtistResponse($"An error ocurred while updating the artist: {ex.Message}");
+            }
         }
     }
 }
