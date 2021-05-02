@@ -12,6 +12,10 @@ namespace PERUSTARS.Domain.Models
         public string ArtDescription { get; set; }
         public double ArtCost { get; set; }
         public string LinkInfo { get; set; } 
+
+        //Una obra tiene muchos artistas
+        public long ArtistId { get; set; }
+
         public Artist Artist { get; set; }
 
         public List<FavoriteArtwork> FavoriteArtworks { get; set; }

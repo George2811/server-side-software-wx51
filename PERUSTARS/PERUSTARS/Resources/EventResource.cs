@@ -14,6 +14,9 @@ namespace PERUSTARS.Resources
         public DateTime DateEnd { get; set; }
         public string EventDescription { get; set; }
         public string EventAditionalInfo { get; set; }
+
+        public long ArtistId { get; set; }
+
         public ArtistResource Artist { get; set; }
 
     }
