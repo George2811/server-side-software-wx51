@@ -16,7 +16,6 @@
     <Folder Include="Extensions\" />
     <Folder Include="Resources\" />
     <Folder Include="Persistence\Repositories\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

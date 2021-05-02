@@ -76,7 +76,12 @@ namespace PERUSTARS.Services
             if (existingArtist == null)
                 return new ArtistResponse("Artist not found");
 
+            existingArtist.Firstname = artist.Firstname;
+            existingArtist.Lastname = artist.Lastname;
             existingArtist.BrandName = artist.BrandName;
+            existingArtist.Description = artist.Description;
+            existingArtist.Phrase = artist.Phrase;
+            existingArtist.SpecialtyArt = artist.SpecialtyArt;
 
             try
             {
