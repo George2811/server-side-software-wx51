@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Resources
 {
-    public class ArtistResource
+    public class ArtistResource : PersonResource
     {
         public string BrandingName{ get; set; }
 

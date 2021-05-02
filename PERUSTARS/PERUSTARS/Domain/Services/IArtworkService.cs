@@ -11,7 +11,7 @@ namespace PERUSTARS.Domain.Services
     {
          Task<IEnumerable<Artwork>> ListAsync();
 
-        Task<IEnumerable<Artwork>> ListAsyncByArtistId(long Id);
+        Task<IEnumerable<Artwork>> ListByArtistIdAsync(long Id);
         Task<ArtworkResponse> GetByIdAsync(long id);
         Task<ArtworkResponse> SaveAsync(Artwork artwork);
         Task<ArtworkResponse> UpdateAsync(long id, Artwork artwork);

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PERUSTARS.Resources
 {
-    public class SaveArtistResource
+    public class SaveArtistResource : SavePersonResource
     {
 
         [Required]
