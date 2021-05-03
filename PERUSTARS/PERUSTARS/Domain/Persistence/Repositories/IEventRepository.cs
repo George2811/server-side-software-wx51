@@ -9,7 +9,7 @@ namespace PERUSTARS.Domain.Persistence.Repositories
     public interface IEventRepository
     {
         Task<IEnumerable<Event>> ListAsync();
-        Task<IEnumerable<Event>> ListByArtistIdAsync(long eventId);
+        Task<IEnumerable<Event>> ListByArtistIdAsync(long artistId);
         Task AddAsync(Event _event);
         Task<Event> FindById(long id);
         void Update(Event _event);
