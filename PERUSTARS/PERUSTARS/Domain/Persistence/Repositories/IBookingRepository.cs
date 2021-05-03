@@ -14,10 +14,10 @@ namespace PERUSTARS.Domain.Persistence.Repositories
         Task<IEnumerable<Booking>> ListByEventIdAsync(long eventId);
         Task<IEnumerable<Booking>> ListByHobbyistIdAsync(long hobbyistId);
 
-        Task<IEnumerable<Booking>> ListByHobbyistIdAndEventIdAsync(long hobbyistId, long eventId);
+        Task<Booking> FindByHobbyistIdAndEventIdAsync(long hobbyistId, long eventId);
 
         Task AssignBookingTag(long hobbyistId, long eventId);
-        void UnassignBookingTag(long hobbyistId, long eventId);
+        Task UnassignBookingTag(long hobbyistId, long eventId);
 
         void Remove(Booking booking);
     }

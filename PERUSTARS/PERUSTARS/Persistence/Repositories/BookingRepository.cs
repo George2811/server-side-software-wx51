@@ -15,44 +15,60 @@ namespace PERUSTARS.Persistence.Repositories
         {
         }
 
-        public Task AddAsync(Booking booking)
-        {
-            throw new NotImplementedException();
+        public async Task AddAsync(Booking booking)
+        {           
+            await _context.Bookings.AddAsync(booking);
         }
 
-        public Task AssignBookingTag(long hobbyistId, long eventId)
+        public async Task AssignBookingTag(long hobbyistId, long eventId)
         {
-            throw new NotImplementedException();
+            Booking booking = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
+            if (booking == null)
+            {
+                booking = new Booking { HobbyistId = hobbyistId, EventId = eventId  };
+                await AddAsync(booking);
+            }
+
         }
 
-        public Task<IEnumerable<Booking>> ListAsync()
+        public async Task<IEnumerable<Booking>> ListAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Bookings.ToListAsync();
         }
 
-        public Task<IEnumerable<Booking>> ListByEventIdAsync(long eventId)
+        public async Task<IEnumerable<Booking>> ListByEventIdAsync(long eventId)
         {
-            throw new NotImplementedException();
+            return await _context.Bookings
+                   .Where(pt => pt.EventId == eventId)
+                   .Include(pt => pt.Event)
+                   .Include(pt => pt.Hobbyist)
+                   .ToListAsync();
         }
 
-        public Task<IEnumerable<Booking>> ListByHobbyistIdAndEventIdAsync(long hobbyistId, long eventId)
+        public async Task<Booking> FindByHobbyistIdAndEventIdAsync(long hobbyistId, long eventId)
         {
-            throw new NotImplementedException();
+            return await _context.Bookings.FindAsync(hobbyistId,eventId);
         }
 
-        public Task<IEnumerable<Booking>> ListByHobbyistIdAsync(long hobbyistId)
+        public async Task<IEnumerable<Booking>> ListByHobbyistIdAsync(long hobbyistId)
         {
-            throw new NotImplementedException();
+            return await _context.Bookings
+                 .Where(pt => pt.HobbyistId == hobbyistId)
+                 .Include(pt => pt.Event)
+                 .Include(pt => pt.Hobbyist)
+                 .ToListAsync();
         }
 
         public void Remove(Booking booking)
         {
-            throw new NotImplementedException();
+            _context.Bookings.Remove(booking);
         }
 
-        public void UnassignBookingTag(long hobbyistId, long eventId)
+        public async Task UnassignBookingTag(long hobbyistId, long eventId)
         {
-            throw new NotImplementedException();
+            Booking booking = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
+            if (booking != null)
+                Remove(booking);
         }
     }
 }

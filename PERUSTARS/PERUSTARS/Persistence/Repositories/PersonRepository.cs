@@ -22,7 +22,7 @@ namespace PERUSTARS.Persistence.Repositories
 
         public async Task<Person> FindById(long personId)
         {
-            return await _context.Hobbyists.FindAsync(personId);
+            return await _context.Persons.FindAsync(personId);
         }
 
         public async Task<IEnumerable<Person>> ListAsync()
