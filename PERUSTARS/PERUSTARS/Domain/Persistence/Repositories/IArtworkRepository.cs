@@ -10,7 +10,7 @@ namespace PERUSTARS.Domain.Persistence.Repositories
     {
         Task<IEnumerable<Artwork>> ListAsync();
         Task AddAsync(Artwork artwork);
-        Task<Artwork> FindById(long artistId);
+        Task<Artwork> FindById(long artworkId);
         Task<IEnumerable<Artwork>> ListByArtistIdAsync(long artistId);
         void Update(Artwork artwork);
         void Remove(Artwork artwork);

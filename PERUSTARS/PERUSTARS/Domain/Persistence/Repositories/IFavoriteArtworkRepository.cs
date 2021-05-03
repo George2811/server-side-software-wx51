@@ -15,7 +15,7 @@ namespace PERUSTARS.Domain.Persistence.Repositories
         Task AddAsync(FavoriteArtwork favoriteArtwork);
         void Remove(FavoriteArtwork favoriteArtwork);
         Task AssignFavoriteArtwork(long HobbyistId, long ArtworkId);
-        void UnassignFavoriteArtwork(long HobbyistId, long ArtworkId);
+        Task UnassignFavoriteArtwork(long HobbyistId, long ArtworkId);
 
     }
 }
