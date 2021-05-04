@@ -10,6 +10,6 @@ namespace PERUSTARS.Domain.Services
     public interface ISpecialtyService
     {
         Task<IEnumerable<Specialty>> ListAsync();
-        Task<SpecialtyResponse> GetByIdAsync(long Id);
+        Task<SpecialtyResponse> GetByIdAsync(long id);
     }
 }
