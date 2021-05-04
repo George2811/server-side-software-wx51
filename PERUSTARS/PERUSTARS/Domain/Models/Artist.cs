@@ -13,14 +13,13 @@ namespace PERUSTARS.Domain.Models
 
         public List<string>SocialMediaLink { get; set; }
 
-        public ESpecialty SpecialtyArt { get; set; }
+        public Specialty SpecialtyArt { get; set; }
 
         public IList<Artwork> Artworks { get; set; } = new List<Artwork>();
 
         public List<Event> Events { get; set; }
 
         public List<Follower> Followers { get; set; }
-
-      
+              
     }
 }
