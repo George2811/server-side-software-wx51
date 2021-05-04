@@ -17,13 +17,15 @@ namespace PERUSTARS.Domain.Persistence.Contexts
                      /*DEFINIENDO CLASES*/
         //*******************************************//
 
-        public DbSet<Artist> Artists { get; set; }
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Artist> Artists { get; set; }
         public DbSet<Hobbyist> Hobbyists { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Artwork> Artworks { get; set; }
         public DbSet<Follower> Followers { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Specialty> Specialties { get; set; }
+        public DbSet<HobbyistSpecialty> Interests { get; set; }
         public DbSet<FavoriteArtwork> FavoriteArtworks { get; set; }
 
 
@@ -110,14 +112,41 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             builder.Entity<Artwork>().Property(p => p.LinkInfo);
 
 
+                                //*******************************************//
+                                                /* SPECIALTY ENTITY */
+                                //*******************************************//
+
+            builder.Entity<Specialty>().ToTable("Specialties");
+            builder.Entity<Specialty>().HasKey(p => p.SpecialtyId);
+            builder.Entity<Specialty>().Property(p => p.SpecialtyId).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Specialty>().Property(p => p.SpecialtyName).IsRequired().HasMaxLength(100);
+
+
+                                //*******************************************//
+                                                 /*Interests*/
+                                 //*******************************************//
+
+            builder.Entity<HobbyistSpecialty>().ToTable("Interests");
+            builder.Entity<HobbyistSpecialty>().HasKey(pt => new { pt.HobbyistId, pt.SpecialtyId });
+
+
+            //Relaciones
+            builder.Entity<HobbyistSpecialty>()
+                .HasOne(pt => pt.Hobbyist)
+                .WithMany(p => p.HobbyistSpecialty)
+                .HasForeignKey(pt => pt.HobbyistId);
+
+            builder.Entity<HobbyistSpecialty>()
+                .HasOne(pt => pt.Specialty)
+                .WithMany(p => p.HobbyistSpecialty)
+                .HasForeignKey(pt => pt.SpecialtyId);
 
 
 
 
-
-                                    //*******************************************//
-                                                  /*ClaimTicket*/
-                                    //*******************************************//
+            //*******************************************//
+            /*ClaimTicket*/
+            //*******************************************//
 
             builder.Entity<ClaimTicket>().ToTable("ClaimTickets");
             builder.Entity<ClaimTicket>().HasKey(p => p.ClaimId);
@@ -126,7 +155,6 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             builder.Entity<ClaimTicket>().Property(p => p.ClaimDescription).IsRequired().HasMaxLength(300);
             builder.Entity<ClaimTicket>().Property(p => p.IncedentDate).IsRequired();
             builder.Entity<ClaimTicket>().Property(p => p.ReportedPerson).IsRequired();
-
 
 
 
@@ -151,8 +179,6 @@ namespace PERUSTARS.Domain.Persistence.Contexts
                 .HasOne(pt => pt.Artwork)
                 .WithMany(p => p.FavoriteArtworks)
                 .HasForeignKey(pt => pt.ArtworkId);
-
-
 
 
 
@@ -196,7 +222,6 @@ namespace PERUSTARS.Domain.Persistence.Contexts
                 .HasOne(pt => pt.Event)
                 .WithMany(p => p.Assistance)
                 .HasForeignKey(pt => pt.EventId);
-
 
         }
     }

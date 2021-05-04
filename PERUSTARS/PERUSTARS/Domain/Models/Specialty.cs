@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Domain.Models
 {
-    public class Hobbyist : Person
+    public class Specialty
     {
+        public long SpecialtyId { get; set; }
+        public string SpecialtyName { get; set; }
         public List<HobbyistSpecialty> HobbyistSpecialty { get; set; }
-        public List<FavoriteArtwork> FavoriteArtworks { get; set; }
 
-        public List<Follower> Followers { get; set; }
-
-        public List<Booking> Assistance { get; set; }
     }
 }
