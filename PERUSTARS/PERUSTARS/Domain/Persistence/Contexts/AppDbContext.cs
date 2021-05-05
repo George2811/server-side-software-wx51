@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PERUSTARS.Domain.Models;
+using PERUSTARS.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,8 @@ namespace PERUSTARS.Domain.Persistence.Contexts
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<HobbyistSpecialty> Interests { get; set; }
         public DbSet<FavoriteArtwork> FavoriteArtworks { get; set; }
+
+        public DbSet<ClaimTicket> ClaimTickets { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -222,6 +225,9 @@ namespace PERUSTARS.Domain.Persistence.Contexts
                 .HasOne(pt => pt.Event)
                 .WithMany(p => p.Assistance)
                 .HasForeignKey(pt => pt.EventId);
+
+            // Apply Naming Convention
+            builder.ApplySnakeCaseNamingConvention();
 
         }
     }
