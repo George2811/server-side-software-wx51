@@ -6,7 +6,6 @@ using PERUSTARS.Domain.Services.Communications;
 using PERUSTARS.Domain.Persistence.Repositories;
 using PERUSTARS.Services;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace PERUSTARS.Test
 {
