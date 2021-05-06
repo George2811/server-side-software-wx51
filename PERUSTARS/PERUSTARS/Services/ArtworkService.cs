@@ -14,6 +14,12 @@ namespace PERUSTARS.Services
         private readonly IArtworkRepository _artworkRepository;
         private readonly IUnitOfWork _unitOfWork;
 
+        public ArtworkService(IArtworkRepository artworkRepository, IUnitOfWork unitOfWork)
+        {
+            _artworkRepository = artworkRepository;
+            _unitOfWork = unitOfWork;
+        }
+
         public async Task<ArtworkResponse> DeleteAsync(long id)
         {
             var existingArtwork = await _artworkRepository.FindById(id);
