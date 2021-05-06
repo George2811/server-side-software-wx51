@@ -53,9 +53,9 @@ namespace PERUSTARS.Services
             return await _eventRepository.ListByArtistIdAsync(Id);
         }
 
-        public Task<IEnumerable<Event>> ListAsyncByEventType(ETypeOfEvent eTypeOf)
+        public async Task<IEnumerable<Event>> ListAsyncByEventType(ETypeOfEvent eTypeOf)
         {
-            throw new NotImplementedException();
+            return await _eventRepository.ListByEventTypeAsync(eTypeOf);
         }
 
         public async Task<EventResponse> SaveAsync(Event _event)
