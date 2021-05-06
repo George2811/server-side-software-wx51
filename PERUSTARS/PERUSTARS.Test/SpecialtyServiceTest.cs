@@ -15,7 +15,27 @@ namespace PERUSTARS.Test
         public void Setup(){}
 
         [Test]
-        public async Task GetAllAsyncWhenNoSpecialtyReturnsSpecialtyNotFoundResponse()
+        public async Task GetByIdAsyncWhenValidSpecialtyReturnsSpecialty()
+        {
+            // Arrange
+            var mockSpecialtyRepository = GetDefaultISpecialtyRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var specialtyId = 1;
+            Specialty specialty = new Specialty();
+            specialty.SpecialtyId = specialtyId;
+            mockSpecialtyRepository.Setup(r => r.FindById(specialtyId))
+                .Returns(Task.FromResult(specialty));
+
+            var service = new SpecialtyService(mockSpecialtyRepository.Object, mockUnitOfWork.Object);
+
+            // Act
+            SpecialtyResponse result = await service.GetByIdAsync(specialtyId);
+            var specialtyResult = result.Resource;
+            // Assert
+            specialtyResult.Should().Be(specialty);
+        }
+        [Test]
+        public async Task GetByIdAsyncWhenNoSpecialtyReturnsSpecialtyNotFoundResponse()
         {
             // Arrange
             var mockSpecialtyRepository = GetDefaultISpecialtyRepositoryInstance();
@@ -30,7 +50,7 @@ namespace PERUSTARS.Test
             SpecialtyResponse result = await service.GetByIdAsync(specialtyId);
             var message = result.Message;
             // Assert
-            message.Should().Be("Specialty Not Found");
+            message.Should().Be("Specialty not found");
         }
         private Mock<ISpecialtyRepository> GetDefaultISpecialtyRepositoryInstance()
         {
