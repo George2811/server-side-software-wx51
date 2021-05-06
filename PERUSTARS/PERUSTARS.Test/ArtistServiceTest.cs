@@ -6,6 +6,7 @@ using PERUSTARS.Domain.Services.Communications;
 using PERUSTARS.Domain.Persistence.Repositories;
 using PERUSTARS.Services;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace PERUSTARS.Test
 {
@@ -16,8 +17,29 @@ namespace PERUSTARS.Test
         {
         }
 
+        // GET BY ID
         [Test]
-        public async Task GetAllAsyncWhenNoArtistReturnsArtistNotFoundResponse()
+        public async Task GetByIdAsyncWhenValidArtistReturnsArtist()
+        {
+            // Arrange
+            var mockArtistRepository = GetDefaultIArtistRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var artistId = 1;
+            Artist artist = new Artist();
+            artist.Id = artistId;
+            mockArtistRepository.Setup(r => r.FindById(artistId))
+                .Returns(Task.FromResult(artist));
+
+            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object);
+
+            // Act
+            ArtistResponse result = await service.GetByIdAsync(artistId);
+            var artistResult = result.Resource;
+            // Assert
+            artistResult.Should().Be(artist);
+        }
+        [Test]
+        public async Task GetByIdAsyncWhenNoArtistFoundReturnsArtistNotFoundResponse()
         {
             // Arrange
             var mockArtistRepository = GetDefaultIArtistRepositoryInstance();
@@ -32,8 +54,9 @@ namespace PERUSTARS.Test
             ArtistResponse result = await service.GetByIdAsync(artistId);
             var message = result.Message;
             // Assert
-            message.Should().Be("Artist Not Found");
-        } 
+            message.Should().Be("Artist not found");
+        }
+
         private Mock<IArtistRepository> GetDefaultIArtistRepositoryInstance()
         {
             return new Mock<IArtistRepository>(); 

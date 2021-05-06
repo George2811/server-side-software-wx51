@@ -15,8 +15,30 @@ namespace PERUSTARS.Test
         public void Setup()
         {
         }
+
+        // GET BY ID
         [Test]
-        public async Task GetAllAsyncWhenNoArtworkReturnsArtworkNotFoundResponse()
+        public async Task GetByIdWhenValidArtworkReturnsArtwork()
+        {
+            // Arrange
+            var mockArtworkRepository = GetDefaultIArtworkRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var artworkId = 1;
+            Artwork artwork = new Artwork();
+            artwork.ArtworkId = artworkId;
+            mockArtworkRepository.Setup(r => r.FindById(artworkId))
+                .Returns(Task.FromResult(artwork));
+
+            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object);
+
+            // Act
+            ArtworkResponse result = await service.GetByIdAsync(artworkId);
+            var artworkResult = result.Resource;
+            // Assert
+            artworkResult.Should().Be(artwork);
+        }
+        [Test]
+        public async Task GetByIdWhenNoArtworkReturnsArtworkNotFoundResponse()
         {
             // Arrange
             var mockArtworkRepository = GetDefaultIArtworkRepositoryInstance();
@@ -30,8 +52,9 @@ namespace PERUSTARS.Test
             // Act
             ArtworkResponse result = await service.GetByIdAsync(artworkId);
             var message = result.Message;
+
             // Assert
-            message.Should().Be("Artwork Not Found");
+            message.Should().Be("Artwork not found");
         }
         private Mock<IArtworkRepository> GetDefaultIArtworkRepositoryInstance()
         {

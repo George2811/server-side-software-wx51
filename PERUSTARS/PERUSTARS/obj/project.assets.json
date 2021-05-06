@@ -6238,25 +6238,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sebastian Sasaki\\.nuget\\packages\\": {},
+    "C:\\Users\\Diego Alonso\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sebastian Sasaki\\Documents\\UPC\\Quinto Ciclo\\Aplicaciones Web\\Server Side\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
+      "projectUniqueName": "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
       "projectName": "PERUSTARS",
-      "projectPath": "C:\\Users\\Sebastian Sasaki\\Documents\\UPC\\Quinto Ciclo\\Aplicaciones Web\\Server Side\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
-      "packagesPath": "C:\\Users\\Sebastian Sasaki\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sebastian Sasaki\\Documents\\UPC\\Quinto Ciclo\\Aplicaciones Web\\Server Side\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\obj\\",
+      "projectPath": "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
+      "packagesPath": "C:\\Users\\Diego Alonso\\.nuget\\packages\\",
+      "outputPath": "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Sebastian Sasaki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Diego Alonso\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6342,7 +6342,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
