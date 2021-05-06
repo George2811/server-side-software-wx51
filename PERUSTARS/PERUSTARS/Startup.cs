@@ -2,11 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PERUSTARS.Domain.Persistence.Contexts;
+using PERUSTARS.Domain.Persistence.Repositories;
+using PERUSTARS.Domain.Services;
+using PERUSTARS.Persistence.Repositories;
+using PERUSTARS.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +34,35 @@ namespace PERUSTARS
         {
 
             services.AddControllers();
+
+            //Database
+
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            // Dependency Injection Configuration
+
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<IArtworkRepository, ArtworkRepository>();
+            services.AddScoped<IHobbyistRepository, HobbyistRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IClaimTicketRepository, ClaimTicketRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IFavoriteArtworkRepository, FavoriteArtworkRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IArtworkService, ArtworkService>();
+            services.AddScoped<IArtistService, ArtistService>();
+            services.AddScoped<IHobbyistService, HobbyistService>();
+
+            // Apply Endpoints Naming Convention
+            services.AddRouting(options => options.LowercaseUrls = true);
+
+            // AutoMapper Setup
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PERUSTARS", Version = "v1" });
