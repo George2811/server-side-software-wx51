@@ -33,7 +33,14 @@ namespace PERUSTARS.Persistence.Repositories
         public async Task<IEnumerable<Event>> ListByArtistIdAsync(long artistId) //falta implementar
         {
             return await _context.Events
-                  .Where(pt => pt.ArtistId == artistId)
+                  .Where(ev => ev.ArtistId == artistId)
+                  .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Event>> ListByEventTypeAsync(ETypeOfEvent typeOfEvent)
+        {
+            return await _context.Events
+                  .Where(ev => ev.EventType == typeOfEvent)
                   .ToListAsync();
         }
 
