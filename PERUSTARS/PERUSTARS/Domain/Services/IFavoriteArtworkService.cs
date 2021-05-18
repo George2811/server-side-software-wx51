@@ -10,7 +10,7 @@ namespace PERUSTARS.Domain.Services
     public interface IFavoriteArtworkService
     {
         Task<IEnumerable<FavoriteArtwork>> ListAsync();
-        Task<IEnumerable<FavoriteArtwork>> ListByHobbyistIdAsync(long Id); //HALLA LAS OBRAS FAVORITAS SEGUN EL ID DEL AFICIONADO 
+        Task<IEnumerable<FavoriteArtwork>> ListByHobbyistIdAsync(long Id); 
         Task<FavoriteArtworkResponse> AssignFavoriteArtworkAsync(long HobbyistId, long ArtworkId);
         Task<FavoriteArtworkResponse> UnassignFavoriteArtworkAsync(long HobbyistId, long ArtworkId);
     }

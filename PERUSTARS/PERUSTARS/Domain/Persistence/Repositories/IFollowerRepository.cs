@@ -15,7 +15,9 @@ namespace PERUSTARS.Domain.Persistence.Repositories
         Task AddAsync(Follower follower);
         void Remove(Follower follower);
         Task AssignFollower(long HobbyistId, long ArtistId);
-        void UnassignFollower(long HobbyistId, long ArtistId);
+        Task UnassignFollower(long HobbyistId, long ArtistId);
+
+        Task<int> CountFollower(long ArtistId);
 
     }
 }
