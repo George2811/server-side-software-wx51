@@ -16,8 +16,8 @@ namespace PERUSTARS.Domain.Persistence.Repositories
 
         Task<Booking> FindByHobbyistIdAndEventIdAsync(long hobbyistId, long eventId);
 
-        Task AssignBookingTag(long hobbyistId, long eventId);
-        Task UnassignBookingTag(long hobbyistId, long eventId);
+        Task AssignBooking(long hobbyistId, long eventId, DateTime attendance);
+        Task UnassignBooking(long hobbyistId, long eventId);
 
         void Remove(Booking booking);
     }

@@ -16,6 +16,7 @@ namespace PERUSTARS.Mapping
             CreateMap<Person, PersonResource>();
             CreateMap<Event, EventResource>();
             CreateMap<ClaimTicket, ClaimTicketResource>();
+            CreateMap<Booking, BookingResource>();
 
 
 

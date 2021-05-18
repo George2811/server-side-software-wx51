@@ -15,7 +15,7 @@ namespace PERUSTARS.Domain.Models
 
         //**************************************//
         public DateTime AttendanceDay { get; set; }
-        public bool Payment { get; set; }
+       
 
     }
 }

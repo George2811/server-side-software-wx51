@@ -13,11 +13,11 @@ namespace PERUSTARS.Services
     {
         private readonly IBookingRepository _bookingRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public async Task<BookingResponse> AssignBookingAsync(long HobbyistId, long EventId)
+        public async Task<BookingResponse> AssignBookingAsync(long HobbyistId, long EventId, DateTime attendance)
         {
             try
             {
-                await _bookingRepository.AssignBookingTag(HobbyistId, EventId);
+                await _bookingRepository.AssignBooking(HobbyistId, EventId, attendance);
                 await _unitOfWork.CompleteAsync();
                 Booking booking = await _bookingRepository.FindByHobbyistIdAndEventIdAsync(HobbyistId, EventId);
                 return new BookingResponse(booking);
@@ -43,7 +43,7 @@ namespace PERUSTARS.Services
             try
             {
                 Booking booking = await _bookingRepository.FindByHobbyistIdAndEventIdAsync(HobbyistId, EventId);
-                await _bookingRepository.UnassignBookingTag(HobbyistId, EventId);
+                await _bookingRepository.UnassignBooking(HobbyistId, EventId);
                 await _unitOfWork.CompleteAsync();
                 return new BookingResponse(booking);
             }
