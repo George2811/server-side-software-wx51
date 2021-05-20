@@ -11,9 +11,10 @@ namespace PERUSTARS.Domain.Services
     {
         Task<IEnumerable<Booking>> ListAsync();
 
+
         Task<IEnumerable<Booking>> ListAsyncByHobbyistId(long Id);
 
-        Task<BookingResponse> AssignBookingAsync(long HobbyistId, long EventId);
+        Task<BookingResponse> AssignBookingAsync(long HobbyistId, long EventId, DateTime attendance);
         Task<BookingResponse> UnassignBookingAsync(long HobbyistId, long EventId);
     }
 }

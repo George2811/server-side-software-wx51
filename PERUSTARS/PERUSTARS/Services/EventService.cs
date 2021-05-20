@@ -12,7 +12,15 @@ namespace PERUSTARS.Services
     public class EventService : IEventService
     {
         private readonly IEventRepository _eventRepository;
+        private readonly IBookingRepository _bookingRepository;
         private readonly IUnitOfWork _unitOfWork;
+
+        public EventService(IEventRepository eventRepository, IBookingRepository bookingRepository, IUnitOfWork unitOfWork)
+        {
+            _eventRepository = eventRepository;
+            _bookingRepository = bookingRepository;
+            _unitOfWork = unitOfWork;
+        }
 
         public async Task<EventResponse> DeleteAsync(long id)
         {
@@ -56,6 +64,14 @@ namespace PERUSTARS.Services
         public async Task<IEnumerable<Event>> ListAsyncByEventType(ETypeOfEvent eTypeOf)
         {
             return await _eventRepository.ListByEventTypeAsync(eTypeOf);
+        }
+
+        //Para booking
+        public async Task<IEnumerable<Event>> ListByHobbyistAsync(long hobbyistId)
+        {
+            var booking = await _bookingRepository.ListByHobbyistIdAsync(hobbyistId);
+            var events = booking.Select(pt => pt.Event).ToList();
+            return events;
         }
 
         public async Task<EventResponse> SaveAsync(Event _event)

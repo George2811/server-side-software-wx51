@@ -213,7 +213,7 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             builder.Entity<Booking>().ToTable("Bookings");
             builder.Entity<Booking>().HasKey(pt => new { pt.HobbyistId, pt.EventId });
             builder.Entity<Booking>().Property(pt => pt.AttendanceDay);
-            builder.Entity<Booking>().Property(pt => pt.Payment);
+        
 
             //Relaciones
             builder.Entity<Booking>()
