@@ -20,12 +20,12 @@ namespace PERUSTARS.Persistence.Repositories
             await _context.Bookings.AddAsync(booking);
         }
 
-        public async Task AssignBookingTag(long hobbyistId, long eventId)
+        public async Task AssignBooking(long hobbyistId, long eventId, DateTime attendance)
         {
             Booking booking = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
             if (booking == null)
             {
-                booking = new Booking { HobbyistId = hobbyistId, EventId = eventId  };
+                booking = new Booking { HobbyistId = hobbyistId, EventId = eventId  , AttendanceDay = attendance};
                 await AddAsync(booking);
             }
 
@@ -64,7 +64,7 @@ namespace PERUSTARS.Persistence.Repositories
             _context.Bookings.Remove(booking);
         }
 
-        public async Task UnassignBookingTag(long hobbyistId, long eventId)
+        public async Task UnassignBooking(long hobbyistId, long eventId)
         {
             Booking booking = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
             if (booking != null)

@@ -14,6 +14,10 @@ namespace PERUSTARS.Domain.Services
         Task<IEnumerable<Event>> ListAsyncByArtistId(long Id); //Encuentra todos los eventos por Artista
 
         Task<IEnumerable<Event>> ListAsyncByEventType(ETypeOfEvent eTypeOf); // Encuentra todos los eventos segun Ti
+
+        //PARA BOOKING
+        Task<IEnumerable<Event>> ListByHobbyistAsync(long hobbyistId); //Encuentra los eventos segun aficionado
+
         Task<EventResponse> GetByIdAsync(long id);
         Task<EventResponse> SaveAsync(Event _event);
         Task<EventResponse> UpdateAsync(long id, Event _event);

@@ -55,7 +55,7 @@ namespace PERUSTARS.Controllers
         [SwaggerOperation(
          Summary = "Get artist by Id",
          Description = "Get artist by Id",
-         OperationId = "GerArtistId")]
+         OperationId = "GerArtistById")]
         [SwaggerResponse(200, "Get artist by id", typeof(ArtistResource))]
 
         [HttpGet("{id}")]
