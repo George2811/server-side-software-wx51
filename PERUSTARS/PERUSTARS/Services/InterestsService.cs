@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Services
 {
-    public class HobbyistSpecialtyService : IHobbyistSpecialtyService
+    public class InterestsService : IInterestService
     {
-        private readonly IHobbyistSpecialtyRepository _hobbyistSpecialtyRepository;
+        private readonly IInterestRepository _hobbyistSpecialtyRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public HobbyistSpecialtyService(IHobbyistSpecialtyRepository hobbyistSpecialtyRepository, IUnitOfWork unitOfWork)
+        public InterestsService(IInterestRepository hobbyistSpecialtyRepository, IUnitOfWork unitOfWork)
         {
             _hobbyistSpecialtyRepository = hobbyistSpecialtyRepository;
             _unitOfWork = unitOfWork;
@@ -26,7 +26,7 @@ namespace PERUSTARS.Services
             {
                 await _hobbyistSpecialtyRepository.AssignHobbyistSpecialty(HobbyistId, SpecialtyId);
                 await _unitOfWork.CompleteAsync();
-                HobbyistSpecialty hobbyistSpecialty = await _hobbyistSpecialtyRepository.FindByHobbyistIdAndSpecialtyId(HobbyistId, SpecialtyId);
+                Interest hobbyistSpecialty = await _hobbyistSpecialtyRepository.FindByHobbyistIdAndSpecialtyId(HobbyistId, SpecialtyId);
                 return new HobbyistSpecialtyResponse(hobbyistSpecialty);
             }
             catch (Exception ex)
@@ -35,12 +35,12 @@ namespace PERUSTARS.Services
             }
         }
 
-        public async Task<IEnumerable<HobbyistSpecialty>> ListAsync()
+        public async Task<IEnumerable<Interest>> ListAsync()
         {
             return await _hobbyistSpecialtyRepository.ListAsync();
         }
 
-        public async Task<IEnumerable<HobbyistSpecialty>> ListByHobbyistsIdAsync(long HobbyistId)
+        public async Task<IEnumerable<Interest>> ListByHobbyistsIdAsync(long HobbyistId)
         {
             return await _hobbyistSpecialtyRepository.ListByHobbyistIdAsync(HobbyistId);
         }
@@ -49,7 +49,7 @@ namespace PERUSTARS.Services
         {
             try
             {
-                HobbyistSpecialty hobbyistSpecialty = await _hobbyistSpecialtyRepository.FindByHobbyistIdAndSpecialtyId(HobbyistId, SpecialtyId);
+                Interest hobbyistSpecialty = await _hobbyistSpecialtyRepository.FindByHobbyistIdAndSpecialtyId(HobbyistId, SpecialtyId);
                 _hobbyistSpecialtyRepository.UnassignHobbyistSpecialty(HobbyistId, SpecialtyId);
                 await _unitOfWork.CompleteAsync();
                 return new HobbyistSpecialtyResponse(hobbyistSpecialty);

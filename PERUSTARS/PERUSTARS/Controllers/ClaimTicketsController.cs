@@ -11,11 +11,11 @@ namespace PERUSTARS.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class ClaimTicketController : ControllerBase
+    public class ClaimTicketsController : ControllerBase
     {
         private readonly IClaimTicketService _claimTicketService;
 
-        public ClaimTicketController(IClaimTicketService claimTicketService)
+        public ClaimTicketsController(IClaimTicketService claimTicketService)
         {
             _claimTicketService = claimTicketService;
         }

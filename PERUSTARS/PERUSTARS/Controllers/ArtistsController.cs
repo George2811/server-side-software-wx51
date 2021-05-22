@@ -17,12 +17,12 @@ namespace PERUSTARS.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class ArtistController : ControllerBase
+    public class ArtistsController : ControllerBase
     {
         private readonly IArtistService _artistService;
         private readonly IMapper _mapper;
 
-        public ArtistController(IArtistService artistService, IMapper mapper)
+        public ArtistsController(IArtistService artistService, IMapper mapper)
         {
             _artistService = artistService;
             _mapper = mapper;

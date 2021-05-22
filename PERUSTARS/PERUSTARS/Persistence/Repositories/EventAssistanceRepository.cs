@@ -9,34 +9,34 @@ using PERUSTARS.Domain.Models;
 
 namespace PERUSTARS.Persistence.Repositories
 {
-    public class BookingRepository : BaseRepository, IBookingRepository
+    public class EventAssistanceRepository : BaseRepository, IEventAssistanceRepository
     {
-        public BookingRepository(AppDbContext context) : base(context)
+        public EventAssistanceRepository(AppDbContext context) : base(context)
         {
         }
 
-        public async Task AddAsync(Booking booking)
+        public async Task AddAsync(EventAssistance booking)
         {           
             await _context.Bookings.AddAsync(booking);
         }
 
         public async Task AssignBooking(long hobbyistId, long eventId, DateTime attendance)
         {
-            Booking booking = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
+            EventAssistance booking = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
             if (booking == null)
             {
-                booking = new Booking { HobbyistId = hobbyistId, EventId = eventId  , AttendanceDay = attendance};
+                booking = new EventAssistance { HobbyistId = hobbyistId, EventId = eventId  , AttendanceDay = attendance};
                 await AddAsync(booking);
             }
 
         }
 
-        public async Task<IEnumerable<Booking>> ListAsync()
+        public async Task<IEnumerable<EventAssistance>> ListAsync()
         {
             return await _context.Bookings.ToListAsync();
         }
 
-        public async Task<IEnumerable<Booking>> ListByEventIdAsync(long eventId)
+        public async Task<IEnumerable<EventAssistance>> ListByEventIdAsync(long eventId)
         {
             return await _context.Bookings
                    .Where(pt => pt.EventId == eventId)
@@ -45,12 +45,12 @@ namespace PERUSTARS.Persistence.Repositories
                    .ToListAsync();
         }
 
-        public async Task<Booking> FindByHobbyistIdAndEventIdAsync(long hobbyistId, long eventId)
+        public async Task<EventAssistance> FindByHobbyistIdAndEventIdAsync(long hobbyistId, long eventId)
         {
             return await _context.Bookings.FindAsync(hobbyistId,eventId);
         }
 
-        public async Task<IEnumerable<Booking>> ListByHobbyistIdAsync(long hobbyistId)
+        public async Task<IEnumerable<EventAssistance>> ListByHobbyistIdAsync(long hobbyistId)
         {
             return await _context.Bookings
                  .Where(pt => pt.HobbyistId == hobbyistId)
@@ -59,14 +59,14 @@ namespace PERUSTARS.Persistence.Repositories
                  .ToListAsync();
         }
 
-        public void Remove(Booking booking)
+        public void Remove(EventAssistance booking)
         {
             _context.Bookings.Remove(booking);
         }
 
         public async Task UnassignBooking(long hobbyistId, long eventId)
         {
-            Booking booking = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
+            EventAssistance booking = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
             if (booking != null)
                 Remove(booking);
         }

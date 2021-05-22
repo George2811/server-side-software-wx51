@@ -9,7 +9,7 @@ namespace PERUSTARS.Domain.Models
     {
         public long SpecialtyId { get; set; }
         public string SpecialtyName { get; set; }
-        public List<HobbyistSpecialty> HobbyistSpecialty { get; set; }
+        public List<Interest> Interests { get; set; }
 
     }
 }

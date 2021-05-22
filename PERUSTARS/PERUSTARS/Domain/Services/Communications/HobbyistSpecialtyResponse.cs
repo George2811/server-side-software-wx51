@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Domain.Services.Communications
 {
-    public class HobbyistSpecialtyResponse : BaseResponse<HobbyistSpecialty>
+    public class HobbyistSpecialtyResponse : BaseResponse<Interest>
     {
-        public HobbyistSpecialtyResponse(HobbyistSpecialty resource) : base(resource)
+        public HobbyistSpecialtyResponse(Interest resource) : base(resource)
         {
         }
 

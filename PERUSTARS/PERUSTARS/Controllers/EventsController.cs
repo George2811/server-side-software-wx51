@@ -16,12 +16,12 @@ namespace PERUSTARS.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class EventController : ControllerBase
+    public class EventsController : ControllerBase
     {
         private readonly IEventService _eventService;
         private readonly IMapper _mapper;
 
-        public EventController(IEventService eventService, IMapper mapper)
+        public EventsController(IEventService eventService, IMapper mapper)
         {
             _eventService = eventService;
             _mapper = mapper; 

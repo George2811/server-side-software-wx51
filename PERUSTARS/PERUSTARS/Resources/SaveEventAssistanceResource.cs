@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Resources
 {
-    public class SaveBookingResource
+    public class SaveEventAssistanceResource
     {
         [Required]
         public DateTime AttendanceDay { get; set; }

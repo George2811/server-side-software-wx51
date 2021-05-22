@@ -12,13 +12,13 @@ namespace PERUSTARS.Services
     public class EventService : IEventService
     {
         private readonly IEventRepository _eventRepository;
-        private readonly IBookingRepository _bookingRepository;
+        private readonly IEventAssistanceRepository _eventAssistanceRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public EventService(IEventRepository eventRepository, IBookingRepository bookingRepository, IUnitOfWork unitOfWork)
+        public EventService(IEventRepository eventRepository, IEventAssistanceRepository eventAsisstanceRepository, IUnitOfWork unitOfWork)
         {
             _eventRepository = eventRepository;
-            _bookingRepository = bookingRepository;
+            _eventAssistanceRepository = eventAsisstanceRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -66,11 +66,11 @@ namespace PERUSTARS.Services
             return await _eventRepository.ListByEventTypeAsync(eTypeOf);
         }
 
-        //Para booking
+        //Para event assistance
         public async Task<IEnumerable<Event>> ListByHobbyistAsync(long hobbyistId)
         {
-            var booking = await _bookingRepository.ListByHobbyistIdAsync(hobbyistId);
-            var events = booking.Select(pt => pt.Event).ToList();
+            var eventAssistance = await _eventAssistanceRepository.ListByHobbyistIdAsync(hobbyistId);
+            var events = eventAssistance.Select(pt => pt.Event).ToList();
             return events;
         }
 

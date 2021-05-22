@@ -11,11 +11,11 @@ namespace PERUSTARS.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class FavoriteArtworkController : ControllerBase
+    public class FavoriteArtworksController : ControllerBase
     {
         private readonly IFavoriteArtworkService _favoriteArtworkService;
 
-        public FavoriteArtworkController(IFavoriteArtworkService favoriteArtworkService)
+        public FavoriteArtworksController(IFavoriteArtworkService favoriteArtworkService)
         {
             _favoriteArtworkService = favoriteArtworkService;
         }

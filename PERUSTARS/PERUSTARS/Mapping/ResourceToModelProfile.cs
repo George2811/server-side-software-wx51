@@ -16,7 +16,7 @@ namespace PERUSTARS.Mapping
             CreateMap<SaveArtworkResource, Artwork>();
             CreateMap<SaveEventResource, Event>();
             CreateMap<SaveClaimTicketResource, ClaimTicket>();
-            CreateMap<SaveBookingResource, Booking>();
+            CreateMap<SaveEventAssistanceResource, EventAssistance>();
         }
     }
 }

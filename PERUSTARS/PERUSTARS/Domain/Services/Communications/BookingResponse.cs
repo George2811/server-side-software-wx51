@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Domain.Services.Communications
 {
-    public class BookingResponse : BaseResponse<Booking>
+    public class BookingResponse : BaseResponse<EventAssistance>
     {
-        public BookingResponse(Booking resource) : base(resource)
+        public BookingResponse(EventAssistance resource) : base(resource)
         {
         }
 

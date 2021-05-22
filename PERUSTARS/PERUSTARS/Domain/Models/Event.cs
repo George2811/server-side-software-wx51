@@ -19,6 +19,6 @@ namespace PERUSTARS.Domain.Models
         public long ArtistId { get; set; }
         public Artist Artist { get; set; }
 
-        public List<Booking>Assistance { get; set; }
+        public List<EventAssistance>Assistance { get; set; }
     }
 }
