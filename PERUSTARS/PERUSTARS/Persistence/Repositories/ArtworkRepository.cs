@@ -25,6 +25,30 @@ namespace PERUSTARS.Persistence.Repositories
             return await _context.Artworks.FindAsync(artworkId);
         }
 
+        public async Task<bool> isSameTitle(string title, long ArtistId)
+        {
+            bool ver = false;
+            IEnumerable<Artwork> Verification = await ListByArtistIdAsync(ArtistId);
+            List<string> titles = new List<string>();
+
+            foreach (Artwork item in Verification)
+            {
+                titles.Add(item.ArtTitle);
+            }
+
+            for (int i = 0; i < titles.Count(); i++)
+            {
+
+                if (titles[i] == title)
+                {
+                    ver = true;
+                    return ver;
+                }
+            }
+            ver = false;
+            return ver;
+        }
+
         public async Task<IEnumerable<Artwork>> ListAsync()
         {
             return await _context.Artworks.ToListAsync();

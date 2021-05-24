@@ -16,5 +16,8 @@ namespace PERUSTARS.Domain.Services
         Task<ArtworkResponse> SaveAsync(Artwork artwork);
         Task<ArtworkResponse> UpdateAsync(long id, Artwork artwork);
         Task<ArtworkResponse> DeleteAsync(long id);
+
+        Task<bool> isSameTitle(string title, long ArtistId);
+
     }
 }

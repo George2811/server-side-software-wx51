@@ -56,6 +56,104 @@ namespace PERUSTARS.Test
             // Assert
             message.Should().Be("Artwork not found");
         }
+
+
+        //REPITE TITULO DE OBRA
+
+        [Test]
+        public async Task GetIsSameTitleWhenArtistRepitTitle()
+        {
+            //Arrange
+            var mockArtworkRepository = GetDefaultIArtworkRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+
+            Artist artist = new Artist();
+            artist.Id = 1;
+            artist.Firstname = "Sebastian";
+            artist.Lastname = "Gonzales";
+            artist.BrandName = "SebasGx";
+
+            Artwork artwork1 = new Artwork(); ;
+            artwork1.ArtworkId = 1;
+            artwork1.ArtistId = 1;
+            artwork1.ArtTitle = "hola";
+
+            Artwork artwork2 = new Artwork(); ;
+            artwork2.ArtworkId = 2;
+            artwork2.ArtistId = 1;
+            artwork2.ArtTitle = "adios";
+
+
+
+
+            mockArtworkRepository.Setup(r => r.isSameTitle("hola", 1))
+                  .Returns(Task.FromResult(true));
+
+            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object);
+
+
+            //Act
+
+
+            bool result = await service.isSameTitle("hola", 1);
+
+
+            //Assert
+            Assert.IsTrue(result);
+        }
+
+
+        //NO REPITE TITULO DE OBRA
+
+        [Test]
+        public async Task GetIsSameTitleWhenArtistNOTRepitTitle()
+        {
+            //Arrange
+            var mockArtworkRepository = GetDefaultIArtworkRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+
+            Artist artist = new Artist();
+            artist.Id = 1;
+            artist.Firstname = "Sebastian";
+            artist.Lastname = "Gonzales";
+            artist.BrandName = "SebasGx";
+
+            Artwork artwork1 = new Artwork(); ;
+            artwork1.ArtworkId = 1;
+            artwork1.ArtistId = 1;
+            artwork1.ArtTitle = "hola";
+
+            Artwork artwork2 = new Artwork(); ;
+            artwork2.ArtworkId = 2;
+            artwork2.ArtistId = 1;
+            artwork2.ArtTitle = "adios";
+
+
+
+
+            mockArtworkRepository.Setup(r => r.isSameTitle("titulo", 1))
+                  .Returns(Task.FromResult(false));
+
+            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object);
+
+
+            //Act
+
+
+            bool result = await service.isSameTitle("titulo", 1);
+
+
+            //Assert
+            Assert.AreEqual(result, false);
+        }
+
+
+
+
+
+
+
+
         private Mock<IArtworkRepository> GetDefaultIArtworkRepositoryInstance()
         {
             return new Mock<IArtworkRepository>();

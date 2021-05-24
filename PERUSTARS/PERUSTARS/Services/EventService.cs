@@ -51,6 +51,12 @@ namespace PERUSTARS.Services
             return new EventResponse(existingEvent);
         }
 
+        public async Task<bool> isSameTitle(string title, long ArtistId)
+        {
+            return await _eventRepository.isSameTitle(title, ArtistId);
+
+        }
+
         public async Task<IEnumerable<Event>> ListAsync()
         {
             return await _eventRepository.ListAsync();
@@ -76,11 +82,18 @@ namespace PERUSTARS.Services
 
         public async Task<EventResponse> SaveAsync(Event _event)
         {
-            
+
+            if (_eventRepository.isSameTitle(_event.EventTitle, _event.ArtistId).Result == true)
+            {
+                return new EventResponse($"You already created an event with the same title");
+            }
+
             try
             {
                 await _eventRepository.AddAsync(_event);
                 await _unitOfWork.CompleteAsync();
+
+               
 
                 return new EventResponse(_event);
             }
@@ -97,6 +110,15 @@ namespace PERUSTARS.Services
 
             if (existingEvent == null)
                 return new EventResponse("Event not found");
+
+
+            if (existingEvent.EventTitle != _event.EventTitle)
+            {
+                if (_eventRepository.isSameTitle(_event.EventTitle, id).Result == true)
+                {
+                    return new EventResponse($"You already created an event with the same title");
+                }
+            }
 
             existingEvent.EventTitle = _event.EventTitle;
             existingEvent.EventType = _event.EventType;

@@ -49,6 +49,12 @@ namespace PERUSTARS.Services
             return new ArtistResponse(existingArtist);
         }
 
+        public async Task<bool> isSameBrandingName(string brandingname)
+        {
+            return await _artistRepository.isSameBrandingName(brandingname);
+
+        }
+
         public async Task<IEnumerable<Artist>> ListAsync()
         {
             return await _artistRepository.ListAsync();
@@ -56,6 +62,11 @@ namespace PERUSTARS.Services
 
         public async Task<ArtistResponse> SaveAsync(Artist artist)
         {
+            if (_artistRepository.isSameBrandingName(artist.BrandName).Result == true)
+            {
+                return new ArtistResponse($"Your Brand Name is already in use");
+            }
+
             try
             {
                 await _artistRepository.AddAsync(artist);
@@ -75,6 +86,14 @@ namespace PERUSTARS.Services
 
             if (existingArtist == null)
                 return new ArtistResponse("Artist not found");
+
+            if (existingArtist.BrandName != artist.BrandName)
+            {
+                if (_artistRepository.isSameBrandingName(artist.BrandName).Result == true)
+                {
+                    return new ArtistResponse($"Your NEW Brand Name is already in use");
+                }
+            }
 
             existingArtist.Firstname = artist.Firstname;
             existingArtist.Lastname = artist.Lastname;

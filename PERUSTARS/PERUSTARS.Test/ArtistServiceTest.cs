@@ -57,6 +57,86 @@ namespace PERUSTARS.Test
             message.Should().Be("Artist not found");
         }
 
+
+        //Artista repite brand name
+        [Test]
+        public async Task GetIsSameBrandNamewhenArtistRepitBrandName()
+        {
+
+
+            //ARRANGE
+            var mockArtistRepository = GetDefaultIArtistRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+
+            Artist artista1 = new Artist();
+            Artist artista2 = new Artist();
+            Artist artista3 = new Artist();
+
+            artista1.Id = 1;
+            artista1.BrandName = "Prueba";
+
+            artista2.Id = 2;
+            artista2.BrandName = "Test";
+
+            artista3.Id = 3;
+            artista3.BrandName = "Prueba_Test";
+
+            mockArtistRepository.Setup(r => r.isSameBrandingName("Prueba"))
+               .Returns(Task.FromResult(true));
+
+            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object);
+
+            //Act
+
+            bool result = await service.isSameBrandingName("Prueba");
+
+            //Asert
+
+            Assert.IsTrue(result);
+
+        }
+
+
+        [Test]
+        public async Task GetIsSameBrandNamewhenArtistNOTRepitBrandName()
+        {
+
+
+            //ARRANGE
+            var mockArtistRepository = GetDefaultIArtistRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+
+            Artist artista1 = new Artist();
+            Artist artista2 = new Artist();
+            Artist artista3 = new Artist();
+
+            artista1.Id = 1;
+            artista1.BrandName = "Prueba";
+
+            artista2.Id = 2;
+            artista2.BrandName = "Test";
+
+            artista3.Id = 3;
+            artista3.BrandName = "Prueba_Test";
+
+            mockArtistRepository.Setup(r => r.isSameBrandingName("nuevoBrandName"))
+               .Returns(Task.FromResult(false));
+
+            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object);
+
+            //Act
+
+            bool result = await service.isSameBrandingName("nuevoBrandName");
+
+            //Asert
+
+            Assert.AreEqual(result, false);
+
+        }
+
+
+
+        //Artista NO repite brand name
         private Mock<IArtistRepository> GetDefaultIArtistRepositoryInstance()
         {
             return new Mock<IArtistRepository>(); 
