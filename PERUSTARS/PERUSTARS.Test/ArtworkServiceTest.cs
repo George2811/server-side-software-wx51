@@ -37,6 +37,7 @@ namespace PERUSTARS.Test
             // Assert
             artworkResult.Should().Be(artwork);
         }
+       
         [Test]
         public async Task GetByIdWhenNoArtworkReturnsArtworkNotFoundResponse()
         {

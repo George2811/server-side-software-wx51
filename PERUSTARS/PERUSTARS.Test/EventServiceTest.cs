@@ -3,6 +3,7 @@ using Moq;
 using NUnit.Framework;
 using PERUSTARS.Domain.Models;
 using PERUSTARS.Domain.Persistence.Repositories;
+using PERUSTARS.Domain.Services.Communications;
 using PERUSTARS.Services;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,57 @@ namespace PERUSTARS.Test
         public void Setup()
         {
         }
+
+
+
+
+        // GET BY ID
+        [Test]
+        public async Task GetByIdWhenValidEventsReturnsEvents()
+        {
+            // Arrange
+            var mockEventRepository = GetDefaultIEventRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var mockBookingRepository = new Mock<IEventAssistanceRepository>();
+
+            var eventId = 1;
+            Event _event = new Event();
+            _event.EventId = eventId;
+            mockEventRepository.Setup(r => r.FindById(eventId))
+                .Returns(Task.FromResult(_event));
+
+            var service = new EventService(mockEventRepository.Object, mockBookingRepository.Object, mockUnitOfWork.Object);
+
+            // Act
+            EventResponse result = await service.GetByIdAsync(eventId);
+            var eventResult = result.Resource;
+            // Assert
+            eventResult.Should().Be(_event);
+        }
+
+        [Test]
+        public async Task GetByIdWhenNoEventReturnsEventNotFoundResponse()
+        {
+            // Arrange
+            var mockEventRepository = GetDefaultIEventRepositoryInstance();
+            var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var mockBookingRepository = new Mock<IEventAssistanceRepository>();
+            var eventId = 1;
+
+            mockEventRepository.Setup(r => r.FindById(eventId))
+               .Returns(Task.FromResult<Event>(null));
+
+            var service = new EventService(mockEventRepository.Object, mockBookingRepository.Object, mockUnitOfWork.Object);
+
+            // Act
+            EventResponse result = await service.GetByIdAsync(eventId);
+            var message = result.Message;
+
+            // Assert
+            message.Should().Be("Event not found");
+        }
+
+
 
 
         [Test]
