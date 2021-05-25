@@ -23,13 +23,15 @@ namespace PERUSTARS.Test
             // Arrange
             var mockArtworkRepository = GetDefaultIArtworkRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var favoriteArtworkRepository = new Mock<IFavoriteArtworkRepository>();
             var artworkId = 1;
+
             Artwork artwork = new Artwork();
             artwork.ArtworkId = artworkId;
             mockArtworkRepository.Setup(r => r.FindById(artworkId))
                 .Returns(Task.FromResult(artwork));
 
-            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object);
+            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object, favoriteArtworkRepository.Object);
 
             // Act
             ArtworkResponse result = await service.GetByIdAsync(artworkId);
@@ -44,11 +46,12 @@ namespace PERUSTARS.Test
             // Arrange
             var mockArtworkRepository = GetDefaultIArtworkRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var favoriteArtworkRepository = new Mock<IFavoriteArtworkRepository>();
             var artworkId = 1;
             mockArtworkRepository.Setup(r => r.FindById(artworkId))
                 .Returns(Task.FromResult<Artwork>(null));
 
-            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object);
+            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object, favoriteArtworkRepository.Object);
 
             // Act
             ArtworkResponse result = await service.GetByIdAsync(artworkId);
@@ -67,6 +70,7 @@ namespace PERUSTARS.Test
             //Arrange
             var mockArtworkRepository = GetDefaultIArtworkRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var favoriteArtworkRepository = new Mock<IFavoriteArtworkRepository>();
 
             Artist artist = new Artist();
             artist.Id = 1;
@@ -90,7 +94,7 @@ namespace PERUSTARS.Test
             mockArtworkRepository.Setup(r => r.isSameTitle("hola", 1))
                   .Returns(Task.FromResult(true));
 
-            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object);
+            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object, favoriteArtworkRepository.Object);
 
 
             //Act
@@ -112,6 +116,7 @@ namespace PERUSTARS.Test
             //Arrange
             var mockArtworkRepository = GetDefaultIArtworkRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var favoriteArtworkRepository = new Mock<IFavoriteArtworkRepository>();
 
             Artist artist = new Artist();
             artist.Id = 1;
@@ -135,7 +140,7 @@ namespace PERUSTARS.Test
             mockArtworkRepository.Setup(r => r.isSameTitle("titulo", 1))
                   .Returns(Task.FromResult(false));
 
-            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object);
+            var service = new ArtworkService(mockArtworkRepository.Object, mockUnitOfWork.Object, favoriteArtworkRepository.Object);
 
 
             //Act

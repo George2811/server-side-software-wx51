@@ -12,12 +12,14 @@ namespace PERUSTARS.Services
     public class ArtworkService : IArtworkService
     {
         private readonly IArtworkRepository _artworkRepository;
+        private readonly IFavoriteArtworkRepository _favoriteArtworkRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ArtworkService(IArtworkRepository artworkRepository, IUnitOfWork unitOfWork)
+        public ArtworkService(IArtworkRepository artworkRepository, IUnitOfWork unitOfWork, IFavoriteArtworkRepository favoriteArtworkRepository)
         {
             _artworkRepository = artworkRepository;
             _unitOfWork = unitOfWork;
+            _favoriteArtworkRepository = favoriteArtworkRepository;
         }
 
         public async Task<ArtworkResponse> DeleteAsync(long id)
@@ -62,6 +64,13 @@ namespace PERUSTARS.Services
         public async Task<IEnumerable<Artwork>> ListByArtistIdAsync(long id)
         {
             return await _artworkRepository.ListByArtistIdAsync(id);
+        }
+
+        public async Task<IEnumerable<Artwork>> ListByHobbyistAsync(long hobbyistId)
+        {
+            var favoriteArtwork = await _favoriteArtworkRepository.ListByHobbyistIdAsync(hobbyistId);
+            var artworks = favoriteArtwork.Select(pt => pt.Artwork).ToList();
+            return artworks;
         }
 
         public async Task<ArtworkResponse> SaveAsync(Artwork artwork)
