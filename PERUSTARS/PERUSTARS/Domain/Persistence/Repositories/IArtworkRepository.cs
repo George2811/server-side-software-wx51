@@ -14,5 +14,8 @@ namespace PERUSTARS.Domain.Persistence.Repositories
         Task<IEnumerable<Artwork>> ListByArtistIdAsync(long artistId);
         void Update(Artwork artwork);
         void Remove(Artwork artwork);
+
+        Task<bool> isSameTitle(string title, long ArtistId);
+
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Domain.Models
 {
-    public class HobbyistSpecialty
+    public class Interest
     {
         public long HobbyistId { get; set; }
         public Hobbyist Hobbyist { get; set; }

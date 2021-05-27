@@ -49,10 +49,8 @@ namespace PERUSTARS
             services.AddScoped<IHobbyistRepository, HobbyistRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IClaimTicketRepository, ClaimTicketRepository>();
-            services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IFavoriteArtworkRepository, FavoriteArtworkRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             services.AddScoped<IArtworkService, ArtworkService>();
             services.AddScoped<IArtistService, ArtistService>();
             services.AddScoped<IHobbyistService, HobbyistService>();

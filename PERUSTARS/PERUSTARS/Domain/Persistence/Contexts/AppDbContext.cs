@@ -24,9 +24,9 @@ namespace PERUSTARS.Domain.Persistence.Contexts
         public DbSet<Event> Events { get; set; }
         public DbSet<Artwork> Artworks { get; set; }
         public DbSet<Follower> Followers { get; set; }
-        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<EventAssistance> Bookings { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
-        public DbSet<HobbyistSpecialty> Interests { get; set; }
+        public DbSet<Interest> Interests { get; set; }
         public DbSet<FavoriteArtwork> FavoriteArtworks { get; set; }
 
         public DbSet<ClaimTicket> ClaimTickets { get; set; }
@@ -129,19 +129,19 @@ namespace PERUSTARS.Domain.Persistence.Contexts
                                                  /*Interests*/
                                  //*******************************************//
 
-            builder.Entity<HobbyistSpecialty>().ToTable("Interests");
-            builder.Entity<HobbyistSpecialty>().HasKey(pt => new { pt.HobbyistId, pt.SpecialtyId });
+            builder.Entity<Interest>().ToTable("Interests");
+            builder.Entity<Interest>().HasKey(pt => new { pt.HobbyistId, pt.SpecialtyId });
 
 
             //Relaciones
-            builder.Entity<HobbyistSpecialty>()
+            builder.Entity<Interest>()
                 .HasOne(pt => pt.Hobbyist)
-                .WithMany(p => p.HobbyistSpecialty)
+                .WithMany(p => p.Interests)
                 .HasForeignKey(pt => pt.HobbyistId);
 
-            builder.Entity<HobbyistSpecialty>()
+            builder.Entity<Interest>()
                 .HasOne(pt => pt.Specialty)
-                .WithMany(p => p.HobbyistSpecialty)
+                .WithMany(p => p.Interests)
                 .HasForeignKey(pt => pt.SpecialtyId);
 
 
@@ -210,18 +210,18 @@ namespace PERUSTARS.Domain.Persistence.Contexts
                                                /*Booking*/
                                 //*******************************************//
 
-            builder.Entity<Booking>().ToTable("Bookings");
-            builder.Entity<Booking>().HasKey(pt => new { pt.HobbyistId, pt.EventId });
-            builder.Entity<Booking>().Property(pt => pt.AttendanceDay);
+            builder.Entity<EventAssistance>().ToTable("Bookings");
+            builder.Entity<EventAssistance>().HasKey(pt => new { pt.HobbyistId, pt.EventId });
+            builder.Entity<EventAssistance>().Property(pt => pt.AttendanceDay);
         
 
             //Relaciones
-            builder.Entity<Booking>()
+            builder.Entity<EventAssistance>()
                 .HasOne(pt => pt.Hobbyist)
                 .WithMany(p => p.Assistance)
                 .HasForeignKey(pt => pt.HobbyistId);
 
-            builder.Entity<Booking>()
+            builder.Entity<EventAssistance>()
                 .HasOne(pt => pt.Event)
                 .WithMany(p => p.Assistance)
                 .HasForeignKey(pt => pt.EventId);

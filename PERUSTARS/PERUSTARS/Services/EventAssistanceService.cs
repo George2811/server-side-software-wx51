@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Services
 {
-    public class BookingService : IBookingService
+    public class EventAssistanceService : IEventAssistanceService
     {
-        private readonly IBookingRepository _bookingRepository;
+        private readonly IEventAssistanceRepository _bookingRepository;
         private readonly IUnitOfWork _unitOfWork;
         public async Task<BookingResponse> AssignBookingAsync(long HobbyistId, long EventId, DateTime attendance)
         {
@@ -19,7 +19,7 @@ namespace PERUSTARS.Services
             {
                 await _bookingRepository.AssignBooking(HobbyistId, EventId, attendance);
                 await _unitOfWork.CompleteAsync();
-                Booking booking = await _bookingRepository.FindByHobbyistIdAndEventIdAsync(HobbyistId, EventId);
+                EventAssistance booking = await _bookingRepository.FindByHobbyistIdAndEventIdAsync(HobbyistId, EventId);
                 return new BookingResponse(booking);
             }
             catch (Exception ex)
@@ -28,12 +28,12 @@ namespace PERUSTARS.Services
             }
         }
 
-        public async Task<IEnumerable<Booking>> ListAsync()
+        public async Task<IEnumerable<EventAssistance>> ListAsync()
         {
             return await _bookingRepository.ListAsync();
         }
 
-        public async Task<IEnumerable<Booking>> ListAsyncByHobbyistId(long Id)
+        public async Task<IEnumerable<EventAssistance>> ListAsyncByHobbyistId(long Id)
         {
             return await _bookingRepository.ListByHobbyistIdAsync(Id);
         }
@@ -42,7 +42,7 @@ namespace PERUSTARS.Services
         {
             try
             {
-                Booking booking = await _bookingRepository.FindByHobbyistIdAndEventIdAsync(HobbyistId, EventId);
+                EventAssistance booking = await _bookingRepository.FindByHobbyistIdAndEventIdAsync(HobbyistId, EventId);
                 await _bookingRepository.UnassignBooking(HobbyistId, EventId);
                 await _unitOfWork.CompleteAsync();
                 return new BookingResponse(booking);

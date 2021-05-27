@@ -12,12 +12,14 @@ namespace PERUSTARS.Services
     public class ArtworkService : IArtworkService
     {
         private readonly IArtworkRepository _artworkRepository;
+        private readonly IFavoriteArtworkRepository _favoriteArtworkRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ArtworkService(IArtworkRepository artworkRepository, IUnitOfWork unitOfWork)
+        public ArtworkService(IArtworkRepository artworkRepository, IUnitOfWork unitOfWork, IFavoriteArtworkRepository favoriteArtworkRepository)
         {
             _artworkRepository = artworkRepository;
             _unitOfWork = unitOfWork;
+            _favoriteArtworkRepository = favoriteArtworkRepository;
         }
 
         public async Task<ArtworkResponse> DeleteAsync(long id)
@@ -49,6 +51,11 @@ namespace PERUSTARS.Services
             return new ArtworkResponse(existingArtwork);
         }
 
+        public async Task<bool> isSameTitle(string title, long ArtistId)
+        {
+            return await _artworkRepository.isSameTitle(title, ArtistId);
+        }
+
         public async Task<IEnumerable<Artwork>> ListAsync()
         {
             return await _artworkRepository.ListAsync();
@@ -59,8 +66,21 @@ namespace PERUSTARS.Services
             return await _artworkRepository.ListByArtistIdAsync(id);
         }
 
+        public async Task<IEnumerable<Artwork>> ListByHobbyistAsync(long hobbyistId)
+        {
+            var favoriteArtwork = await _favoriteArtworkRepository.ListByHobbyistIdAsync(hobbyistId);
+            var artworks = favoriteArtwork.Select(pt => pt.Artwork).ToList();
+            return artworks;
+        }
+
         public async Task<ArtworkResponse> SaveAsync(Artwork artwork)
         {
+
+            if (_artworkRepository.isSameTitle(artwork.ArtTitle, artwork.ArtistId).Result == true)
+            {
+                return new ArtworkResponse($"You already created an artwork with the same title");
+            }
+
             try
             {
                 await _artworkRepository.AddAsync(artwork);
@@ -80,6 +100,15 @@ namespace PERUSTARS.Services
 
             if (existingArtwork == null)
                 return new ArtworkResponse("Artist not found");
+
+            if (existingArtwork.ArtTitle != artwork.ArtTitle)
+            { // si el titulo nuevo es diferente al titulo existente
+                if (_artworkRepository.isSameTitle(artwork.ArtTitle, id).Result == true) // se verifica si el titulo nuevo es igual a cualquier titulo de obras del artista
+                {
+                    return new ArtworkResponse($"You already created an artwork with the same title");
+                }
+            }
+
 
             existingArtwork.ArtTitle = artwork.ArtTitle;
             existingArtwork.ArtDescription = artwork.ArtDescription;

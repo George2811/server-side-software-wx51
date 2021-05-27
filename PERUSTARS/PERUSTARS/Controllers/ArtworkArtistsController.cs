@@ -14,12 +14,12 @@ namespace PERUSTARS.Controllers
 {
     [ApiController]
     [Route("/api/artist/{artistId}/artworks")]
-    public class ArtworkArtistController : ControllerBase
+    public class ArtworkArtistsController : ControllerBase
     {
         private readonly IArtworkService _artworkService;
         private readonly IMapper _mapper;
 
-        public ArtworkArtistController(IArtworkService artworkService, IMapper mapper)
+        public ArtworkArtistsController(IArtworkService artworkService, IMapper mapper)
         {
             _artworkService = artworkService;
             _mapper = mapper; 

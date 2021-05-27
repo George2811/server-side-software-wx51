@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Domain.Models
 {
-    public class Booking
+    public class EventAssistance
     {
         public Event Event { get; set; }
         public long EventId { get; set; }

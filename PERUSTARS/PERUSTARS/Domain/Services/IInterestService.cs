@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Domain.Services
 {
-    public interface IHobbyistSpecialtyService
+    public interface IInterestService
     {
-        Task<IEnumerable<HobbyistSpecialty>> ListAsync();
-        Task<IEnumerable<HobbyistSpecialty>> ListByHobbyistsIdAsync(long HobbyistId);
+        Task<IEnumerable<Interest>> ListAsync();
+        Task<IEnumerable<Interest>> ListByHobbyistsIdAsync(long HobbyistId);
         Task<HobbyistSpecialtyResponse> AssignHobbyistSpecialtyAsync(long HobbyistId, long SpecialtyId);
         Task<HobbyistSpecialtyResponse> UnassignHobbyistSpecialtyAsync(long HobbyistId, long SpecialtyId);
     }

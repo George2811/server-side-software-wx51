@@ -12,5 +12,8 @@ namespace PERUSTARS.Domain.Persistence.Repositories
         Task<Artist> FindById(long id);
         void Update(Artist artist);
         void Remove(Artist artist);
+
+        Task<bool> isSameBrandingName(string brandingname);
+
     }
 }

@@ -12,13 +12,13 @@ namespace PERUSTARS.Services
     public class EventService : IEventService
     {
         private readonly IEventRepository _eventRepository;
-        private readonly IBookingRepository _bookingRepository;
+        private readonly IEventAssistanceRepository _eventAssistanceRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public EventService(IEventRepository eventRepository, IBookingRepository bookingRepository, IUnitOfWork unitOfWork)
+        public EventService(IEventRepository eventRepository, IEventAssistanceRepository eventAsisstanceRepository, IUnitOfWork unitOfWork)
         {
             _eventRepository = eventRepository;
-            _bookingRepository = bookingRepository;
+            _eventAssistanceRepository = eventAsisstanceRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -51,6 +51,12 @@ namespace PERUSTARS.Services
             return new EventResponse(existingEvent);
         }
 
+        public async Task<bool> isSameTitle(string title, long ArtistId)
+        {
+            return await _eventRepository.isSameTitle(title, ArtistId);
+
+        }
+
         public async Task<IEnumerable<Event>> ListAsync()
         {
             return await _eventRepository.ListAsync();
@@ -66,21 +72,28 @@ namespace PERUSTARS.Services
             return await _eventRepository.ListByEventTypeAsync(eTypeOf);
         }
 
-        //Para booking
+        //Para event assistance
         public async Task<IEnumerable<Event>> ListByHobbyistAsync(long hobbyistId)
         {
-            var booking = await _bookingRepository.ListByHobbyistIdAsync(hobbyistId);
-            var events = booking.Select(pt => pt.Event).ToList();
+            var eventAssistance = await _eventAssistanceRepository.ListByHobbyistIdAsync(hobbyistId);
+            var events = eventAssistance.Select(pt => pt.Event).ToList();
             return events;
         }
 
         public async Task<EventResponse> SaveAsync(Event _event)
         {
-            
+
+            if (_eventRepository.isSameTitle(_event.EventTitle, _event.ArtistId).Result == true)
+            {
+                return new EventResponse($"You already created an event with the same title");
+            }
+
             try
             {
                 await _eventRepository.AddAsync(_event);
                 await _unitOfWork.CompleteAsync();
+
+               
 
                 return new EventResponse(_event);
             }
@@ -97,6 +110,15 @@ namespace PERUSTARS.Services
 
             if (existingEvent == null)
                 return new EventResponse("Event not found");
+
+
+            if (existingEvent.EventTitle != _event.EventTitle)
+            {
+                if (_eventRepository.isSameTitle(_event.EventTitle, id).Result == true)
+                {
+                    return new EventResponse($"You already created an event with the same title");
+                }
+            }
 
             existingEvent.EventTitle = _event.EventTitle;
             existingEvent.EventType = _event.EventType;

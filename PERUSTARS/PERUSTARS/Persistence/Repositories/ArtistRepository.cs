@@ -24,6 +24,30 @@ namespace PERUSTARS.Persistence.Repositories
             return await _context.Artists.FindAsync(id);
         }
 
+        public async Task<bool> isSameBrandingName(string brandingname)
+        {
+            bool ver = false;
+            IEnumerable<Artist> allartist = await ListAsync();
+            List<string> brandingnames = new List<string>();
+
+            foreach (Artist item in allartist)
+            {
+                brandingnames.Add(item.BrandName);
+            }
+
+            for (int i = 0; i < brandingnames.Count(); i++)
+            {
+
+                if (brandingnames[i] == brandingname)
+                {
+                    ver = true;
+                    return ver;
+                }
+            }
+            ver = false;
+            return ver;
+        }
+
         public async Task<IEnumerable<Artist>> ListAsync()
         {
             return await _context.Artists.ToListAsync();

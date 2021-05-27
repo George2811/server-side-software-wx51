@@ -14,16 +14,16 @@ namespace PERUSTARS.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class BookingController : ControllerBase
+    public class EventAssistancesController : ControllerBase
     {
 
 
-        private readonly IBookingService _bookingService;
+        private readonly IEventAssistanceService _bookingService;
         private readonly IEventService _eventService;
         private readonly IHobbyistService _hobbyistService;
         private readonly IMapper _mapper;
 
-        public BookingController(IBookingService bookingService, IMapper mapper, IHobbyistService hobbyistService, IEventService eventService = null)
+        public EventAssistancesController(IEventAssistanceService bookingService, IMapper mapper, IHobbyistService hobbyistService, IEventService eventService = null)
         {
             _bookingService = bookingService;
             _mapper = mapper;

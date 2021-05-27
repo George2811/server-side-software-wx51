@@ -23,5 +23,7 @@ namespace PERUSTARS.Domain.Services
         Task<EventResponse> UpdateAsync(long id, Event _event);
         Task<EventResponse> DeleteAsync(long id);
 
+        Task<bool> isSameTitle(string title, long ArtistId);
+
     }
 }

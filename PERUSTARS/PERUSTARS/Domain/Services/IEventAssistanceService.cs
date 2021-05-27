@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Domain.Services
 {
-    public interface IBookingService
+    public interface IEventAssistanceService
     {
-        Task<IEnumerable<Booking>> ListAsync();
+        Task<IEnumerable<EventAssistance>> ListAsync();
 
 
-        Task<IEnumerable<Booking>> ListAsyncByHobbyistId(long Id);
+        Task<IEnumerable<EventAssistance>> ListAsyncByHobbyistId(long Id);
 
         Task<BookingResponse> AssignBookingAsync(long HobbyistId, long EventId, DateTime attendance);
         Task<BookingResponse> UnassignBookingAsync(long HobbyistId, long EventId);

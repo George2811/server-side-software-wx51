@@ -15,5 +15,7 @@ namespace PERUSTARS.Domain.Persistence.Repositories
         Task<Event> FindById(long id);
         void Update(Event _event);
         void Remove(Event _event);
+        Task<bool> isSameTitle(string title, long ArtistId);
+
     }
 }
