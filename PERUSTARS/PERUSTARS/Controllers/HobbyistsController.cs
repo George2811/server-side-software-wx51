@@ -129,6 +129,5 @@ namespace PERUSTARS.Controllers
             var hobbyistResource = _mapper.Map<Hobbyist, HobbyistResource>(result.Resource);
             return Ok(hobbyistResource);
         }
-
     }
 }

@@ -20,12 +20,12 @@ namespace PERUSTARS.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<FollowerResponse> AssignFollowerAsync(long HobbyistId, long ArtistId)
+        public async Task<FollowerResponse> AssignFollowerAsync(long hobbyistId, long artistId)
         {
             try {
-                await _followerRepository.AssignFollower(HobbyistId,ArtistId);
+                await _followerRepository.AssignFollower(hobbyistId,artistId);
                 await _unitOfWork.CompleteAsync();
-                Follower follower = await _followerRepository.FindByHobbyistIdAndArtistId(HobbyistId, ArtistId);
+                Follower follower = await _followerRepository.FindByHobbyistIdAndArtistId(hobbyistId, artistId);
                 return new FollowerResponse(follower);
             }
             catch (Exception ex) { 
@@ -33,9 +33,9 @@ namespace PERUSTARS.Services
             }
         }
 
-        public async Task<int> CountFollowers(long ArtistId)
+        public async Task<int> CountFollowers(long artistId)
         {
-            return await _followerRepository.CountFollower(ArtistId);
+            return await _followerRepository.CountFollower(artistId);
         }
 
         public async Task<IEnumerable<Follower>> ListAsync()
@@ -43,22 +43,22 @@ namespace PERUSTARS.Services
             return await _followerRepository.ListAsync();
         }
 
-        public async Task<IEnumerable<Follower>> ListByArtistAsync(long Id)
+        public async Task<IEnumerable<Follower>> ListByArtistIdAsync(long artistId)
         {
-            return await _followerRepository.ListByArtistIdAsync(Id);
+            return await _followerRepository.ListByArtistIdAsync(artistId);
         }
 
-        public async Task<IEnumerable<Follower>> ListByHobbyistIdAsync(long Id)
+        public async Task<IEnumerable<Follower>> ListByHobbyistIdAsync(long hobbyistId)
         {
-            return await _followerRepository.ListByHobbyistIdAsync(Id);
+            return await _followerRepository.ListByHobbyistIdAsync(hobbyistId);
         }
 
-        public async Task<FollowerResponse> UnassignFollowerAsync(long HobbyistId, long ArtistId)
+        public async Task<FollowerResponse> UnassignFollowerAsync(long hobbyistId, long artistId)
         {
             try
             {
-                Follower follower = await _followerRepository.FindByHobbyistIdAndArtistId(HobbyistId, ArtistId);
-                _followerRepository.UnassignFollower(HobbyistId, ArtistId);
+                Follower follower = await _followerRepository.FindByHobbyistIdAndArtistId(hobbyistId, artistId);
+                await _followerRepository.UnassignFollower(hobbyistId, artistId);
                 await _unitOfWork.CompleteAsync();
                 return new FollowerResponse(follower);
             }

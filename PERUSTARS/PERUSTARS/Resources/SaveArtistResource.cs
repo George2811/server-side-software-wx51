@@ -26,8 +26,7 @@ namespace PERUSTARS.Resources
 
 
         [Required]
-        [MaxLength(25)]
-        public string SpecialtyArt { get; set; }
+        public long SpecialtyId { get; set; }
 
     }
 }

@@ -14,6 +14,6 @@ namespace PERUSTARS.Resources
 
         public string Phrase { get; set; }
 
-        public string SpecialtyArt { get; set; }
+        public long SpecialtyId { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace PERUSTARS.Domain.Services
         Task<IEnumerable<Follower>> ListAsync();
         Task<IEnumerable<Follower>> ListByHobbyistIdAsync(long Id); //Halla los artistas a los cuales sigue el aficionado
 
-        Task<IEnumerable<Follower>> ListByArtistAsync(long Id); //Halla los aficionados que siguen al artista
+        Task<IEnumerable<Follower>> ListByArtistIdAsync(long Id); //Halla los aficionados que siguen al artista
 
         Task<int> CountFollowers(long ArtistId); // Cuenta los seguidores del artista
 

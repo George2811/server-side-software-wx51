@@ -31,7 +31,7 @@ namespace PERUSTARS.Persistence.Repositories
         public async Task<IEnumerable<ClaimTicket>> ListByPersonIdAsync(long personId)
         {
             return await _context.ClaimTickets
-                  .Where(pt => pt.PersonId == personId)
+                  .Where(pt => pt.ReportMadeById == personId)
                   .ToListAsync();
         }
 
