@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Domain.Models
 {
-    public class Artist :Person
+    public class Artist : Person
     {
         public string BrandName { get; set; }
         public string Description { get; set; }
@@ -13,6 +13,7 @@ namespace PERUSTARS.Domain.Models
 
         public List<string>SocialMediaLink { get; set; }
 
+        public long SpecialtyId { get; set; }
         public Specialty SpecialtyArt { get; set; }
 
         public IList<Artwork> Artworks { get; set; } = new List<Artwork>();
