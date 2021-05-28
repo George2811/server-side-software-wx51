@@ -14,6 +14,12 @@ namespace PERUSTARS.Services
         private readonly IClaimTicketRepository _claimTicketRepository;
         private readonly IUnitOfWork _unitOfWork;
 
+        public ClaimTicketService(IClaimTicketRepository claimTicketRepository, IUnitOfWork unitOfWork)
+        {
+            _claimTicketRepository = claimTicketRepository;
+            _unitOfWork = unitOfWork;
+        }
+
         public async Task<ClaimTicketResponse> DeleteAsync(long id)
         {
             var existingClaimTicket = await _claimTicketRepository.FindById(id);
