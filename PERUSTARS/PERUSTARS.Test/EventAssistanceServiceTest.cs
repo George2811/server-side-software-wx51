@@ -107,7 +107,7 @@ namespace PERUSTARS.Test
         }
 
         [Test]
-        public async Task UnassignEventAssistanceWhenValidEventAssistanceReturnsEventAssistanceExceptionResponse()
+        public async Task UnassignEventAssistanceWhenInvalidEventAssistanceReturnsEventAssistanceExceptionResponse()
         {
             //Arrange
             var mockEventAssistanceRepository = GetDefaultIEventAssistanceRepositoryInstance();

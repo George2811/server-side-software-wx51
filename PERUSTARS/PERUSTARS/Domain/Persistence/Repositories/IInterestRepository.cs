@@ -11,10 +11,10 @@ namespace PERUSTARS.Domain.Persistence.Repositories
         Task<IEnumerable<Interest>> ListAsync();
         Task<IEnumerable<Interest>> ListByHobbyistIdAsync(long hobbyistId);
         Task<Interest> FindByHobbyistIdAndSpecialtyId(long hobbyistId, long specialtyId);
-        Task AddAsync(Interest hobbyistSpecialty);
-        void Remove(Interest hobbyistSpecialty);
-        Task AssignHobbyistSpecialty(long hobbyistId, long specialtyId);
-        void UnassignHobbyistSpecialty(long hobbyistId, long specialtyId);
+        Task AddAsync(Interest interest);
+        void Remove(Interest interest);
+        Task AssignInterest(long hobbyistId, long specialtyId);
+        Task UnassignInterest(long hobbyistId, long specialtyId);
 
     }
 }
