@@ -6,17 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PERUSTARS.Domain.Persistence.Contexts;
 using PERUSTARS.Domain.Persistence.Repositories;
 using PERUSTARS.Domain.Services;
 using PERUSTARS.Persistence.Repositories;
 using PERUSTARS.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PERUSTARS
 {
