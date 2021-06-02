@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Domain.Services.Communications
 {
-    public class HobbyistSpecialtyResponse : BaseResponse<Interest>
+    public class EventAssistanceResponse : BaseResponse<EventAssistance>
     {
-        public HobbyistSpecialtyResponse(Interest resource) : base(resource)
+        public EventAssistanceResponse(EventAssistance resource) : base(resource)
         {
         }
 
-        public HobbyistSpecialtyResponse(string message) : base(message)
+        public EventAssistanceResponse(string message) : base(message)
         {
         }
     }

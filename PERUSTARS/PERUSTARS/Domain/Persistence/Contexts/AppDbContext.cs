@@ -24,7 +24,7 @@ namespace PERUSTARS.Domain.Persistence.Contexts
         public DbSet<Event> Events { get; set; }
         public DbSet<Artwork> Artworks { get; set; }
         public DbSet<Follower> Followers { get; set; }
-        public DbSet<EventAssistance> Bookings { get; set; }
+        public DbSet<EventAssistance> EventAssistances { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<Interest> Interests { get; set; }
         public DbSet<FavoriteArtwork> FavoriteArtworks { get; set; }

@@ -23,6 +23,7 @@ namespace PERUSTARS.Test
         {
             // Arrange
             var mockArtistRepository = GetDefaultIArtistRepositoryInstance();
+            var mockFollowerRepository = GetDefaultIFollowerRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
             var artistId = 1;
             Artist artist = new Artist();
@@ -30,7 +31,7 @@ namespace PERUSTARS.Test
             mockArtistRepository.Setup(r => r.FindById(artistId))
                 .Returns(Task.FromResult(artist));
 
-            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object);
+            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object, mockFollowerRepository.Object);
 
             // Act
             ArtistResponse result = await service.GetByIdAsync(artistId);
@@ -43,12 +44,13 @@ namespace PERUSTARS.Test
         {
             // Arrange
             var mockArtistRepository = GetDefaultIArtistRepositoryInstance();
+            var mockFollowerRepository = GetDefaultIFollowerRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
             var artistId = 1;
             mockArtistRepository.Setup(r => r.FindById(artistId))
                 .Returns(Task.FromResult<Artist>(null));
 
-            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object);
+            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object, mockFollowerRepository.Object);
 
             // Act
             ArtistResponse result = await service.GetByIdAsync(artistId);
@@ -66,6 +68,7 @@ namespace PERUSTARS.Test
 
             //ARRANGE
             var mockArtistRepository = GetDefaultIArtistRepositoryInstance();
+            var mockFollowerRepository = GetDefaultIFollowerRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
 
             Artist artista1 = new Artist();
@@ -84,7 +87,7 @@ namespace PERUSTARS.Test
             mockArtistRepository.Setup(r => r.isSameBrandingName("Prueba"))
                .Returns(Task.FromResult(true));
 
-            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object);
+            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object, mockFollowerRepository.Object);
 
             //Act
 
@@ -104,6 +107,7 @@ namespace PERUSTARS.Test
 
             //ARRANGE
             var mockArtistRepository = GetDefaultIArtistRepositoryInstance();
+            var mockFollowerRepository = GetDefaultIFollowerRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
 
             Artist artista1 = new Artist();
@@ -122,7 +126,7 @@ namespace PERUSTARS.Test
             mockArtistRepository.Setup(r => r.isSameBrandingName("nuevoBrandName"))
                .Returns(Task.FromResult(false));
 
-            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object);
+            var service = new ArtistService(mockArtistRepository.Object, mockUnitOfWork.Object, mockFollowerRepository.Object);
 
             //Act
 
@@ -140,6 +144,10 @@ namespace PERUSTARS.Test
         private Mock<IArtistRepository> GetDefaultIArtistRepositoryInstance()
         {
             return new Mock<IArtistRepository>(); 
+        }
+        private Mock<IFollowerRepository> GetDefaultIFollowerRepositoryInstance()
+        {
+            return new Mock<IFollowerRepository>();
         }
         private Mock<IUnitOfWork> GetDefaultIUnitOfWorkInstance()
         {
