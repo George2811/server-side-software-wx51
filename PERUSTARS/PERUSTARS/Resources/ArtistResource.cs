@@ -8,7 +8,7 @@ namespace PERUSTARS.Resources
 {
     public class ArtistResource : PersonResource
     {
-        public string BrandingName{ get; set; }
+        public string BrandName{ get; set; }
 
         public string Description { get; set; }
 

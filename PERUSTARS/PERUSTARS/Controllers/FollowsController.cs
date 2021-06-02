@@ -14,31 +14,32 @@ namespace PERUSTARS.Controllers
     [ApiController]
     public class FollowsController : ControllerBase
     {
-        private readonly IHobbyistService _hobbyistService;
+        private readonly IArtistService _artistService;
         private readonly IMapper _mapper;
 
-        public FollowsController(IHobbyistService hobbyistService, IMapper mapper)
+        public FollowsController(IArtistService artistService, IMapper mapper)
         {
-            _hobbyistService = hobbyistService;
+            _artistService = artistService;
             _mapper = mapper;
         }
 
 
-        [SwaggerOperation(
-           Summary = "Get All Hobbyist By Artist Id",
-           Description = "Get All Hobbyists By Artist Id",
-           OperationId = "GetAllByArtistId")]
-        [SwaggerResponse(200, "Get All By HobbyistId", typeof(HobbyistResource))]
 
-        [ProducesResponseType(typeof(HobbyistResource), 200)]
+        [SwaggerOperation(
+           Summary = "Get All Artists By Hobbyist Id",
+           Description = "Get All Artists By Hobbyist Id",
+           OperationId = "GetAllByHobbyistId")]
+        [SwaggerResponse(200, "Get All By HobbyistId", typeof(ArtistResource))]
+
+        [ProducesResponseType(typeof(ArtistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
 
         [HttpGet]
-        public async Task<IEnumerable<HobbyistResource>> GetAllByArtistIdAsync(int artistId)
+        public async Task<IEnumerable<ArtistResource>> GetAllByHobbyistIdAsync(int hobbyistId)
         {
-            var hobbyists = await _hobbyistService.ListByArtistIdAsync(artistId);
-            var resources = _mapper.Map<IEnumerable<Hobbyist>, IEnumerable<HobbyistResource>>(hobbyists);
+            var artists = await _artistService.ListByHobbyistIdAsync(hobbyistId);
+            var resources = _mapper.Map<IEnumerable<Artist>, IEnumerable<ArtistResource>>(artists);
             return resources;
-        }
+        }    
     }
 }

@@ -11,14 +11,15 @@ namespace PERUSTARS.Services
 {
     public class HobbyistService : IHobbyistService
     {
-        private readonly IFollowerRepository _followerRepository;
         private readonly IHobbyistRepository _hobbyistRepository;
+        private readonly IFollowerRepository _followerRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public HobbyistService(IHobbyistRepository hobbyistRepository, IUnitOfWork unitOfWork)
+        public HobbyistService(IHobbyistRepository hobbyistRepository, IUnitOfWork unitOfWork, IFollowerRepository followerRepository)
         {
             _hobbyistRepository = hobbyistRepository;
             _unitOfWork = unitOfWork;
+            _followerRepository = followerRepository;
         }
 
         public async Task<HobbyistResponse> DeleteAsync(long id)
