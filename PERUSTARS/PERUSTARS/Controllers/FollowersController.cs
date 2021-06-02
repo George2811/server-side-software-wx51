@@ -79,7 +79,7 @@ namespace PERUSTARS.Controllers
         [ProducesResponseType(typeof(BadRequestResult), 404)]
 
         [HttpGet]
-        public IEnumerable<HobbyistResource> GetAllByArtistIdAsync(int artistId)
+        public async Task<IEnumerable<HobbyistResource>> GetAllByArtistIdAsync(int artistId)
         {
             var hobbyists = await _hobbyistService.ListByArtistIdAsync(artistId);
             var resources = _mapper.Map<IEnumerable<Hobbyist>, IEnumerable<HobbyistResource>>(hobbyists);
@@ -97,7 +97,7 @@ namespace PERUSTARS.Controllers
         [ProducesResponseType(typeof(ArtistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
 
-        [HttpGet]
+        [HttpGet("count")]
         public async Task<int> CountFollowers(long artistId)
         {
             var count = await _followerService.CountFollowers(artistId);
