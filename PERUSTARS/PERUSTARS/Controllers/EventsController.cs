@@ -27,9 +27,8 @@ namespace PERUSTARS.Controllers
             _mapper = mapper; 
         }
 
-
         /*****************************************************************/
-                              /*LIST OF EVENTS*/
+                             /*LIST OF EVENTS*/
         /*****************************************************************/
 
         [HttpGet]
@@ -43,46 +42,10 @@ namespace PERUSTARS.Controllers
         }
 
 
-        /*****************************************************************/
-                             /*GET EVENTS BY ID*/
-        /*****************************************************************/
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(typeof(EventResource), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetAsync(int id)
-        {
-            var result = await _eventService.GetByIdAsync(id);
-            if (!result.Success)
-                return BadRequest(result.Message);
-            var eventResource = _mapper.Map<Event, EventResource>(result.Resource);
-            return Ok(eventResource);
-        }
+       
 
 
-
-        /*****************************************************************/
-                               /*SAVE EVENTS BY ID*/
-        /*****************************************************************/
-
-
-        [HttpPost]
-        [ProducesResponseType(typeof(EventResource), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PostAsync([FromBody] SaveEventResource resource)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState.GetErrorMessages());
-
-            var _event = _mapper.Map<SaveEventResource, Event>(resource);
-            var result = await _eventService.SaveAsync(_event);
-
-            if (!result.Success)
-                return BadRequest(result.Message);
-            var eventResource = _mapper.Map<Event, EventResource>(result.Resource);
-            return Ok(eventResource);
-
-        }
 
 
 
