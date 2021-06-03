@@ -13,28 +13,14 @@ namespace PERUSTARS.Persistence.Repositories
     {
         public ClaimTicketRepository(AppDbContext context) : base(context) { }
 
-        public async Task AddAsync(ClaimTicket claimTicket)
-        {
-            await _context.ClaimTickets.AddAsync(claimTicket);
-        }
-
-        public async Task<ClaimTicket> FindById(long id)
-        {
-            return await _context.ClaimTickets.FindAsync(id);
-        }
-
         public async Task<IEnumerable<ClaimTicket>> ListAsync()
         {
             return await _context.ClaimTickets.ToListAsync();
         }
-
-        public async Task<IEnumerable<ClaimTicket>> ListByPersonIdAsync(long personId)
+        public async Task AddAsync(ClaimTicket claimTicket)
         {
-            return await _context.ClaimTickets
-                  .Where(pt => pt.ReportMadeById == personId)
-                  .ToListAsync();
+            await _context.ClaimTickets.AddAsync(claimTicket);
         }
-
         public void Remove(ClaimTicket claimTicket)
         {
             _context.ClaimTickets.Remove(claimTicket);
@@ -44,5 +30,26 @@ namespace PERUSTARS.Persistence.Repositories
         {
             _context.ClaimTickets.Update(claimTicket);
         }
+
+        public async Task<ClaimTicket> FindByIdAndPersonId(long id, long personId)
+        {
+            var claimTickets = await _context.ClaimTickets.Include(c => c.ReportMadeBy).ToListAsync();
+            return claimTickets.Where(c => c.ClaimId == id && c.ReportMadeById == personId).FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<ClaimTicket>> ListByPersonIdAsync(long personId)
+        {
+            return await _context.ClaimTickets
+                  .Where(pt => pt.ReportMadeById == personId)
+                  .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ClaimTicket>> ListByReportedPersonIdAsync(long personId)
+        {
+            return await _context.ClaimTickets
+                  .Where(pt => pt.ReportedPersonId == personId)
+                  .ToListAsync();
+        }
+    
     }
 }

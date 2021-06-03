@@ -28,41 +28,44 @@ namespace PERUSTARS.Controllers
             _mapper = mapper;
         }
 
-        /*****************************************************************/
-                               /*LIST OF ARTIST*/
-        /*****************************************************************/
 
+
+        /*****************************************************************/
+                               /*LIST OF ARTISTS*/
+        /*****************************************************************/
 
         [SwaggerOperation(
-         Summary = "List all Artist",
-         Description = "List of Artist",
-         OperationId = "ListAllArtist")]
-        [SwaggerResponse(200, "List of Artist", typeof(IEnumerable<ArtistResource>))]
+         Summary = "List all Artists",
+         Description = "List of all Artists",
+         OperationId = "ListAllArtists")]
+        [SwaggerResponse(200, "List of Artists", typeof(IEnumerable<ArtistResource>))]
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<ArtistResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IEnumerable<ArtistResource>> GetAllAsync() {
             var artist = await _artistService.ListAsync();
-            var resources = _mapper
-                .Map<IEnumerable<Artist>, IEnumerable<ArtistResource>>(artist);
+            var resources = _mapper.Map<IEnumerable<Artist>, IEnumerable<ArtistResource>>(artist);
             return resources;
         }
+
+
 
         /*****************************************************************/
                                /*GET ARTIST BY ID*/
         /*****************************************************************/
 
         [SwaggerOperation(
-         Summary = "Get artist by Id",
-         Description = "Get artist by Id",
+         Summary = "Get Artist by Id",
+         Description = "Get Artist by Id",
          OperationId = "GerArtistById")]
-        [SwaggerResponse(200, "Get artist by id", typeof(ArtistResource))]
+        [SwaggerResponse(200, "Get Artist by Id", typeof(ArtistResource))]
 
-        [HttpGet("{id}")]
+        [HttpGet("{artistId}")]
         [ProducesResponseType(typeof(ArtistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetAsync(int id) {
-            var result = await _artistService.GetByIdAsync(id);
+        public async Task<IActionResult> GetByIdAsync(int artistId) {
+            var result = await _artistService.GetByIdAsync(artistId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var artistResource = _mapper.Map<Artist, ArtistResource>(result.Resource);
@@ -80,7 +83,7 @@ namespace PERUSTARS.Controllers
           Summary = "Save Artist",
           Description = "Save Artist",
           OperationId = "SaveArtist")]
-        [SwaggerResponse(200, "Save artist", typeof(ArtistResource))]
+        [SwaggerResponse(200, "Save Artist", typeof(ArtistResource))]
 
         [HttpPost]
         [ProducesResponseType(typeof(ArtistResource), 200)]
@@ -101,6 +104,7 @@ namespace PERUSTARS.Controllers
         }
 
 
+
         /*****************************************************************/
                                   /*UPDATE ARTIST*/
         /*****************************************************************/
@@ -109,18 +113,18 @@ namespace PERUSTARS.Controllers
         Summary = "Update Artist",
         Description = "Update Artist",
         OperationId = "UpdateArtist")]
-        [SwaggerResponse(200, "Update artist", typeof(ArtistResource))]
+        [SwaggerResponse(200, "Update Artist", typeof(ArtistResource))]
 
 
-        [HttpPut("{id}")]
+        [HttpPut("{artistId}")]
         [ProducesResponseType(typeof(ArtistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PutAsync(long id, [FromBody] SaveArtistResource resource) {
+        public async Task<IActionResult> PutAsync(long artistId, [FromBody] SaveArtistResource resource) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
            
             var artist = _mapper.Map<SaveArtistResource, Artist>(resource);
-            var result = await _artistService.UpdateAsync(id, artist);
+            var result = await _artistService.UpdateAsync(artistId, artist);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -139,13 +143,13 @@ namespace PERUSTARS.Controllers
            Summary = "Delete Artist",
            Description = "Delete Artist",
            OperationId = "DeleteArtist")]
-        [SwaggerResponse(200, "Delete artist", typeof(ArtistResource))]
+        [SwaggerResponse(200, "Delete Artist", typeof(ArtistResource))]
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{artistId}")]
         [ProducesResponseType(typeof(ArtistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> DeleteAsync(long id) {
-            var result = await _artistService.DeleteAsync(id);
+        public async Task<IActionResult> DeleteAsync(long artistId) {
+            var result = await _artistService.DeleteAsync(artistId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var artistResource = _mapper.Map<Artist, ArtistResource>(result.Resource);

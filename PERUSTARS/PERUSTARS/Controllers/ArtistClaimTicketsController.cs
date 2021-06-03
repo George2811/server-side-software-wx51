@@ -5,6 +5,7 @@ using PERUSTARS.Domain.Models;
 using PERUSTARS.Domain.Services;
 using PERUSTARS.Extensions;
 using PERUSTARS.Resources;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,47 +13,60 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/artists/{artistId}/claimTickets")]
     [Produces("application/json")]
     [ApiController]
-    public class ClaimTicketsController : ControllerBase
+    public class ArtistClaimTicketsController : ControllerBase
     {
         private readonly IClaimTicketService _claimTicketService;
         private readonly IMapper _mapper;
 
-        public ClaimTicketsController(IClaimTicketService claimTicketService, IMapper mapper)
+        public ArtistClaimTicketsController(IClaimTicketService claimTicketService, IMapper mapper)
         {
             _claimTicketService = claimTicketService;
             _mapper = mapper;
         }
         
+
+
         /*****************************************************************/
-                               /*LIST OF CLAIM TICKETS*/
+                        /*LIST OF CLAIM TICKETS BY ARTIST ID*/
         /*****************************************************************/
 
+        [SwaggerOperation(
+           Summary = "Get All Claim Tickets By Artist Id",
+           Description = "Get All Claim Tickets By Artist Id",
+           OperationId = "GetAllClaimTicketsByArtistId")]
+        [SwaggerResponse(200, "Get All Claim Tickets By Artist Id", typeof(IEnumerable<HobbyistResource>))]
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<ClaimTicketResource>), 200)]
-        public async Task<IEnumerable<ClaimTicketResource>> GetAllAsync()
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IEnumerable<ClaimTicketResource>> GetAllByArtistIdAsync(long artistId)
         {
-            var claimTicket = await _claimTicketService.ListAsync();
-            var resources = _mapper
-                .Map<IEnumerable<ClaimTicket>, IEnumerable<ClaimTicketResource>>(claimTicket);
+            var claimTicket = await _claimTicketService.ListAsyncByPersonId(artistId);
+            var resources = _mapper.Map<IEnumerable<ClaimTicket>, IEnumerable<ClaimTicketResource>>(claimTicket);
             return resources;
         }
 
 
 
         /*****************************************************************/
-                                /*GET CLAIM TICKETS BY ID*/
+                        /*GET CLAIM TICKET OF ARTIST BY ID*/
         /*****************************************************************/
 
-        [HttpGet("{id}")]
+        [SwaggerOperation(
+           Summary = "Get Claim Ticket Of Artist By Id",
+           Description = "Get Claim Ticket Of Artist By Id",
+           OperationId = "GetClaimTicketOfArtistById")]
+        [SwaggerResponse(200, "Get Claim Ticket Of Artist By Id", typeof(ClaimTicketResource))]
+
+        [HttpGet("{claimTicketId}")]
         [ProducesResponseType(typeof(ClaimTicketResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(long artistId, long claimTicketId)
         {
-            var result = await _claimTicketService.GetByIdAsync(id);
+            var result = await _claimTicketService.GetByIdAndPersonIdAsync(artistId, claimTicketId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var claimTicketResource = _mapper.Map<ClaimTicket, ClaimTicketResource>(result.Resource);
@@ -61,23 +75,26 @@ namespace PERUSTARS.Controllers
 
 
 
-
-
         /*****************************************************************/
-                                /*SAVE CLAIM TICKET*/
+                            /*SAVE CLAIM TICKET OF ARTIST*/
         /*****************************************************************/
 
+        [SwaggerOperation(
+           Summary = "Save Claim Ticket Of Artist",
+           Description = "Save Claim Ticket Of Artist",
+           OperationId = "SaveClaimTicketOfArtist")]
+        [SwaggerResponse(200, "ClaimTicket saved", typeof(ClaimTicketResource))]
 
         [HttpPost]
         [ProducesResponseType(typeof(ClaimTicketResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PostAsync([FromBody] SaveClaimTicketResource resource)
+        public async Task<IActionResult> PostAsync(long artistId, [FromBody] SaveClaimTicketResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var claimTicket = _mapper.Map<SaveClaimTicketResource, ClaimTicket>(resource);
-            var result = await _claimTicketService.SaveAsync(claimTicket);
+            var result = await _claimTicketService.SaveAsync(artistId, claimTicket);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -88,22 +105,26 @@ namespace PERUSTARS.Controllers
 
 
 
-
         /*****************************************************************/
-                                /*UPDATE CLAIM TICKET*/
+                           /*UPDATE CLAIM TICKET OF ARTIST*/
         /*****************************************************************/
 
+        [SwaggerOperation(
+           Summary = "Update Claim Ticket Of Artist",
+           Description = "Update Claim Ticket Of Artist",
+           OperationId = "UpdateClaimTicketOfArtist")]
+        [SwaggerResponse(200, "ClaimTicket updated", typeof(ClaimTicketResource))]
 
-        [HttpPut("{id}")]
+        [HttpPut("{claimTicketId}")]
         [ProducesResponseType(typeof(ClaimTicketResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PutAsync(long id, [FromBody] SaveClaimTicketResource resource)
+        public async Task<IActionResult> PutAsync(long artistId, long claimTicketId, [FromBody] SaveClaimTicketResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var claimTicket = _mapper.Map<SaveClaimTicketResource, ClaimTicket>(resource);
-            var result = await _claimTicketService.UpdateAsync(id, claimTicket);
+            var result = await _claimTicketService.UpdateAsync(artistId, claimTicketId, claimTicket);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -114,15 +135,21 @@ namespace PERUSTARS.Controllers
 
 
         /*****************************************************************/
-                                /*DELETE CLAIM TICKET*/
+                            /*DELETE CLAIM TICKET OF ARTIST*/
         /*****************************************************************/
 
-        [HttpDelete("{id}")]
+        [SwaggerOperation(
+           Summary = "Delete Claim Ticket Of Artist",
+           Description = "Delete Claim Ticket Of Artist",
+           OperationId = "DeleteClaimTicketOfArtist")]
+        [SwaggerResponse(200, "ClaimTicket deleted", typeof(ClaimTicketResource))]
+
+        [HttpDelete("{claimTicketId}")]
         [ProducesResponseType(typeof(ClaimTicketResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> DeleteAsync(long id)
+        public async Task<IActionResult> DeleteAsync(long artistId, long claimTicketId)
         {
-            var result = await _claimTicketService.DeleteAsync(id);
+            var result = await _claimTicketService.DeleteAsync(artistId, claimTicketId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var claimTicketResource = _mapper.Map<ClaimTicket, ClaimTicketResource>(result.Resource);

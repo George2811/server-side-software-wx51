@@ -11,10 +11,17 @@ namespace PERUSTARS.Domain.Services
     {
         Task<IEnumerable<ClaimTicket>> ListAsync();
 
-        Task<IEnumerable<ClaimTicket>> ListAsyncByPersonId(long Id);
-        Task<ClaimTicketResponse> GetByIdAsync(long id);
-        Task<ClaimTicketResponse> SaveAsync(ClaimTicket claimTicket);
-        Task<ClaimTicketResponse> UpdateAsync(long id, ClaimTicket claimTicket);
-        Task<ClaimTicketResponse> DeleteAsync(long id);
+        Task<IEnumerable<ClaimTicket>> ListAsyncByPersonId(long personId);
+
+        Task<IEnumerable<ClaimTicket>> ListAsyncByReportedPersonId(long personId);
+
+
+        Task<ClaimTicketResponse> GetByIdAndPersonIdAsync(long personId, long claimTicketId);
+
+
+        Task<ClaimTicketResponse> SaveAsync(long personId, ClaimTicket claimTicket);
+        Task<ClaimTicketResponse> UpdateAsync(long personId, long claimTicketId, ClaimTicket claimTicket);
+        Task<ClaimTicketResponse> DeleteAsync(long personId, long claimTicketId);
+
     }
 }

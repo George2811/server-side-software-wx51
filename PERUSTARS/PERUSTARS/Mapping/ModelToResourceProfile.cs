@@ -18,6 +18,7 @@ namespace PERUSTARS.Mapping
             CreateMap<ClaimTicket, ClaimTicketResource>();
             CreateMap<EventAssistance, EventAssistanceResource>();
             CreateMap<Artwork, ArtworkResource>();
+            CreateMap<Specialty, SpecialtyResource>();
 
         }
 

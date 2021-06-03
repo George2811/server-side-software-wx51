@@ -20,29 +20,34 @@ namespace PERUSTARS.Persistence.Repositories
             await _context.Followers.AddAsync(follower);
         }
 
-        public async Task AssignFollower(long HobbyistId, long ArtistId)
+        public async Task AssignFollower(long hobbyistId, long artistId)
         {
-            Follower follower = await FindByHobbyistIdAndArtistId(HobbyistId, ArtistId);
+            Follower follower = await FindByHobbyistIdAndArtistId(hobbyistId, artistId);
             if (follower == null)
             {
-                follower = new Follower { HobbyistId = HobbyistId, ArtistId = ArtistId };
+                follower = new Follower { HobbyistId = hobbyistId, ArtistId = artistId };
                 await AddAsync(follower);
             }
         }
 
-        public async Task<int> CountFollower(long ArtistId)
+        public async Task<int> CountFollower(long artistId)
         {
             return await _context.Followers
-               .Where(pt => pt.ArtistId == ArtistId)
+               .Where(pt => pt.ArtistId == artistId)
                .Include(pt => pt.Artist)
                .Include(pt => pt.Hobbyist)
                .CountAsync();
                
         }
 
-        public async Task<Follower> FindByHobbyistIdAndArtistId(long HobbyistId, long ArtistId)
+        public async Task<Follower> FindByHobbyistIdAndArtistId(long hobbyistId, long artistId)
         {
-            return await _context.Followers.FindAsync(HobbyistId, ArtistId);
+            return await _context.Followers
+                .Where(f => f.HobbyistId == hobbyistId && f.ArtistId == artistId)
+                .Include(f => f.Artist)
+                .FirstOrDefaultAsync();
+
+            //return await _context.Followers.FindAsync(HobbyistId, ArtistId);
         }
 
         public async Task<IEnumerable<Follower>> ListAsync()
@@ -50,19 +55,19 @@ namespace PERUSTARS.Persistence.Repositories
             return await _context.Followers.ToListAsync();
         }
 
-        public async Task<IEnumerable<Follower>> ListByArtistIdAsync(long ArtistId)
+        public async Task<IEnumerable<Follower>> ListByArtistIdAsync(long artistId)
         {
             return await _context.Followers
-                .Where(pt => pt.ArtistId == ArtistId)
+                .Where(pt => pt.ArtistId == artistId)
                 .Include(pt => pt.Artist)
                 .Include(pt => pt.Hobbyist)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Follower>> ListByHobbyistIdAsync(long HobbyistId)
+        public async Task<IEnumerable<Follower>> ListByHobbyistIdAsync(long hobbyistId)
         {
             return await _context.Followers
-               .Where(pt => pt.HobbyistId == HobbyistId)
+               .Where(pt => pt.HobbyistId == hobbyistId)
                .Include(pt => pt.Artist)
                .Include(pt => pt.Hobbyist)
                .ToListAsync();
@@ -73,9 +78,9 @@ namespace PERUSTARS.Persistence.Repositories
             _context.Followers.Remove(follower);
         }
 
-        public async Task UnassignFollower(long HobbyistId, long ArtistId)
+        public async Task UnassignFollower(long hobbyistId, long artistId)
         {
-            Follower follower = await FindByHobbyistIdAndArtistId(HobbyistId, ArtistId);
+            Follower follower = await FindByHobbyistIdAndArtistId(hobbyistId, artistId);
             if (follower != null)
                 Remove(follower);
         }

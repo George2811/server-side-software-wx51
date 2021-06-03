@@ -20,19 +20,23 @@ namespace PERUSTARS.Persistence.Repositories
             await _context.FavoriteArtworks.AddAsync(favoriteArtwork);
         }
 
-        public async Task AssignFavoriteArtwork(long HobbyistId, long ArtworkId)
+        public async Task AssignFavoriteArtwork(long hobbyistId, long artworkId)
         {
-            FavoriteArtwork favoriteArtwork = await FindByHobbyistIdAndArtworkId(HobbyistId, ArtworkId);
+            FavoriteArtwork favoriteArtwork = await FindByHobbyistIdAndArtworkId(hobbyistId, artworkId);
             if (favoriteArtwork == null)
             {
-                favoriteArtwork = new FavoriteArtwork { HobyyistId = HobbyistId , ArtworkId = ArtworkId };
+                favoriteArtwork = new FavoriteArtwork { HobyyistId = hobbyistId , ArtworkId = artworkId };
                 await AddAsync(favoriteArtwork);
             }
         }
 
-        public async Task<FavoriteArtwork>FindByHobbyistIdAndArtworkId(long HobbyistId, long ArtworkId)
+        public async Task<FavoriteArtwork>FindByHobbyistIdAndArtworkId(long hobbyistId, long artworkId)
         {
-            return await _context.FavoriteArtworks.FindAsync(HobbyistId, ArtworkId);
+            return await _context.FavoriteArtworks
+                .Where(art => art.HobyyistId == hobbyistId && art.ArtworkId == artworkId)
+                .Include(art => art.Artwork)
+                .FirstOrDefaultAsync();
+            //return await _context.FavoriteArtworks.FindAsync(HobbyistId, ArtworkId);
         }
 
         public async Task<IEnumerable<FavoriteArtwork>> ListAsync()
@@ -40,19 +44,19 @@ namespace PERUSTARS.Persistence.Repositories
             return await _context.FavoriteArtworks.ToListAsync();
         }
 
-        public async Task<IEnumerable<FavoriteArtwork>> ListByArtworkIdAsync(long ArtworkId)
+        public async Task<IEnumerable<FavoriteArtwork>> ListByArtworkIdAsync(long artworkId)
         {
             return await _context.FavoriteArtworks
-                 .Where(pt => pt.ArtworkId == ArtworkId)
+                 .Where(pt => pt.ArtworkId == artworkId)
                  .Include(pt => pt.Artwork)
                  .Include(pt => pt.Hobbyist)
                  .ToListAsync();
         }
 
-        public async Task<IEnumerable<FavoriteArtwork>> ListByHobbyistIdAsync(long HobbyistId)
+        public async Task<IEnumerable<FavoriteArtwork>> ListByHobbyistIdAsync(long hobbyistId)
         {
             return await _context.FavoriteArtworks
-                 .Where(pt => pt.HobyyistId == HobbyistId)
+                 .Where(pt => pt.HobyyistId == hobbyistId)
                  .Include(pt => pt.Artwork)
                  .Include(pt => pt.Hobbyist)
                  .ToListAsync();
@@ -63,9 +67,9 @@ namespace PERUSTARS.Persistence.Repositories
             _context.FavoriteArtworks.Remove(favoriteArtwork);
         }
 
-        public async Task UnassignFavoriteArtwork(long HobbyistId, long ArtworkId)
+        public async Task UnassignFavoriteArtwork(long hobbyistId, long artworkId)
         {
-            FavoriteArtwork favoriteArtwork = await FindByHobbyistIdAndArtworkId(HobbyistId, ArtworkId);
+            FavoriteArtwork favoriteArtwork = await FindByHobbyistIdAndArtworkId(hobbyistId, artworkId);
             if (favoriteArtwork != null)
                 Remove(favoriteArtwork);
         }

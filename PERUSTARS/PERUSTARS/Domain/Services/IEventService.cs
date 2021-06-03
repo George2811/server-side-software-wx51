@@ -10,20 +10,16 @@ namespace PERUSTARS.Domain.Services
     public interface IEventService
     {
         Task<IEnumerable<Event>> ListAsync();
-
-        Task<IEnumerable<Event>> ListAsyncByArtistId(long Id); //Encuentra todos los eventos por Artista
-
-        Task<IEnumerable<Event>> ListAsyncByEventType(ETypeOfEvent eTypeOf); // Encuentra todos los eventos segun Ti
-
+        Task<IEnumerable<Event>> ListAsyncByArtistId(long artistId);
+        Task<IEnumerable<Event>> ListAsyncByEventType(ETypeOfEvent eTypeOf);
         //PARA BOOKING
-        Task<IEnumerable<Event>> ListByHobbyistAsync(long hobbyistId); //Encuentra los eventos segun aficionado
+        Task<IEnumerable<Event>> ListByHobbyistAsync(long hobbyistId);
+        Task<EventResponse> GetByIdAndArtistIdAsync(long eventId, long artistId);
+        Task<EventResponse> SaveAsync(long artistId, Event _event);
+        Task<EventResponse> UpdateAsync(long eventId, long artistId, Event _event);
+        Task<EventResponse> DeleteAsync(long eventId, long artistId);
 
-        Task<EventResponse> GetByIdAsync(long id);
-        Task<EventResponse> SaveAsync(Event _event);
-        Task<EventResponse> UpdateAsync(long id, Event _event);
-        Task<EventResponse> DeleteAsync(long id);
-
-        Task<bool> isSameTitle(string title, long ArtistId);
+        Task<bool> isSameTitle(string title, long artistId);
 
     }
 }

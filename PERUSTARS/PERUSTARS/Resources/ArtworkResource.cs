@@ -12,10 +12,6 @@ namespace PERUSTARS.Resources
         public string ArtDescription { get; set; }
         public double ArtCost { get; set; }
         public string LinkInfo { get; set; }
-
         public long ArtistId { get; set; }
-
-        public ArtistResource Artist { get; set; }
-
     }
 }

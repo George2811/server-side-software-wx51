@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/hobbyists/{hobbyistId}/artworks")]
     [Produces("application/json")]
     [ApiController]
     public class FavoriteArtworksController : ControllerBase
@@ -29,7 +29,21 @@ namespace PERUSTARS.Controllers
             _artworkService = artworkService;
         }
 
+
+
+        /*****************************************************************/
+                   /*LIST OF ALL FAVORITE ARTWORKS BY HOBBYIST ID*/
+        /*****************************************************************/
+
+        [SwaggerOperation(
+           Summary = "Get All Favorite Artworks By Hobbyist Id",
+           Description = "Get All Favorite Artworks By Hobbyist Id",
+           OperationId = "GetAllFavoriteArtworksByHobbyistId")]
+        [SwaggerResponse(200, "Get All Favorite Artworks By Hobbyist Id", typeof(IEnumerable<ArtworkResource>))]
+
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ArtworkResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IEnumerable<ArtworkResource>> GetAllByHobbyistIdAsync(long hobbyistId)
         {
             var artworks = await _artworkService.ListByHobbyistAsync(hobbyistId);
@@ -37,8 +51,22 @@ namespace PERUSTARS.Controllers
             return resources;
         }
 
-        [HttpPost("{artworkId}")]
-        public async Task<IActionResult> AssignArtwork(long hobbyistId, long artworkId)
+
+
+        /*****************************************************************/
+                             /*ASSIGN FAVORITE ARTWORK*/
+        /*****************************************************************/
+
+        [SwaggerOperation(
+           Summary = "Assign Favorite Artwork",
+           Description = "Assign Favorite Artwork",
+           OperationId = "AssignFavoriteArtwork")]
+        [SwaggerResponse(200, "Favorite Artwork Assigned", typeof(ArtworkResource))]
+
+        [HttpPost]
+        [ProducesResponseType(typeof(ArtworkResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> AssignFavoriteArtwork(long hobbyistId, long artworkId)
         {
             var result = await _favoriteArtworkService.AssignFavoriteArtworkAsync(hobbyistId, artworkId);
             if (!result.Success)
@@ -47,8 +75,22 @@ namespace PERUSTARS.Controllers
             return Ok(artworkResource);
         }
 
+
+
+        /*****************************************************************/
+                            /*UNASSIGN FAVORITE ARTWORK*/
+        /*****************************************************************/
+
+        [SwaggerOperation(
+           Summary = "Unassign Favorite Artwork",
+           Description = "Unassign Favorite Artwork",
+           OperationId = "UnassignFavoriteArtwork")]
+        [SwaggerResponse(200, "Favorite Artwork Unassigned", typeof(ArtworkResource))]
+
         [HttpDelete("{artworkId}")]
-        public async Task<IActionResult> UnassignBooking(long hobbyistId, long artworkId)
+        [ProducesResponseType(typeof(ArtworkResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> UnassignFavoriteArtwork(long hobbyistId, long artworkId)
         {
             var result = await _favoriteArtworkService.UnassignFavoriteArtworkAsync(hobbyistId, artworkId);
             if (!result.Success)

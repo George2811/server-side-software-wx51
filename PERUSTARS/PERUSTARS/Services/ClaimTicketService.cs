@@ -12,17 +12,21 @@ namespace PERUSTARS.Services
     public class ClaimTicketService : IClaimTicketService
     {
         private readonly IClaimTicketRepository _claimTicketRepository;
+        private readonly IArtistRepository _artistRepository;
+        private readonly IHobbyistRepository _hobbyistRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ClaimTicketService(IClaimTicketRepository claimTicketRepository, IUnitOfWork unitOfWork)
+        public ClaimTicketService(IClaimTicketRepository claimTicketRepository, IUnitOfWork unitOfWork, IArtistRepository artistRepository, IHobbyistRepository hobbyistRepository)
         {
             _claimTicketRepository = claimTicketRepository;
             _unitOfWork = unitOfWork;
+            _artistRepository = artistRepository;
+            _hobbyistRepository = hobbyistRepository;
         }
 
-        public async Task<ClaimTicketResponse> DeleteAsync(long id)
+        public async Task<ClaimTicketResponse> DeleteAsync(long personId, long claimTicketId)
         {
-            var existingClaimTicket = await _claimTicketRepository.FindById(id);
+            var existingClaimTicket = await _claimTicketRepository.FindByIdAndPersonId(claimTicketId, personId);
 
             if (existingClaimTicket == null)
                 return new ClaimTicketResponse("Claim Ticket not found");
@@ -40,12 +44,17 @@ namespace PERUSTARS.Services
             }
         }
 
-        public async Task<ClaimTicketResponse> GetByIdAsync(long id)
+        public async Task<ClaimTicketResponse> GetByIdAndPersonIdAsync(long personId, long claimTicketId)
         {
-            var existingClaimTicket = await _claimTicketRepository.FindById(id);
+            var existingArtist = await _artistRepository.FindById(personId);
+            var existingHobbyist = await _hobbyistRepository.FindById(personId);
+            if (existingArtist == null && existingHobbyist == null)
+                return new ClaimTicketResponse("Person not found.");
 
+            var existingClaimTicket = await _claimTicketRepository.FindByIdAndPersonId(claimTicketId, personId);
             if (existingClaimTicket == null)
-                return new ClaimTicketResponse("Claim Ticket not found");
+                return new ClaimTicketResponse("Claim Ticket not found by Person with Id: " + personId);
+
             return new ClaimTicketResponse(existingClaimTicket);
         }
 
@@ -54,13 +63,23 @@ namespace PERUSTARS.Services
             return await _claimTicketRepository.ListAsync();
         }
 
-        public async Task<IEnumerable<ClaimTicket>> ListAsyncByPersonId(long Id)
+        public async Task<IEnumerable<ClaimTicket>> ListAsyncByPersonId(long personId)
         {
-            return await _claimTicketRepository.ListByPersonIdAsync(Id);
+            return await _claimTicketRepository.ListByPersonIdAsync(personId);
         }
 
-        public async Task<ClaimTicketResponse> SaveAsync(ClaimTicket claimTicket)
+        public async Task<IEnumerable<ClaimTicket>> ListAsyncByReportedPersonId(long personId)
         {
+            return await _claimTicketRepository.ListByReportedPersonIdAsync(personId);
+        }
+
+        public async Task<ClaimTicketResponse> SaveAsync(long personId, ClaimTicket claimTicket)
+        {
+            var existingArtist = await _artistRepository.FindById(personId);
+            var existingHobbyist = await _hobbyistRepository.FindById(personId);
+            if (existingArtist == null && existingHobbyist == null)
+                return new ClaimTicketResponse("Person not found");
+            claimTicket.ReportMadeById = personId;
             try
             {
                 await _claimTicketRepository.AddAsync(claimTicket);
@@ -74,9 +93,9 @@ namespace PERUSTARS.Services
             }
         }
 
-        public async Task<ClaimTicketResponse> UpdateAsync(long id, ClaimTicket claimTicket)
+        public async Task<ClaimTicketResponse> UpdateAsync(long personId, long claimTicketId, ClaimTicket claimTicket)
         {
-            var existingClaimTicket = await _claimTicketRepository.FindById(id);
+            var existingClaimTicket = await _claimTicketRepository.FindByIdAndPersonId(claimTicketId, personId);
 
             if (existingClaimTicket == null)
                 return new ClaimTicketResponse("Claim Ticket not found");

@@ -25,28 +25,32 @@ namespace PERUSTARS.Persistence.Repositories
             return await _context.Artworks.FindAsync(artworkId);
         }
 
-        public async Task<bool> isSameTitle(string title, long ArtistId)
+        public async Task<bool> isSameTitle(string title, long artistId)
         {
-            bool ver = false;
-            IEnumerable<Artwork> Verification = await ListByArtistIdAsync(ArtistId);
-            List<string> titles = new List<string>();
+            var artworksWithSameTilte = await _context.Artworks
+                                                .Where(pt => pt.ArtistId == artistId
+                                                 && pt.ArtTitle == title)
+                                                .ToListAsync();
 
-            foreach (Artwork item in Verification)
-            {
-                titles.Add(item.ArtTitle);
-            }
+            return artworksWithSameTilte.Count > 0;
 
-            for (int i = 0; i < titles.Count(); i++)
-            {
+            //IEnumerable<Artwork> verification = await ListByArtistIdAsync(artistId);
+            //List<string> titles = new List<string>();
 
-                if (titles[i] == title)
-                {
-                    ver = true;
-                    return ver;
-                }
-            }
-            ver = false;
-            return ver;
+            //foreach (Artwork item in verification)
+            //{
+            //    titles.Add(item.ArtTitle);
+            //}
+
+            //for (int i = 0; i < titles.Count(); i++)
+            //{
+
+            //    if (titles[i] == title)
+            //    {
+            //        return true;
+            //    }
+            //}
+            //return false;
         }
 
         public async Task<IEnumerable<Artwork>> ListAsync()
@@ -56,7 +60,6 @@ namespace PERUSTARS.Persistence.Repositories
 
         public async Task<IEnumerable<Artwork>> ListByArtistIdAsync(long artistId) 
         {
-
             return await _context.Artworks
                   .Where(pt => pt.ArtistId == artistId)
                   .ToListAsync();

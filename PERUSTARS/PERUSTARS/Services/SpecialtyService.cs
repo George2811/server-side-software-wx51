@@ -12,12 +12,14 @@ namespace PERUSTARS.Services
     public class SpecialtyService : ISpecialtyService
     {
         private readonly ISpecialtyRepository _specialtyRepository;
+        private readonly IInterestRepository _interestRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public SpecialtyService(ISpecialtyRepository specialtyRepository, IUnitOfWork unitOfWork)
+        public SpecialtyService(ISpecialtyRepository specialtyRepository, IUnitOfWork unitOfWork, IInterestRepository interestRepository)
         {
             _specialtyRepository = specialtyRepository;
             _unitOfWork = unitOfWork;
+            _interestRepository = interestRepository;
         }
 
         public async Task<SpecialtyResponse> GetByIdAsync(long id)
@@ -31,6 +33,13 @@ namespace PERUSTARS.Services
         public async Task<IEnumerable<Specialty>> ListAsync()
         {
             return await _specialtyRepository.ListAsync();
+        }
+
+        public async Task<IEnumerable<Specialty>> ListByHobbyistIdAsync(int hobbyistId)
+        {
+            var interests = await _interestRepository.ListByHobbyistIdAsync(hobbyistId);
+            var specialties = interests.Select(i => i.Specialty).ToList();
+            return specialties;
         }
     }
 }
