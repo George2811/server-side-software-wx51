@@ -48,6 +48,7 @@ namespace PERUSTARS
             services.AddScoped<IFavoriteArtworkRepository, FavoriteArtworkRepository>();
             services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
             services.AddScoped<IFollowerRepository, FollowerRepository>();
+            services.AddScoped<IEventAssistanceRepository, EventAssistanceRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -56,6 +57,11 @@ namespace PERUSTARS
             services.AddScoped<IHobbyistService, HobbyistService>();
             services.AddScoped<ISpecialtyService, SpecialtyService>();
             services.AddScoped<IFollowerService, FollowerService>();
+            services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IEventAssistanceService, EventAssistanceService>();
+            services.AddScoped<IFavoriteArtworkService, FavoriteArtworkService>();
+            services.AddScoped<IClaimTicketService, ClaimTicketService>();
+
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);

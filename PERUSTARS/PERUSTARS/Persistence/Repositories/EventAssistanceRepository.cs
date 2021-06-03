@@ -47,7 +47,11 @@ namespace PERUSTARS.Persistence.Repositories
 
         public async Task<EventAssistance> FindByHobbyistIdAndEventIdAsync(long hobbyistId, long eventId)
         {
-            return await _context.EventAssistances.FindAsync(hobbyistId,eventId);
+            return await _context.EventAssistances
+                .Where(ev => ev.EventId == eventId && ev.HobbyistId == hobbyistId)
+                .Include(ev => ev.Event)
+                .FirstOrDefaultAsync();
+            //return await _context.EventAssistances.FindAsync(hobbyistId,eventId);
         }
 
         public async Task<IEnumerable<EventAssistance>> ListByHobbyistIdAsync(long hobbyistId)

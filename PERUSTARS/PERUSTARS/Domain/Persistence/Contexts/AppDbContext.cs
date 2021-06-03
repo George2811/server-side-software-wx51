@@ -103,7 +103,9 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             builder.Entity<Event>().HasKey(p => p.EventId);
             builder.Entity<Event>().Property(p => p.EventId).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Event>().Property(p => p.EventTitle).IsRequired().HasMaxLength(100);
-            builder.Entity<Event>().Property(p => p.EventType).IsRequired().HasMaxLength(25);
+            builder.Entity<Event>().Property(p => p.EventType).IsRequired().HasConversion(
+                type => type.ToString(),                                                        //convert enum to string
+                type => (ETypeOfEvent)Enum.Parse(typeof(ETypeOfEvent), type));                  //convert string to enum
             builder.Entity<Event>().Property(p => p.DateStart).IsRequired();
             builder.Entity<Event>().Property(p => p.DateEnd).IsRequired();
             builder.Entity<Event>().Property(p => p.EventDescription).IsRequired().HasMaxLength(250);

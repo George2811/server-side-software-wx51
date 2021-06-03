@@ -18,9 +18,9 @@ namespace PERUSTARS.Persistence.Repositories
             await _context.ClaimTickets.AddAsync(claimTicket);
         }
 
-        public async Task<ClaimTicket> FindById(long id)
+        public async Task<ClaimTicket> FindById(long claimTicketId)
         {
-            return await _context.ClaimTickets.FindAsync(id);
+            return await _context.ClaimTickets.FindAsync(claimTicketId);
         }
 
         public async Task<IEnumerable<ClaimTicket>> ListAsync()

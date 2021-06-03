@@ -26,16 +26,20 @@ namespace PERUSTARS.Controllers
         }
 
 
+
+        /*****************************************************************/
+                                 /*ASSIGN FOLLOWER*/
+        /*****************************************************************/
+
         [SwaggerOperation(
            Summary = "Assign Follower",
            Description = "Assign Follower",
            OperationId = "AssignFollower")]
-        [SwaggerResponse(200, "Assign Follower", typeof(IActionResult))]
+        [SwaggerResponse(200, "Artist Assign Follower", typeof(ArtistResource))]
 
-        [ProducesResponseType(typeof(IActionResult), 200)]
+        [HttpPost]
+        [ProducesResponseType(typeof(ArtistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-
-        [HttpPost("{hobbyistId}")]
         public async Task<IActionResult> AssignFollower(int hobbyistId, int artistId)
         {
             var result = await _followerService.AssignFollowerAsync(hobbyistId, artistId);
@@ -47,16 +51,20 @@ namespace PERUSTARS.Controllers
         }
 
 
+
+        /*****************************************************************/
+                                /*UNASSIGN FOLLOWER*/
+        /*****************************************************************/
+
         [SwaggerOperation(
            Summary = "Unassign Follower",
            Description = "Unassign Follower",
            OperationId = "UnassignFollower")]
-        [SwaggerResponse(200, "Unassign Follower", typeof(IActionResult))]
-
-        [ProducesResponseType(typeof(IActionResult), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        [SwaggerResponse(200, "Artist Unassign Follower", typeof(ArtistResource))]
 
         [HttpDelete("{hobbyistId}")]
+        [ProducesResponseType(typeof(ArtistResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IActionResult> UnassignFollower(int hobbyistId, int artistId)
         {
             var result = await _followerService.UnassignFollowerAsync(hobbyistId, artistId);
@@ -69,16 +77,19 @@ namespace PERUSTARS.Controllers
 
 
 
+        /*****************************************************************/
+                    /*LIST OF ALL HOBBYISTS BY ARTIST ID*/
+        /*****************************************************************/
+
         [SwaggerOperation(
            Summary = "Get All Hobbyist By Artist Id",
            Description = "Get All Hobbyists By Artist Id",
-           OperationId = "GetAllByArtistId")]
-        [SwaggerResponse(200, "Get All By Artist Id", typeof(IEnumerable<HobbyistResource>))]
-
-        [ProducesResponseType(typeof(IEnumerable<HobbyistResource>), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 404)]
+           OperationId = "GetAllHobbyistsByArtistId")]
+        [SwaggerResponse(200, "Get All Hobbyists By Artist Id", typeof(IEnumerable<HobbyistResource>))]
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<HobbyistResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IEnumerable<HobbyistResource>> GetAllByArtistIdAsync(int artistId)
         {
             var hobbyists = await _hobbyistService.ListByArtistIdAsync(artistId);
@@ -88,16 +99,19 @@ namespace PERUSTARS.Controllers
 
 
 
-        [SwaggerOperation(
-           Summary = "Count Artist's Followers",
-           Description = "Count Artist's Followers",
-           OperationId = "CountFollowers")]
-        [SwaggerResponse(200, "Count Followers", typeof(ArtistResource))]
+        /*****************************************************************/
+                          /*COUNT OF ARTISTS' FOLLOWERS*/
+        /*****************************************************************/
 
-        [ProducesResponseType(typeof(ArtistResource), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        [SwaggerOperation(
+           Summary = "Count Artists' Followers",
+           Description = "Count Artists' Followers",
+           OperationId = "CountFollowers")]
+        [SwaggerResponse(200, "Count Followers", typeof(int))]
 
         [HttpGet("count")]
+        [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<int> CountFollowers(long artistId)
         {
             var count = await _followerService.CountFollowers(artistId);

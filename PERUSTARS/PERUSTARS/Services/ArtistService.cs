@@ -109,7 +109,7 @@ namespace PERUSTARS.Services
             existingArtist.BrandName = artist.BrandName;
             existingArtist.Description = artist.Description;
             existingArtist.Phrase = artist.Phrase;
-            existingArtist.SpecialtyArt = artist.SpecialtyArt;
+            existingArtist.SpecialtyId = artist.SpecialtyId;
 
             try
             {

@@ -25,15 +25,18 @@ namespace PERUSTARS.Services
             _artistRepository = artistRepository;
         }
 
-        public async Task<ArtworkResponse> DeleteAsync(long id, long artistId)
+        public async Task<ArtworkResponse> DeleteAsync(long artworkId, long artistId)
         {
             var existingArtist = await _artistRepository.FindById(artistId);
             if (existingArtist == null)
                 return new ArtworkResponse("Artist not found");
 
-            var existingArtwork = await _artworkRepository.FindById(id);
+            var existingArtwork = await _artworkRepository.FindById(artworkId);
             if (existingArtwork == null)
                 return new ArtworkResponse("Artwork not found");
+
+            if (!existingArtist.Artworks.Contains(existingArtwork))
+                return new ArtworkResponse("Artwork not found by Artist with Id: " + artistId);
 
             try
             {
@@ -48,15 +51,18 @@ namespace PERUSTARS.Services
             }
         }
 
-        public async Task<ArtworkResponse> GetByIdAndArtistIdAsync(long id, long artistId)
+        public async Task<ArtworkResponse> GetByIdAndArtistIdAsync(long artworkId, long artistId)
         {
             var existingArtist = await _artistRepository.FindById(artistId);
             if (existingArtist == null)
                 return new ArtworkResponse("Artist not found");
 
-            var existingArtwork = await _artworkRepository.FindById(id);
+            var existingArtwork = await _artworkRepository.FindById(artworkId);
             if (existingArtwork == null)
                 return new ArtworkResponse("Artwork not found");
+
+            if (!existingArtist.Artworks.Contains(existingArtwork))
+                return new ArtworkResponse("Artwork not found by Artist with Id: " + artistId);
 
             return new ArtworkResponse(existingArtwork);
         }
@@ -88,7 +94,9 @@ namespace PERUSTARS.Services
             var existingArtist = await _artistRepository.FindById(artistId);
             if (existingArtist == null)
                 return new ArtworkResponse("Artist not found");
+
             artwork.ArtistId = artistId;
+
             if (_artworkRepository.isSameTitle(artwork.ArtTitle, artwork.ArtistId).Result == true)
             {
                 return new ArtworkResponse($"You already created an artwork with the same title");
@@ -107,16 +115,18 @@ namespace PERUSTARS.Services
             }
         }
 
-        public async Task<ArtworkResponse> UpdateAsync(long id, long artistId, Artwork artwork)
+        public async Task<ArtworkResponse> UpdateAsync(long artworkId, long artistId, Artwork artwork)
         {
             var existingArtist = await _artistRepository.FindById(artistId);
             if (existingArtist == null)
                 return new ArtworkResponse("Artist not found");
 
-            var existingArtwork = await _artworkRepository.FindById(id);
-            
+            var existingArtwork = await _artworkRepository.FindById(artworkId);
             if (existingArtwork == null)
                 return new ArtworkResponse("Artist not found");
+
+            if (!existingArtist.Artworks.Contains(existingArtwork))
+                return new ArtworkResponse("Artwork not found by Artist with Id: " + artistId);
 
             if (existingArtwork.ArtTitle != artwork.ArtTitle)
             { // si el titulo nuevo es diferente al titulo existente
@@ -125,7 +135,6 @@ namespace PERUSTARS.Services
                     return new ArtworkResponse($"You already created an artwork with the same title");
                 }
             }
-
 
             existingArtwork.ArtTitle = artwork.ArtTitle;
             existingArtwork.ArtDescription = artwork.ArtDescription;

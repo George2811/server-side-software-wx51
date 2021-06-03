@@ -25,16 +25,19 @@ namespace PERUSTARS.Controllers
 
 
 
+        /*****************************************************************/
+                       /*LIST OF ALL ARTISTS BY HOBBYIST ID*/
+        /*****************************************************************/
+
         [SwaggerOperation(
            Summary = "Get All Artists By Hobbyist Id",
            Description = "Get All Artists By Hobbyist Id",
            OperationId = "GetAllByHobbyistId")]
-        [SwaggerResponse(200, "Get All By HobbyistId", typeof(ArtistResource))]
-
-        [ProducesResponseType(typeof(ArtistResource), 200)]
-        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        [SwaggerResponse(200, "Get All By HobbyistId", typeof(IEnumerable<ArtistResource>))]
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ArtistResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IEnumerable<ArtistResource>> GetAllByHobbyistIdAsync(int hobbyistId)
         {
             var artists = await _artistService.ListByHobbyistIdAsync(hobbyistId);

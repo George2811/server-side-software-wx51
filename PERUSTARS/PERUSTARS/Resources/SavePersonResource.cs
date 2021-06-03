@@ -15,8 +15,5 @@ namespace PERUSTARS.Resources
         [Required]
         [MaxLength(20)]
         public string Lastname { get; set; }
-
-
-
     }
 }
