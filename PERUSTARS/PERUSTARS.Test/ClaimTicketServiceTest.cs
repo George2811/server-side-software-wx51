@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Test
 {
-    class ClaimTicketTest
+    class ClaimTicketServiceTest
     {
         [SetUp]
         public void SetUp()

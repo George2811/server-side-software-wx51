@@ -68,6 +68,7 @@ namespace PERUSTARS.Controllers
         /*****************************************************************/
 
 
+<<<<<<< HEAD
         [HttpPost]
         [ProducesResponseType(typeof(ArtworkResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
@@ -85,6 +86,9 @@ namespace PERUSTARS.Controllers
             return Ok(artworkResource);
 
         }
+=======
+       
+>>>>>>> develop
 
 
 

@@ -255,13 +255,13 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             //*************************************************//
 
 
-            //builder.Entity<Specialty>().HasData
-            //   (
-            //       new Specialty { Id = 1, Name = "Specialty1" },
-            //       new Specialty { Id = 2, Name = "Specialty2" },
-            //       new Specialty { Id = 3, Name = "Specialty3" },
-            //       new Specialty { Id = 4, Name = "Specialty4" }
-            //   );
+            builder.Entity<Specialty>().HasData
+               (
+                   new Specialty { Id = 1, Name = "Specialty1" },
+                   new Specialty { Id = 2, Name = "Specialty2" },
+                   new Specialty { Id = 3, Name = "Specialty3" },
+                   new Specialty { Id = 4, Name = "Specialty4" }
+               );
 
             //  builder.Entity<Hobbyist>().HasData
             //  (
@@ -282,7 +282,7 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             //    new Artwork { ArtworkId = 2, ArtTitle = "El Beso 2", ArtDescription = "Nueva Representacion de la obra de klimt", ArtCost = 70, LinkInfo = "http//elbeso ", ArtistId = 2 }
             //    );
 
-  
+
 
             // Apply Naming Convention
             builder.ApplySnakeCaseNamingConvention();
