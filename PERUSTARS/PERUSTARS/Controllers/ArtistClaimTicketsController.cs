@@ -66,7 +66,7 @@ namespace PERUSTARS.Controllers
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IActionResult> GetByIdAsync(long artistId, long claimTicketId)
         {
-            var result = await _claimTicketService.GetByIdAndArtistIdAsync(artistId, claimTicketId);
+            var result = await _claimTicketService.GetByIdAndPersonIdAsync(artistId, claimTicketId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var claimTicketResource = _mapper.Map<ClaimTicket, ClaimTicketResource>(result.Resource);
@@ -124,7 +124,7 @@ namespace PERUSTARS.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
 
             var claimTicket = _mapper.Map<SaveClaimTicketResource, ClaimTicket>(resource);
-            var result = await _claimTicketService.UpdateAsync(claimTicketId, claimTicket);
+            var result = await _claimTicketService.UpdateAsync(artistId, claimTicketId, claimTicket);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -149,7 +149,7 @@ namespace PERUSTARS.Controllers
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IActionResult> DeleteAsync(long artistId, long claimTicketId)
         {
-            var result = await _claimTicketService.DeleteAsync(claimTicketId);
+            var result = await _claimTicketService.DeleteAsync(artistId, claimTicketId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var claimTicketResource = _mapper.Map<ClaimTicket, ClaimTicketResource>(result.Resource);

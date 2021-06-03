@@ -24,7 +24,27 @@ namespace PERUSTARS.Services
             _hobbyistRepository = hobbyistRepository;
         }
 
-        public async Task<ClaimTicketResponse> DeleteByArtistIdAsync(long artistId, long claimTicketId)
+        public async Task<ClaimTicketResponse> DeleteAsync(long personId, long claimTicketId)
+        {
+            var existingClaimTicket = await _claimTicketRepository.FindByIdAndPersonId(claimTicketId, personId);
+
+            if (existingClaimTicket == null)
+                return new ClaimTicketResponse("Claim Ticket not found");
+
+            try
+            {
+                _claimTicketRepository.Remove(existingClaimTicket);
+                await _unitOfWork.CompleteAsync();
+
+                return new ClaimTicketResponse(existingClaimTicket);
+            }
+            catch (Exception ex)
+            {
+                return new ClaimTicketResponse($"An error ocurred while deleting the Claim Ticket: {ex.Message}");
+            }
+        }
+
+        /*public async Task<ClaimTicketResponse> DeleteByArtistIdAsync(long artistId, long claimTicketId)
         {
             var existingClaimTicket = await _claimTicketRepository.FindById(claimTicketId);
 
@@ -62,9 +82,9 @@ namespace PERUSTARS.Services
             {
                 return new ClaimTicketResponse($"An error ocurred while deleting the Claim Ticket: {ex.Message}");
             }
-        }
+        }*/
 
-        public async Task<ClaimTicketResponse> GetByIdAndArtistIdAsync(long artistId, long claimTicketId)
+        /*public async Task<ClaimTicketResponse> GetByIdAndArtistIdAsync(long artistId, long claimTicketId)
         {
             var existingArtist = await _artistRepository.FindById(artistId);
             if (existingArtist == null)
@@ -95,6 +115,20 @@ namespace PERUSTARS.Services
 
             return new ClaimTicketResponse(existingClaimTicket);
         }
+        */
+        public async Task<ClaimTicketResponse> GetByIdAndPersonIdAsync(long personId, long claimTicketId)
+        {
+            var existingArtist = await _artistRepository.FindById(personId);
+            var existingHobbyist = await _hobbyistRepository.FindById(personId);
+            if (existingArtist == null && existingHobbyist == null)
+                return new ClaimTicketResponse("Person not found.");
+
+            var existingClaimTicket = await _claimTicketRepository.FindByIdAndPersonId(claimTicketId, personId);
+            if (existingClaimTicket == null)
+                return new ClaimTicketResponse("Claim Ticket not found by Person with Id: " + personId);
+
+            return new ClaimTicketResponse(existingClaimTicket);
+        }
 
         public async Task<IEnumerable<ClaimTicket>> ListAsync()
         {
@@ -106,7 +140,32 @@ namespace PERUSTARS.Services
             return await _claimTicketRepository.ListByPersonIdAsync(personId);
         }
 
-        public async Task<ClaimTicketResponse> SaveByArtistIdAsync(long artistId, ClaimTicket claimTicket)
+        public async Task<IEnumerable<ClaimTicket>> ListAsyncByReportedPersonId(long personId)
+        {
+            return await _claimTicketRepository.ListByReportedPersonIdAsync(personId);
+        }
+
+        public async Task<ClaimTicketResponse> SaveAsync(long personId, ClaimTicket claimTicket)
+        {
+            var existingArtist = await _artistRepository.FindById(personId);
+            var existingHobbyist = await _hobbyistRepository.FindById(personId);
+            if (existingArtist == null && existingHobbyist == null)
+                return new ClaimTicketResponse("Person not found");
+
+            try
+            {
+                await _claimTicketRepository.AddAsync(claimTicket);
+                await _unitOfWork.CompleteAsync();
+
+                return new ClaimTicketResponse(claimTicket);
+            }
+            catch (Exception ex)
+            {
+                return new ClaimTicketResponse($"An error ocurred while saving the Claim Ticket: {ex.Message}");
+            }
+        }
+
+       /* public async Task<ClaimTicketResponse> SaveByArtistIdAsync(long artistId, ClaimTicket claimTicket)
         {
             try
             {
@@ -135,8 +194,33 @@ namespace PERUSTARS.Services
                 return new ClaimTicketResponse($"An error ocurred while saving the Claim Ticket: {ex.Message}");
             }
         }
+       */
+        public async Task<ClaimTicketResponse> UpdateAsync(long personId, long claimTicketId, ClaimTicket claimTicket)
+        {
+            var existingClaimTicket = await _claimTicketRepository.FindByIdAndPersonId(claimTicketId, personId);
 
-        public async Task<ClaimTicketResponse> UpdateByArtistIdAsync(long artistId, long claimTicketId, ClaimTicket claimTicket)
+            if (existingClaimTicket == null)
+                return new ClaimTicketResponse("Claim Ticket not found");
+
+            existingClaimTicket.ClaimDescription = claimTicket.ClaimDescription;
+            existingClaimTicket.ClaimSubject = claimTicket.ClaimSubject;
+            existingClaimTicket.IncedentDate = claimTicket.IncedentDate;
+            existingClaimTicket.ReportedPerson = claimTicket.ReportedPerson;
+
+            try
+            {
+                _claimTicketRepository.Update(existingClaimTicket);
+                await _unitOfWork.CompleteAsync();
+
+                return new ClaimTicketResponse(existingClaimTicket);
+            }
+            catch (Exception ex)
+            {
+                return new ClaimTicketResponse($"An error ocurred while updating the Claim Ticket: {ex.Message}");
+            }
+        }
+
+        /*public async Task<ClaimTicketResponse> UpdateByArtistIdAsync(long artistId, long claimTicketId, ClaimTicket claimTicket)
         {
             var existingClaimTicket = await _claimTicketRepository.FindById(claimTicketId);
 
@@ -184,6 +268,6 @@ namespace PERUSTARS.Services
             {
                 return new ClaimTicketResponse($"An error ocurred while updating the Claim Ticket: {ex.Message}");
             }
-        }
+        }*/
     }
 }
