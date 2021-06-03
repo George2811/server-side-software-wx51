@@ -11,10 +11,11 @@ namespace PERUSTARS.Domain.Models
         public string ClaimSubject { get; set; }
         public string ClaimDescription { get; set; }
         public DateTime IncedentDate { get; set; }
+        public long ReportedPersonId { get; set; }
         public Person ReportedPerson { get; set; }
 
         //Una persona puede realizar multiples reportes
-        public long PersonId { get; set; }
+        public long ReportMadeById { get; set; }
         public Person ReportMadeBy { get; set; }
     }
 }

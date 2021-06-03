@@ -41,7 +41,7 @@ namespace PERUSTARS.Controllers
 
         [HttpPost("{eventId}")]
         public async Task<IActionResult> AssignBooking(long hobbyistId, long eventId, DateTime attendance) {
-            var result = await _bookingService.AssignBookingAsync(hobbyistId, eventId, attendance);
+            var result = await _bookingService.AssignEventAssistanceAsync(hobbyistId, eventId, attendance);
             if (!result.Success)
                 return BadRequest(result.Message);
             var eventResource = _mapper.Map<Event, EventResource>(result.Resource.Event);
@@ -50,7 +50,7 @@ namespace PERUSTARS.Controllers
 
         [HttpDelete("{eventId}")]
         public async Task<IActionResult> UnassignBooking(long hobbyistId, long eventId) {
-            var result = await _bookingService.UnassignBookingAsync(hobbyistId, eventId);
+            var result = await _bookingService.UnassignEventAssistanceAsync(hobbyistId, eventId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var eventResource = _mapper.Map<Event, EventResource>(result.Resource.Event);

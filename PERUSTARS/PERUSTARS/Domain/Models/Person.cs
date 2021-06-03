@@ -12,6 +12,7 @@ namespace PERUSTARS.Domain.Models
 
         public long Id { get; set; }
 
-        public IList<ClaimTicket> ClaimTickets { get; set; } = new List<ClaimTicket>();
+        public IList<ClaimTicket> ClaimTickets { get; set; } = new List<ClaimTicket>();  //Reportes que la Persona realiza
+        public IList<ClaimTicket> ReportsClaimTickets { get; set; } = new List<ClaimTicket>();  //Reportes que le hace a la persona
     }
 }

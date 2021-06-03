@@ -22,7 +22,7 @@ namespace PERUSTARS.Test
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
             var specialtyId = 1;
             Specialty specialty = new Specialty();
-            specialty.SpecialtyId = specialtyId;
+            specialty.Id = specialtyId;
             mockSpecialtyRepository.Setup(r => r.FindById(specialtyId))
                 .Returns(Task.FromResult(specialty));
 

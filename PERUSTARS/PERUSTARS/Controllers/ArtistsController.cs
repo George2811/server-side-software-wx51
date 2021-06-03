@@ -94,6 +94,7 @@ namespace PERUSTARS.Controllers
 
             if (!result.Success)
                 return BadRequest(result.Message);
+
             var artistResource = _mapper.Map<Artist, ArtistResource>(result.Resource);
             return Ok(artistResource);
         

@@ -15,30 +15,30 @@ namespace PERUSTARS.Persistence.Repositories
         {
         }
 
-        public async Task AddAsync(EventAssistance booking)
+        public async Task AddAsync(EventAssistance eventAssistance)
         {           
-            await _context.Bookings.AddAsync(booking);
+            await _context.EventAssistances.AddAsync(eventAssistance);
         }
 
-        public async Task AssignBooking(long hobbyistId, long eventId, DateTime attendance)
+        public async Task AssignEventAssistance(long hobbyistId, long eventId, DateTime attendance)
         {
-            EventAssistance booking = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
-            if (booking == null)
+            EventAssistance eventAssistance = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
+            if (eventAssistance == null)
             {
-                booking = new EventAssistance { HobbyistId = hobbyistId, EventId = eventId  , AttendanceDay = attendance};
-                await AddAsync(booking);
+                eventAssistance = new EventAssistance { HobbyistId = hobbyistId, EventId = eventId  , AttendanceDay = attendance};
+                await AddAsync(eventAssistance);
             }
 
         }
 
         public async Task<IEnumerable<EventAssistance>> ListAsync()
         {
-            return await _context.Bookings.ToListAsync();
+            return await _context.EventAssistances.ToListAsync();
         }
 
         public async Task<IEnumerable<EventAssistance>> ListByEventIdAsync(long eventId)
         {
-            return await _context.Bookings
+            return await _context.EventAssistances
                    .Where(pt => pt.EventId == eventId)
                    .Include(pt => pt.Event)
                    .Include(pt => pt.Hobbyist)
@@ -47,28 +47,28 @@ namespace PERUSTARS.Persistence.Repositories
 
         public async Task<EventAssistance> FindByHobbyistIdAndEventIdAsync(long hobbyistId, long eventId)
         {
-            return await _context.Bookings.FindAsync(hobbyistId,eventId);
+            return await _context.EventAssistances.FindAsync(hobbyistId,eventId);
         }
 
         public async Task<IEnumerable<EventAssistance>> ListByHobbyistIdAsync(long hobbyistId)
         {
-            return await _context.Bookings
+            return await _context.EventAssistances
                  .Where(pt => pt.HobbyistId == hobbyistId)
                  .Include(pt => pt.Event)
                  .Include(pt => pt.Hobbyist)
                  .ToListAsync();
         }
 
-        public void Remove(EventAssistance booking)
+        public void Remove(EventAssistance eventAssistance)
         {
-            _context.Bookings.Remove(booking);
+            _context.EventAssistances.Remove(eventAssistance);
         }
 
-        public async Task UnassignBooking(long hobbyistId, long eventId)
+        public async Task UnassignEventAssistance(long hobbyistId, long eventId)
         {
-            EventAssistance booking = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
-            if (booking != null)
-                Remove(booking);
+            EventAssistance eventAssistance = await FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
+            if (eventAssistance != null)
+                Remove(eventAssistance);
         }
     }
 }

@@ -15,12 +15,12 @@ namespace PERUSTARS.Persistence.Repositories
         {
         }
 
-        public async Task AddAsync(Interest hobbyistSpecialty)
+        public async Task AddAsync(Interest interest)
         {
-            await _context.Interests.AddAsync(hobbyistSpecialty);
+            await _context.Interests.AddAsync(interest);
         }
 
-        public async Task AssignHobbyistSpecialty(long hobbyistId, long specialtyId)
+        public async Task AssignInterest(long hobbyistId, long specialtyId)
         {
             Interest hobbyistSpecialty = await FindByHobbyistIdAndSpecialtyId(hobbyistId, specialtyId);
             if (hobbyistSpecialty == null)
@@ -52,16 +52,16 @@ namespace PERUSTARS.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public void Remove(Interest hobbyistSpecialty)
+        public void Remove(Interest interest)
         {
-            _context.Interests.Remove(hobbyistSpecialty);
+            _context.Interests.Remove(interest);
         }
 
-        public async void UnassignHobbyistSpecialty(long hobbyistId, long specialtyId)
+        public async Task UnassignInterest(long hobbyistId, long specialtyId)
         {
-            Interest hobbyistSpecialty = await FindByHobbyistIdAndSpecialtyId(hobbyistId, specialtyId);
-            if (hobbyistSpecialty != null)
-                Remove(hobbyistSpecialty);
+            Interest interest = await FindByHobbyistIdAndSpecialtyId(hobbyistId, specialtyId);
+            if (interest != null)
+                Remove(interest);
 
         }
     }

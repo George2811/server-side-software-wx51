@@ -22,7 +22,7 @@ namespace PERUSTARS
             using (var context = scope.ServiceProvider.GetService<AppDbContext>())
             {
                 // Ensure Database is created, including seed data
-                // context.Database.EnsureCreated();
+                context.Database.EnsureCreated();
             }
             host.Run();
         }

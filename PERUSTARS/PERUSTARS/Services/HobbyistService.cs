@@ -12,12 +12,14 @@ namespace PERUSTARS.Services
     public class HobbyistService : IHobbyistService
     {
         private readonly IHobbyistRepository _hobbyistRepository;
+        private readonly IFollowerRepository _followerRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public HobbyistService(IHobbyistRepository hobbyistRepository, IUnitOfWork unitOfWork)
+        public HobbyistService(IHobbyistRepository hobbyistRepository, IUnitOfWork unitOfWork, IFollowerRepository followerRepository)
         {
             _hobbyistRepository = hobbyistRepository;
             _unitOfWork = unitOfWork;
+            _followerRepository = followerRepository;
         }
 
         public async Task<HobbyistResponse> DeleteAsync(long id)
@@ -52,6 +54,13 @@ namespace PERUSTARS.Services
         public async Task<IEnumerable<Hobbyist>> ListAsync()
         {
             return await _hobbyistRepository.ListAsync();
+        }
+
+        public async Task<IEnumerable<Hobbyist>> ListByArtistIdAsync(long artistId)
+        {
+            var follows = await _followerRepository.ListByArtistIdAsync(artistId);
+            var hobbyists = follows.Select(f => f.Hobbyist).ToList();
+            return hobbyists;
         }
 
         public async Task<HobbyistResponse> SaveAsync(Hobbyist hobbyist)

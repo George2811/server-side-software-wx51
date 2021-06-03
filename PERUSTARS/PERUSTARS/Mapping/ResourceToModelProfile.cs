@@ -17,6 +17,7 @@ namespace PERUSTARS.Mapping
             CreateMap<SaveEventResource, Event>();
             CreateMap<SaveClaimTicketResource, ClaimTicket>();
             CreateMap<SaveEventAssistanceResource, EventAssistance>();
+            CreateMap<SaveHobbyistResource, Hobbyist>();
         }
     }
 }

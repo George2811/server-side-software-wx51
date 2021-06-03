@@ -6,17 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PERUSTARS.Domain.Models;
 using PERUSTARS.Domain.Persistence.Contexts;
 using PERUSTARS.Domain.Persistence.Repositories;
 using PERUSTARS.Domain.Services;
 using PERUSTARS.Persistence.Repositories;
 using PERUSTARS.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PERUSTARS
 {
@@ -50,10 +46,16 @@ namespace PERUSTARS
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IClaimTicketRepository, ClaimTicketRepository>();
             services.AddScoped<IFavoriteArtworkRepository, FavoriteArtworkRepository>();
+            services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
+            services.AddScoped<IFollowerRepository, FollowerRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<IArtworkService, ArtworkService>();
             services.AddScoped<IArtistService, ArtistService>();
             services.AddScoped<IHobbyistService, HobbyistService>();
+            services.AddScoped<ISpecialtyService, SpecialtyService>();
+            services.AddScoped<IFollowerService, FollowerService>();
 
             // Apply Endpoints Naming Convention
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -64,8 +66,12 @@ namespace PERUSTARS
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PERUSTARS", Version = "v1" });
+                c.EnableAnnotations();
             });
         }
+
+      
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -75,6 +81,7 @@ namespace PERUSTARS
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PERUSTARS v1"));
+                      
             }
 
             app.UseHttpsRedirection();

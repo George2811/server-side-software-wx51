@@ -34,5 +34,24 @@ namespace PERUSTARS.Controllers
         }
 
 
+        [HttpPost]
+        [ProducesResponseType(typeof(ArtworkResource), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
+        public async Task<IActionResult> PostAsync([FromBody] SaveArtworkResource resource, long artistId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var artwork = _mapper.Map<SaveArtworkResource, Artwork>(resource);
+            artwork.ArtistId = artistId;
+            var result = await _artworkService.SaveAsync(artwork);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+            var artworkResource = _mapper.Map<Artwork, ArtworkResource>(result.Resource);
+            return Ok(artworkResource);
+
+        }
+
     }
 }

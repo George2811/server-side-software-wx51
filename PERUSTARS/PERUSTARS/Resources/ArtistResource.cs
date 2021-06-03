@@ -8,12 +8,12 @@ namespace PERUSTARS.Resources
 {
     public class ArtistResource : PersonResource
     {
-        public string BrandingName{ get; set; }
+        public string BrandName{ get; set; }
 
         public string Description { get; set; }
 
         public string Phrase { get; set; }
 
-        public string SpecialtyArt { get; set; }
+        public long SpecialtyId { get; set; }
     }
 }
