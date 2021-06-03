@@ -20,12 +20,12 @@ namespace PERUSTARS.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<FavoriteArtworkResponse> AssignFavoriteArtworkAsync(long HobbyistId, long ArtworkId)
+        public async Task<FavoriteArtworkResponse> AssignFavoriteArtworkAsync(long hobbyistId, long artworkId)
         {
             try {
-                await _favoriteArtworkRepository.AssignFavoriteArtwork(HobbyistId, ArtworkId);
+                await _favoriteArtworkRepository.AssignFavoriteArtwork(hobbyistId, artworkId);
                 await _unitOfWork.CompleteAsync();
-                FavoriteArtwork favoriteArtwork = await _favoriteArtworkRepository.FindByHobbyistIdAndArtworkId(HobbyistId, ArtworkId);
+                FavoriteArtwork favoriteArtwork = await _favoriteArtworkRepository.FindByHobbyistIdAndArtworkId(hobbyistId, artworkId);
                 return new FavoriteArtworkResponse(favoriteArtwork);
             }
             catch (Exception ex) { 
@@ -39,17 +39,19 @@ namespace PERUSTARS.Services
             return await _favoriteArtworkRepository.ListAsync();
         }
 
-        public async Task<IEnumerable<FavoriteArtwork>> ListByHobbyistIdAsync(long Id)
+        public async Task<IEnumerable<FavoriteArtwork>> ListByHobbyistIdAsync(long hobbyistId)
         {
-            return await _favoriteArtworkRepository.ListByHobbyistIdAsync(Id);
+            return await _favoriteArtworkRepository.ListByHobbyistIdAsync(hobbyistId);
         }
 
-        public async Task<FavoriteArtworkResponse> UnassignFavoriteArtworkAsync(long HobbyistId, long ArtworkId)
+        public async Task<FavoriteArtworkResponse> UnassignFavoriteArtworkAsync(long hobbyistId, long artworkId)
         {
             try
             {
-                FavoriteArtwork favoriteArtwork = await _favoriteArtworkRepository.FindByHobbyistIdAndArtworkId(HobbyistId, ArtworkId);
-                _favoriteArtworkRepository.UnassignFavoriteArtwork(HobbyistId,ArtworkId);
+                FavoriteArtwork favoriteArtwork = await _favoriteArtworkRepository.FindByHobbyistIdAndArtworkId(hobbyistId, artworkId);
+                if (favoriteArtwork == null) throw new Exception();
+
+                await _favoriteArtworkRepository.UnassignFavoriteArtwork(hobbyistId,artworkId);
                 await _unitOfWork.CompleteAsync();
                 return new FavoriteArtworkResponse(favoriteArtwork);
 

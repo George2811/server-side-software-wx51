@@ -13,21 +13,29 @@ namespace PERUSTARS.Services
     {
         private readonly IEventRepository _eventRepository;
         private readonly IEventAssistanceRepository _eventAssistanceRepository;
+        private readonly IArtistRepository _artistRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public EventService(IEventRepository eventRepository, IEventAssistanceRepository eventAsisstanceRepository, IUnitOfWork unitOfWork)
+        public EventService(IEventRepository eventRepository, IEventAssistanceRepository eventAsisstanceRepository, IUnitOfWork unitOfWork, IArtistRepository artistRepository)
         {
             _eventRepository = eventRepository;
             _eventAssistanceRepository = eventAsisstanceRepository;
             _unitOfWork = unitOfWork;
+            _artistRepository = artistRepository;
         }
 
-        public async Task<EventResponse> DeleteAsync(long id)
+        public async Task<EventResponse> DeleteAsync(long eventId, long artistId)
         {
-            var existingEvent = await _eventRepository.FindById(id);
+            var existingArtist = await _artistRepository.FindById(artistId);
+            if (existingArtist == null)
+                return new EventResponse("Artist not found");
 
+            var existingEvent = await _eventRepository.FindById(eventId);
             if (existingEvent == null)
                 return new EventResponse("Event not found");
+
+            if (!existingArtist.Events.Contains(existingEvent))
+                return new EventResponse("Event not found by Artist with Id: " + artistId);
 
             try
             {
@@ -42,18 +50,25 @@ namespace PERUSTARS.Services
             }
         }
 
-        public async Task<EventResponse> GetByIdAsync(long id)
+        public async Task<EventResponse> GetByIdAndArtistIdAsync(long eventId, long artistId)
         {
-            var existingEvent = await _eventRepository.FindById(id);
+            var existingArtist = await _artistRepository.FindById(artistId);
+            if (existingArtist == null)
+                return new EventResponse("Artist not found");
 
+            var existingEvent = await _eventRepository.FindById(eventId);
             if (existingEvent == null)
                 return new EventResponse("Event not found");
+
+            if (!existingArtist.Events.Contains(existingEvent))
+                return new EventResponse("Event not found by Artist with Id: " + artistId);
+
             return new EventResponse(existingEvent);
         }
 
-        public async Task<bool> isSameTitle(string title, long ArtistId)
+        public async Task<bool> isSameTitle(string title, long artistId)
         {
-            return await _eventRepository.isSameTitle(title, ArtistId);
+            return await _eventRepository.isSameTitle(title, artistId);
 
         }
 
@@ -62,9 +77,9 @@ namespace PERUSTARS.Services
             return await _eventRepository.ListAsync();
         }
 
-        public async Task<IEnumerable<Event>> ListAsyncByArtistId(long Id)
+        public async Task<IEnumerable<Event>> ListAsyncByArtistId(long artistId)
         {
-            return await _eventRepository.ListByArtistIdAsync(Id);
+            return await _eventRepository.ListByArtistIdAsync(artistId);
         }
 
         public async Task<IEnumerable<Event>> ListAsyncByEventType(ETypeOfEvent eTypeOf)
@@ -80,8 +95,13 @@ namespace PERUSTARS.Services
             return events;
         }
 
-        public async Task<EventResponse> SaveAsync(Event _event)
+        public async Task<EventResponse> SaveAsync(long artistId, Event _event)
         {
+            var existingArtist = await _artistRepository.FindById(artistId);
+            if (existingArtist == null)
+                return new EventResponse("Artist not found");
+
+            _event.ArtistId = artistId;
 
             if (_eventRepository.isSameTitle(_event.EventTitle, _event.ArtistId).Result == true)
             {
@@ -93,8 +113,6 @@ namespace PERUSTARS.Services
                 await _eventRepository.AddAsync(_event);
                 await _unitOfWork.CompleteAsync();
 
-               
-
                 return new EventResponse(_event);
             }
             catch (Exception ex)
@@ -104,17 +122,22 @@ namespace PERUSTARS.Services
         
         }
 
-        public async Task<EventResponse> UpdateAsync(long id, Event _event)
+        public async Task<EventResponse> UpdateAsync(long eventId, long artistId, Event _event)
         {
-            var existingEvent = await _eventRepository.FindById(id);
+            var existingArtist = await _artistRepository.FindById(artistId);
+            if (existingArtist == null)
+                return new EventResponse("Artist not found");
 
+            var existingEvent = await _eventRepository.FindById(eventId);
             if (existingEvent == null)
                 return new EventResponse("Event not found");
 
+            if (!existingArtist.Events.Contains(existingEvent))
+                return new EventResponse("Event not found by Artist with Id: " + artistId);
 
             if (existingEvent.EventTitle != _event.EventTitle)
             {
-                if (_eventRepository.isSameTitle(_event.EventTitle, id).Result == true)
+                if (_eventRepository.isSameTitle(_event.EventTitle, eventId).Result == true)
                 {
                     return new EventResponse($"You already created an event with the same title");
                 }
@@ -126,6 +149,7 @@ namespace PERUSTARS.Services
             existingEvent.DateEnd = _event.DateEnd;
             existingEvent.EventDescription = _event.EventDescription;
             existingEvent.EventAditionalInfo = _event.EventAditionalInfo;
+            existingEvent.ArtistId = artistId;
 
             try
             {

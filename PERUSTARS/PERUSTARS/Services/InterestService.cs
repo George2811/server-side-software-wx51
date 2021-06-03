@@ -50,6 +50,7 @@ namespace PERUSTARS.Services
             try
             {
                 Interest interest = await _interestRepository.FindByHobbyistIdAndSpecialtyId(HobbyistId, SpecialtyId);
+                if (interest == null) throw new Exception();
                 await _interestRepository.UnassignInterest(HobbyistId, SpecialtyId);
                 await _unitOfWork.CompleteAsync();
                 return new InterestResponse(interest);

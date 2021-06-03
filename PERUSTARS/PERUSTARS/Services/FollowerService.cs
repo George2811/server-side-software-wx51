@@ -58,6 +58,7 @@ namespace PERUSTARS.Services
             try
             {
                 Follower follower = await _followerRepository.FindByHobbyistIdAndArtistId(hobbyistId, artistId);
+                if (follower == null) throw new Exception();
                 await _followerRepository.UnassignFollower(hobbyistId, artistId);
                 await _unitOfWork.CompleteAsync();
                 return new FollowerResponse(follower);

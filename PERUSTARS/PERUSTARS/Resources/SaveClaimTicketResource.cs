@@ -20,9 +20,12 @@ namespace PERUSTARS.Resources
         [DataType(DataType.DateTime)]
         public DateTime IncedentDate { get; set; }
 
+        [Required]
+        public long ReportedPersonId { get; set; }
 
-        public PersonResource ReportedPerson { get; set; }
-       
+        [Required]
+        public long ReportMadeById { get; set; }
+
 
 
     }

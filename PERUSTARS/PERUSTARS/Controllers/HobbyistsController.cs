@@ -27,14 +27,21 @@ namespace PERUSTARS.Controllers
             _mapper = mapper;
         }
 
+
+
+        /*****************************************************************/
+                                  /*LIST OF HOBBYISTS*/
+        /*****************************************************************/
+
         [SwaggerOperation(
         Summary = "List all Hobbyists",
-        Description = "List of Hobbyist",
+        Description = "List of all Hobbyists",
         OperationId = "ListAllHobbyists")]
         [SwaggerResponse(200, "List of Hobbyists", typeof(IEnumerable<HobbyistResource>))]
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<HobbyistResource>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IEnumerable<HobbyistResource>> GetAllAsync()
         {
             var hobbyists = await _hobbyistService.ListAsync();
@@ -44,24 +51,34 @@ namespace PERUSTARS.Controllers
         }
 
 
-        [SwaggerOperation(
-        Summary = "Get hobbyist by Id",
-        Description = "Get hobbyist by Id",
-        OperationId = "GetHobbyistById")]
-        [SwaggerResponse(200, "Get hobbyist by id", typeof(HobbyistResource))]
 
-        [HttpGet("{id}")]
+        /*****************************************************************/
+                                /*GET HOBBYIST BY ID*/
+        /*****************************************************************/
+
+        [SwaggerOperation(
+        Summary = "Get Hobbyist by Id",
+        Description = "Get Hobbyist by Id",
+        OperationId = "GetHobbyistById")]
+        [SwaggerResponse(200, "Get Hobbyist by Id", typeof(HobbyistResource))]
+
+        [HttpGet("{hobbyistId}")]
         [ProducesResponseType(typeof(HobbyistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(int hobbyistId)
         {
-            var result = await _hobbyistService.GetByIdAsync(id);
+            var result = await _hobbyistService.GetByIdAsync(hobbyistId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var hobbyistResource = _mapper.Map<Hobbyist, HobbyistResource>(result.Resource);
             return Ok(hobbyistResource);
         }
 
+
+
+        /*****************************************************************/
+                                /*SAVE HOBBYIST*/
+        /*****************************************************************/
 
         [SwaggerOperation(
           Summary = "Save Hobbyist",
@@ -87,22 +104,27 @@ namespace PERUSTARS.Controllers
         }
 
 
+
+        /*****************************************************************/
+                                /*UPDATE HOBBYIST*/
+        /*****************************************************************/
+
         [SwaggerOperation(
         Summary = "Update Hobbyist",
         Description = "Update Hobbyist",
         OperationId = "UpdateHobbyist")]
-        [SwaggerResponse(200, "Update hobbyist", typeof(HobbyistResource))]
+        [SwaggerResponse(200, "Update Hobbyist", typeof(HobbyistResource))]
 
-        [HttpPut("{id}")]
+        [HttpPut("{hobbyistId}")]
         [ProducesResponseType(typeof(HobbyistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PutAsync(long id, [FromBody] SaveHobbyistResource resource)
+        public async Task<IActionResult> PutAsync(long hobbyistId, [FromBody] SaveHobbyistResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var hobbyist = _mapper.Map<SaveHobbyistResource, Hobbyist>(resource);
-            var result = await _hobbyistService.UpdateAsync(id, hobbyist);
+            var result = await _hobbyistService.UpdateAsync(hobbyistId, hobbyist);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -112,18 +134,23 @@ namespace PERUSTARS.Controllers
         }
 
 
+
+        /*****************************************************************/
+                                /*DELETE HOBBYIST*/
+        /*****************************************************************/
+
         [SwaggerOperation(
            Summary = "Delete Hobbyist",
            Description = "Delete Hobbyist",
            OperationId = "DeleteHobbyist")]
         [SwaggerResponse(200, "Delete hobbyist", typeof(HobbyistResource))]
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{hobbyistId}")]
         [ProducesResponseType(typeof(HobbyistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> DeleteAsync(long id)
+        public async Task<IActionResult> DeleteAsync(long hobbyistId)
         {
-            var result = await _hobbyistService.DeleteAsync(id);
+            var result = await _hobbyistService.DeleteAsync(hobbyistId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var hobbyistResource = _mapper.Map<Hobbyist, HobbyistResource>(result.Resource);

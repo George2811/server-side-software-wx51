@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using PERUSTARS.Domain.Models;
 
 namespace PERUSTARS.Resources
 {
@@ -14,8 +15,7 @@ namespace PERUSTARS.Resources
 
 
         [Required]
-        [MaxLength(25)]
-        public string EventType { get; set; }
+        public ETypeOfEvent EventType { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]

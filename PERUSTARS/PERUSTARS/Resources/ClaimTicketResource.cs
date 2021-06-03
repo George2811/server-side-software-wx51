@@ -11,10 +11,7 @@ namespace PERUSTARS.Resources
         public string ClaimSubject { get; set; }
         public string ClaimDescription { get; set; }
         public DateTime IncedentDate { get; set; }
-        public PersonResource ReportedPerson { get; set; }
-
-        //una persona realiza multiples reportes
-        public long PersonId { get; set; }
-        public PersonResource ReportMadeBy { get; set; }
+        public long ReportedPersonId { get; set; }
+        public long ReportMadeById { get; set; }
     }
 }

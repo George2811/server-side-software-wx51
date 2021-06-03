@@ -103,7 +103,9 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             builder.Entity<Event>().HasKey(p => p.EventId);
             builder.Entity<Event>().Property(p => p.EventId).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Event>().Property(p => p.EventTitle).IsRequired().HasMaxLength(100);
-            builder.Entity<Event>().Property(p => p.EventType).IsRequired().HasMaxLength(25);
+            builder.Entity<Event>().Property(p => p.EventType).IsRequired().HasConversion(
+                type => type.ToString(),                                                        //convert enum to string
+                type => (ETypeOfEvent)Enum.Parse(typeof(ETypeOfEvent), type));                  //convert string to enum
             builder.Entity<Event>().Property(p => p.DateStart).IsRequired();
             builder.Entity<Event>().Property(p => p.DateEnd).IsRequired();
             builder.Entity<Event>().Property(p => p.EventDescription).IsRequired().HasMaxLength(250);
@@ -255,13 +257,13 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             //*************************************************//
 
 
-            //builder.Entity<Specialty>().HasData
-            //   (
-            //       new Specialty { Id = 1, Name = "Specialty1" },
-            //       new Specialty { Id = 2, Name = "Specialty2" },
-            //       new Specialty { Id = 3, Name = "Specialty3" },
-            //       new Specialty { Id = 4, Name = "Specialty4" }
-            //   );
+            builder.Entity<Specialty>().HasData
+               (
+                   new Specialty { Id = 1, Name = "Specialty1" },
+                   new Specialty { Id = 2, Name = "Specialty2" },
+                   new Specialty { Id = 3, Name = "Specialty3" },
+                   new Specialty { Id = 4, Name = "Specialty4" }
+               );
 
             //  builder.Entity<Hobbyist>().HasData
             //  (
@@ -282,7 +284,7 @@ namespace PERUSTARS.Domain.Persistence.Contexts
             //    new Artwork { ArtworkId = 2, ArtTitle = "El Beso 2", ArtDescription = "Nueva Representacion de la obra de klimt", ArtCost = 70, LinkInfo = "http//elbeso ", ArtistId = 2 }
             //    );
 
-  
+
 
             // Apply Naming Convention
             builder.ApplySnakeCaseNamingConvention();

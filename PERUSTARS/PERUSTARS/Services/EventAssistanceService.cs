@@ -50,6 +50,8 @@ namespace PERUSTARS.Services
             try
             {
                 EventAssistance eventAssistance = await _eventAssistanceRepository.FindByHobbyistIdAndEventIdAsync(hobbyistId, eventId);
+                if (eventAssistance == null) throw new Exception();
+
                 await _eventAssistanceRepository.UnassignEventAssistance(hobbyistId, eventId);
                 await _unitOfWork.CompleteAsync();
                 return new EventAssistanceResponse(eventAssistance);
