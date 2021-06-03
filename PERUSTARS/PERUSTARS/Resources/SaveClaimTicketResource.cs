@@ -23,10 +23,6 @@ namespace PERUSTARS.Resources
         [Required]
         public long ReportedPersonId { get; set; }
 
-        [Required]
-        public long ReportMadeById { get; set; }
-
-
 
     }
 }

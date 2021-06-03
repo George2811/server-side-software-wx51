@@ -79,7 +79,7 @@ namespace PERUSTARS.Services
             var existingHobbyist = await _hobbyistRepository.FindById(personId);
             if (existingArtist == null && existingHobbyist == null)
                 return new ClaimTicketResponse("Person not found");
-
+            claimTicket.ReportMadeById = personId;
             try
             {
                 await _claimTicketRepository.AddAsync(claimTicket);

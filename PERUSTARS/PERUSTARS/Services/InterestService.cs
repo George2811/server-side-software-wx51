@@ -24,6 +24,9 @@ namespace PERUSTARS.Services
         {
             try
             {
+                Interest existingInterest = await _interestRepository.FindByHobbyistIdAndSpecialtyId(HobbyistId, SpecialtyId);
+                if (existingInterest != null)
+                    return new InterestResponse("Hobbyist already has interest in Specialty with id: " + SpecialtyId);
                 await _interestRepository.AssignInterest(HobbyistId, SpecialtyId);
                 await _unitOfWork.CompleteAsync();
                 Interest hobbyistSpecialty = await _interestRepository.FindByHobbyistIdAndSpecialtyId(HobbyistId, SpecialtyId);
@@ -50,7 +53,8 @@ namespace PERUSTARS.Services
             try
             {
                 Interest interest = await _interestRepository.FindByHobbyistIdAndSpecialtyId(HobbyistId, SpecialtyId);
-                if (interest == null) throw new Exception();
+                if (interest == null)
+                    return new InterestResponse("Hobbyist has no interest in Specialty with id: "+ SpecialtyId);
                 await _interestRepository.UnassignInterest(HobbyistId, SpecialtyId);
                 await _unitOfWork.CompleteAsync();
                 return new InterestResponse(interest);
