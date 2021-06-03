@@ -1,4 +1,5 @@
-﻿using PERUSTARS.Domain.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using PERUSTARS.Domain.Models;
 using PERUSTARS.Domain.Persistence.Repositories;
 using PERUSTARS.Domain.Services;
 using PERUSTARS.Domain.Services.Communications;
@@ -12,20 +13,25 @@ namespace PERUSTARS.Services
     public class ArtworkService : IArtworkService
     {
         private readonly IArtworkRepository _artworkRepository;
+        private readonly IArtistRepository _artistRepository;
         private readonly IFavoriteArtworkRepository _favoriteArtworkRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ArtworkService(IArtworkRepository artworkRepository, IUnitOfWork unitOfWork, IFavoriteArtworkRepository favoriteArtworkRepository)
+        public ArtworkService(IArtworkRepository artworkRepository, IUnitOfWork unitOfWork, IFavoriteArtworkRepository favoriteArtworkRepository, IArtistRepository artistRepository)
         {
             _artworkRepository = artworkRepository;
             _unitOfWork = unitOfWork;
             _favoriteArtworkRepository = favoriteArtworkRepository;
+            _artistRepository = artistRepository;
         }
 
-        public async Task<ArtworkResponse> DeleteAsync(long id)
+        public async Task<ArtworkResponse> DeleteAsync(long id, long artistId)
         {
-            var existingArtwork = await _artworkRepository.FindById(id);
+            var existingArtist = await _artistRepository.FindById(artistId);
+            if (existingArtist == null)
+                return new ArtworkResponse("Artist not found");
 
+            var existingArtwork = await _artworkRepository.FindById(id);
             if (existingArtwork == null)
                 return new ArtworkResponse("Artwork not found");
 
@@ -42,12 +48,16 @@ namespace PERUSTARS.Services
             }
         }
 
-        public async Task<ArtworkResponse> GetByIdAsync(long id)
+        public async Task<ArtworkResponse> GetByIdAndArtistIdAsync(long id, long artistId)
         {
-            var existingArtwork = await _artworkRepository.FindById(id);
+            var existingArtist = await _artistRepository.FindById(artistId);
+            if (existingArtist == null)
+                return new ArtworkResponse("Artist not found");
 
+            var existingArtwork = await _artworkRepository.FindById(id);
             if (existingArtwork == null)
                 return new ArtworkResponse("Artwork not found");
+
             return new ArtworkResponse(existingArtwork);
         }
 
@@ -73,9 +83,12 @@ namespace PERUSTARS.Services
             return artworks;
         }
 
-        public async Task<ArtworkResponse> SaveAsync(Artwork artwork)
+        public async Task<ArtworkResponse> SaveAsync(long artistId, Artwork artwork)
         {
-
+            var existingArtist = await _artistRepository.FindById(artistId);
+            if (existingArtist == null)
+                return new ArtworkResponse("Artist not found");
+            artwork.ArtistId = artistId;
             if (_artworkRepository.isSameTitle(artwork.ArtTitle, artwork.ArtistId).Result == true)
             {
                 return new ArtworkResponse($"You already created an artwork with the same title");
@@ -94,16 +107,20 @@ namespace PERUSTARS.Services
             }
         }
 
-        public async Task<ArtworkResponse> UpdateAsync(long id, Artwork artwork)
+        public async Task<ArtworkResponse> UpdateAsync(long id, long artistId, Artwork artwork)
         {
-            var existingArtwork = await _artworkRepository.FindById(id);
+            var existingArtist = await _artistRepository.FindById(artistId);
+            if (existingArtist == null)
+                return new ArtworkResponse("Artist not found");
 
+            var existingArtwork = await _artworkRepository.FindById(id);
+            
             if (existingArtwork == null)
                 return new ArtworkResponse("Artist not found");
 
             if (existingArtwork.ArtTitle != artwork.ArtTitle)
             { // si el titulo nuevo es diferente al titulo existente
-                if (_artworkRepository.isSameTitle(artwork.ArtTitle, id).Result == true) // se verifica si el titulo nuevo es igual a cualquier titulo de obras del artista
+                if (_artworkRepository.isSameTitle(artwork.ArtTitle, artistId).Result == true) // se verifica si el titulo nuevo es igual a cualquier titulo de obras del artista
                 {
                     return new ArtworkResponse($"You already created an artwork with the same title");
                 }
@@ -114,6 +131,7 @@ namespace PERUSTARS.Services
             existingArtwork.ArtDescription = artwork.ArtDescription;
             existingArtwork.ArtCost = artwork.ArtCost;
             existingArtwork.LinkInfo = artwork.LinkInfo;
+            existingArtwork.ArtistId = artistId;
 
             try
             {
@@ -127,5 +145,6 @@ namespace PERUSTARS.Services
                 return new ArtworkResponse($"An error ocurred while updating the artwork: {ex.Message}");
             }
         }
+
     }
 }

@@ -14,9 +14,9 @@ using PERUSTARS.Extensions;
 
 namespace PERUSTARS.Controllers
 {
-    [Route("api/[controller]")]
-    [Produces("application/json")]
     [ApiController]
+    [Route("/api/artist/{artistId}/artworks")]
+    [Produces("application/json")]
     public class ArtworksController : ControllerBase
     {
         private readonly IArtworkService _artworkService;
@@ -35,27 +35,24 @@ namespace PERUSTARS.Controllers
 
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ArtworkResource>), 200)]
-        public async Task<IEnumerable<ArtworkResource>> GetAllAsync()
+        public async Task<IEnumerable<ArtworkResource>> GetAllByArtistIdAsync(long artistId)
         {
-            var artwork = await _artworkService.ListAsync();
-            var resources = _mapper
-                .Map<IEnumerable<Artwork>, IEnumerable<ArtworkResource>>(artwork);
+            var artworks = await _artworkService.ListByArtistIdAsync(artistId);
+            var resources = _mapper.Map<IEnumerable<Artwork>, IEnumerable<ArtworkResource>>(artworks);
             return resources;
         }
 
 
-
         /*****************************************************************/
-                                /*GET ARTWORKS BY ID*/
+                            /*GET ARTWORKS BY ID*/
         /*****************************************************************/
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ArtworkResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(int id, int artistId)
         {
-            var result = await _artworkService.GetByIdAsync(id);
+            var result = await _artworkService.GetByIdAndArtistIdAsync(id, artistId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var artworkResource = _mapper.Map<Artwork, ArtworkResource>(result.Resource);
@@ -74,13 +71,13 @@ namespace PERUSTARS.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ArtworkResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PostAsync([FromBody] SaveArtworkResource resource)
+        public async Task<IActionResult> PostAsync([FromBody] SaveArtworkResource resource, long artistId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var artwork = _mapper.Map<SaveArtworkResource, Artwork>(resource);
-            var result = await _artworkService.SaveAsync(artwork);
+            var result = await _artworkService.SaveAsync(artistId, artwork);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -100,13 +97,13 @@ namespace PERUSTARS.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(ArtworkResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> PutAsync(long id, [FromBody] SaveArtworkResource resource)
+        public async Task<IActionResult> PutAsync(long id, int artistId, [FromBody] SaveArtworkResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var artwork = _mapper.Map<SaveArtworkResource, Artwork>(resource);
-            var result = await _artworkService.UpdateAsync(id, artwork);
+            var result = await _artworkService.UpdateAsync(id, artistId, artwork);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -123,9 +120,9 @@ namespace PERUSTARS.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ArtworkResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> DeleteAsync(long id)
+        public async Task<IActionResult> DeleteAsync(long id, long artistId)
         {
-            var result = await _artworkService.DeleteAsync(id);
+            var result = await _artworkService.DeleteAsync(id, artistId);
             if (!result.Success)
                 return BadRequest(result.Message);
             var artworkResource = _mapper.Map<Artwork, ArtworkResource>(result.Resource);

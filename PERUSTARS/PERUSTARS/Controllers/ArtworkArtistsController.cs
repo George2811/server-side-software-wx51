@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace PERUSTARS.Controllers
 {
     [ApiController]
-    [Route("/api/artist/{artistId}/artworks")]
+    [Route("/api/[controller]")]
     public class ArtworkArtistsController : ControllerBase
     {
         private readonly IArtworkService _artworkService;
