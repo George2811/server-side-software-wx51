@@ -153,6 +153,7 @@ namespace PERUSTARS.Controllers
             var result = await _eventService.DeleteAsync(eventId, artistId);
             if (!result.Success)
                 return BadRequest(result.Message);
+
             var eventResource = _mapper.Map<Event, EventResource>(result.Resource);
             return Ok(eventResource);
         }

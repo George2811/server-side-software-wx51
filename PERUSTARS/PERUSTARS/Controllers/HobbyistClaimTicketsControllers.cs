@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PERUSTARS.Controllers
 {
-    [Route("api/artists/{hobbyistId}/claimTickets")]
+    [Route("api/hobbyists/{hobbyistId}/claimTickets")]
     [Produces("application/json")]
     [ApiController]
     public class HobbyistClaimTicketsControllers : ControllerBase
@@ -29,7 +29,7 @@ namespace PERUSTARS.Controllers
         }
 
         /*****************************************************************/
-        /*LIST OF CLAIM TICKETS BY Hobbyist ID*/
+                    /*LIST OF CLAIM TICKETS BY HOBBYIST ID*/
         /*****************************************************************/
 
         [SwaggerOperation(
@@ -51,7 +51,7 @@ namespace PERUSTARS.Controllers
 
 
         /*****************************************************************/
-        /*GET CLAIM TICKET OF Hobbyist BY ID*/
+                    /*GET CLAIM TICKET OF HOBBYIST BY ID*/
         /*****************************************************************/
 
         [SwaggerOperation(
@@ -75,7 +75,7 @@ namespace PERUSTARS.Controllers
 
 
         /*****************************************************************/
-        /*SAVE CLAIM TICKET OF Hobbyist*/
+                        /*SAVE CLAIM TICKET OF HOBBYIST*/
         /*****************************************************************/
 
         [SwaggerOperation(
@@ -89,7 +89,7 @@ namespace PERUSTARS.Controllers
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IActionResult> PostAsync(long hobbyistId, [FromBody] SaveClaimTicketResource resource)
         {
-            if (!ModelState.isValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             var claimTicket = _mapper.Map<SaveClaimTicketResource, ClaimTicket>(resource);
@@ -105,7 +105,7 @@ namespace PERUSTARS.Controllers
 
 
         /*****************************************************************/
-        /*UPDATE CLAIM TICKET OF Hobbyist*/
+                        /*UPDATE CLAIM TICKET OF HOBBYIST*/
         /*****************************************************************/
 
         [SwaggerOperation(
@@ -134,7 +134,7 @@ namespace PERUSTARS.Controllers
 
 
         /*****************************************************************/
-        /*DELETE CLAIM TICKET OF Hobbyist*/
+                    /*DELETE CLAIM TICKET OF HOBBYIST*/
         /*****************************************************************/
 
         [SwaggerOperation(

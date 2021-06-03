@@ -45,8 +45,7 @@ namespace PERUSTARS.Controllers
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IEnumerable<ArtistResource>> GetAllAsync() {
             var artist = await _artistService.ListAsync();
-            var resources = _mapper
-                .Map<IEnumerable<Artist>, IEnumerable<ArtistResource>>(artist);
+            var resources = _mapper.Map<IEnumerable<Artist>, IEnumerable<ArtistResource>>(artist);
             return resources;
         }
 

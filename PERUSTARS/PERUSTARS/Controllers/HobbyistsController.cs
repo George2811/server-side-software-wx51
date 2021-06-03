@@ -45,8 +45,7 @@ namespace PERUSTARS.Controllers
         public async Task<IEnumerable<HobbyistResource>> GetAllAsync()
         {
             var hobbyists = await _hobbyistService.ListAsync();
-            var resources = _mapper
-                .Map<IEnumerable<Hobbyist>, IEnumerable<HobbyistResource>>(hobbyists);
+            var resources = _mapper.Map<IEnumerable<Hobbyist>, IEnumerable<HobbyistResource>>(hobbyists);
             return resources;
         }
 
