@@ -21,13 +21,14 @@ namespace PERUSTARS.Test
             // Arrange
             var mockHobbyistRepository = GetDefaultIHobbyistRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var mockFollowerRepository = new Mock<IFollowerRepository>();
             var hobbyistId = 1;
             Hobbyist hobbyist = new Hobbyist();
             hobbyist.Id = hobbyistId;
             mockHobbyistRepository.Setup(r => r.FindById(hobbyistId))
                 .Returns(Task.FromResult(hobbyist));
 
-            var service = new HobbyistService(mockHobbyistRepository.Object, mockUnitOfWork.Object);
+            var service = new HobbyistService(mockHobbyistRepository.Object, mockUnitOfWork.Object, mockFollowerRepository.Object);
 
             // Act
             HobbyistResponse result = await service.GetByIdAsync(hobbyistId);
@@ -41,11 +42,12 @@ namespace PERUSTARS.Test
             // Arrange
             var mockHobbyistRepository = GetDefaultIHobbyistRepositoryInstance();
             var mockUnitOfWork = GetDefaultIUnitOfWorkInstance();
+            var mockFollowerRepository = new Mock<IFollowerRepository>();
             var hobbyistId = 1;
             mockHobbyistRepository.Setup(r => r.FindById(hobbyistId))
                 .Returns(Task.FromResult<Hobbyist>(null));
 
-            var service = new HobbyistService(mockHobbyistRepository.Object, mockUnitOfWork.Object);
+            var service = new HobbyistService(mockHobbyistRepository.Object, mockUnitOfWork.Object,mockFollowerRepository.Object);
 
             // Act
             HobbyistResponse result = await service.GetByIdAsync(hobbyistId);
