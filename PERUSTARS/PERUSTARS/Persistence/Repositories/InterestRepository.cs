@@ -32,7 +32,10 @@ namespace PERUSTARS.Persistence.Repositories
 
         public async Task<Interest> FindByHobbyistIdAndSpecialtyId(long hobbyistId, long specialtyId)
         {
-            return await _context.Interests.FindAsync(hobbyistId, specialtyId);
+            return await _context.Interests
+                .Where(i => i.HobbyistId == hobbyistId && i.SpecialtyId == specialtyId)
+                .Include(i => i.Specialty)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Interest>> ListAsync()
