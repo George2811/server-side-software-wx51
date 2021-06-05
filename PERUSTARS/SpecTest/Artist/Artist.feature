@@ -1,7 +1,7 @@
 ﻿Feature: Artist
 	Create, Read, Update an Artist
 
-There are some instructions in the file "ArtistSteps.cs"
+#There are some instructions in the file "ArtistSteps.cs"
 
 @mytag
 Scenario: 1 Initialize some Artists Intances
