@@ -110,14 +110,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
                             "LastName"});
-                table10.AddRow(new string[] {
+                table13.AddRow(new string[] {
                             "Josselin",
                             "Izaguirre"});
 #line 6
-    testRunner.When("hobbyist required attributes provided", ((string)(null)), table10, "When ");
+    testRunner.When("hobbyist required attributes provided", ((string)(null)), table13, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -154,16 +154,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 13
 testRunner.Given("I have supplied 7 as hobbyistId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "FirstName",
                             "Lastname"});
-                table11.AddRow(new string[] {
+                table14.AddRow(new string[] {
                             "7",
                             "Pablo",
                             "Herrera"});
 #line 14
-testRunner.Then("hobbyist details should be", ((string)(null)), table11, "Then ");
+testRunner.Then("hobbyist details should be", ((string)(null)), table14, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -197,20 +197,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "FirstName",
                             "Lastname"});
-                table12.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "7",
                             "Pablo",
                             "Herrera"});
-                table12.AddRow(new string[] {
+                table15.AddRow(new string[] {
                             "8",
                             "Emmanuel",
                             "Ticona"});
 #line 19
-testRunner.When("No hobbyist supplied All hobbyist list should return", ((string)(null)), table12, "When ");
+testRunner.When("No hobbyist supplied All hobbyist list should return", ((string)(null)), table15, "When ");
 #line hidden
             }
             this.ScenarioCleanup();

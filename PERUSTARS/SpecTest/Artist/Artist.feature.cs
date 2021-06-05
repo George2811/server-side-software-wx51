@@ -40,7 +40,7 @@ namespace SpecTest.Artist
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Artist", "Artist", "\tCreate, Read, Update an Artist", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Artist", "Artist", "\tCreate, Read, Update an Artist\r\n\r\nThere are some instructions in ArtistSteps.cs", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,17 +80,17 @@ namespace SpecTest.Artist
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Add new Artist with below details")]
+        [Xunit.SkippableFactAttribute(DisplayName="1 Initialize some Artists Intances")]
         [Xunit.TraitAttribute("FeatureTitle", "Artist")]
-        [Xunit.TraitAttribute("Description", "Add new Artist with below details")]
+        [Xunit.TraitAttribute("Description", "1 Initialize some Artists Intances")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void AddNewArtistWithBelowDetails()
+        public virtual void _1InitializeSomeArtistsIntances()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add new Artist with below details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 5
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Initialize some Artists Intances", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 7
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -118,28 +118,49 @@ this.ScenarioInitialize(scenarioInfo);
                             "FirstName",
                             "LastName"});
                 table1.AddRow(new string[] {
-                            "SebSasaki",
+                            "ElTitoAlfred",
                             "Nuevo Artista Musical",
                             "Vivo en el presente",
                             "1",
-                            "Sebastian",
-                            "Sasaki"});
-#line 6
-    testRunner.When("artist required attributes provided", ((string)(null)), table1, "When ");
+                            "Alfred",
+                            "Gonzales"});
+                table1.AddRow(new string[] {
+                            "SanSon",
+                            "Escultor de hielo",
+                            "Vivo en el futuro",
+                            "2",
+                            "Paolo",
+                            "Herrera"});
+                table1.AddRow(new string[] {
+                            "Dr.Chocolate",
+                            "Cantante profesional",
+                            "Vivo en el pasado",
+                            "2",
+                            "Anonimo",
+                            "Anonimo"});
+                table1.AddRow(new string[] {
+                            "El bicho",
+                            "Mago magistral",
+                            "Vivo en el olvido",
+                            "3",
+                            "Cristiano",
+                            "Rolando"});
+#line 8
+ testRunner.When("artists required attributes provided to initialize instances", ((string)(null)), table1, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Read a Artist with below details")]
+        [Xunit.SkippableFactAttribute(DisplayName="Add new Artist with below details")]
         [Xunit.TraitAttribute("FeatureTitle", "Artist")]
-        [Xunit.TraitAttribute("Description", "Read a Artist with below details")]
-        public virtual void ReadAArtistWithBelowDetails()
+        [Xunit.TraitAttribute("Description", "Add new Artist with below details")]
+        public virtual void AddNewArtistWithBelowDetails()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Read a Artist with below details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 12
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add new Artist with below details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -159,10 +180,59 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 13
-testRunner.Given("I have supplied 1 as artist Id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "BrandName",
+                            "Description",
+                            "Phrase",
+                            "SpecialtyId",
+                            "FirstName",
+                            "LastName"});
+                table2.AddRow(new string[] {
+                            "SebSasaki",
+                            "Nuevo Artista Musical",
+                            "Vivo en el presente",
+                            "1",
+                            "Sebastian",
+                            "Sasaki"});
+#line 18
+    testRunner.When("artist required attributes provided", ((string)(null)), table2, "When ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Read an Artist with below details")]
+        [Xunit.TraitAttribute("FeatureTitle", "Artist")]
+        [Xunit.TraitAttribute("Description", "Read an Artist with below details")]
+        public virtual void ReadAnArtistWithBelowDetails()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Read an Artist with below details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 24
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 25
+ testRunner.Given("I have supplied 5 as artist Id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "BrandName",
                             "Description",
@@ -170,16 +240,16 @@ testRunner.Given("I have supplied 1 as artist Id", ((string)(null)), ((TechTalk.
                             "SpecialtyId",
                             "FirstName",
                             "Lastname"});
-                table2.AddRow(new string[] {
-                            "1",
-                            "SebasGx",
-                            "Artista Nuevo en PeruStars",
-                            "Solo se que nada se",
+                table3.AddRow(new string[] {
+                            "5",
+                            "SebSasaki",
+                            "Nuevo Artista Musical",
+                            "Vivo en el presente",
                             "1",
                             "Sebastian",
-                            "Gonzales"});
-#line 14
-testRunner.Then("artist details should be", ((string)(null)), table2, "Then ");
+                            "Sasaki"});
+#line 26
+ testRunner.Then("artist details should be", ((string)(null)), table3, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -193,7 +263,7 @@ testRunner.Then("artist details should be", ((string)(null)), table2, "Then ");
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Read All Artist with below details", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 18
+#line 32
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -213,7 +283,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "BrandName",
                             "Description",
@@ -221,24 +291,151 @@ this.ScenarioInitialize(scenarioInfo);
                             "SpecialtyId",
                             "FirstName",
                             "Lastname"});
-                table3.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "1",
-                            "SebasGx",
-                            "Artista Nuevo en PeruStars",
-                            "Solo se que nada se",
+                            "ElTitoAlfred",
+                            "Nuevo Artista Musical",
+                            "Vivo en el presente",
+                            "1",
+                            "Alfred",
+                            "Gonzales"});
+                table4.AddRow(new string[] {
+                            "2",
+                            "SanSon",
+                            "Escultor de hielo",
+                            "Vivo en el futuro",
+                            "2",
+                            "Paolo",
+                            "Herrera"});
+                table4.AddRow(new string[] {
+                            "3",
+                            "Dr.Chocolate",
+                            "Cantante profesional",
+                            "Vivo en el pasado",
+                            "2",
+                            "Anonimo",
+                            "Anonimo"});
+                table4.AddRow(new string[] {
+                            "4",
+                            "El bicho",
+                            "Mago magistral",
+                            "Vivo en el olvido",
+                            "3",
+                            "Cristiano",
+                            "Rolando"});
+                table4.AddRow(new string[] {
+                            "5",
+                            "SebSasaki",
+                            "Nuevo Artista Musical",
+                            "Vivo en el presente",
                             "1",
                             "Sebastian",
-                            "Gonzales"});
-                table3.AddRow(new string[] {
-                            "2",
-                            "Dr.Chocolate",
-                            "Escultor Nuevo en PeruStars",
-                            "Ojos que no ven corazon que no siente",
-                            "4",
-                            "Diego Alonso",
-                            "Chocolate"});
-#line 19
-testRunner.When("No artist supplied All Artist list should return", ((string)(null)), table3, "When ");
+                            "Sasaki"});
+#line 33
+ testRunner.When("No artist supplied All Artist list should return", ((string)(null)), table4, "When ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Update the details of an existing Artist")]
+        [Xunit.TraitAttribute("FeatureTitle", "Artist")]
+        [Xunit.TraitAttribute("Description", "Update the details of an existing Artist")]
+        public virtual void UpdateTheDetailsOfAnExistingArtist()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update the details of an existing Artist", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 43
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "BrandName",
+                            "Description",
+                            "Phrase",
+                            "SpecialtyId",
+                            "FirstName",
+                            "LastName"});
+                table5.AddRow(new string[] {
+                            "SebSasaki 2.0",
+                            "Artista de china",
+                            "Solo hazlo!",
+                            "1",
+                            "Sebastian",
+                            "Sasaki"});
+#line 44
+ testRunner.When("I have supplied 5 as artist Id and update details provided", ((string)(null)), table5, "When ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Delete an Artist")]
+        [Xunit.TraitAttribute("FeatureTitle", "Artist")]
+        [Xunit.TraitAttribute("Description", "Delete an Artist")]
+        public virtual void DeleteAnArtist()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete an Artist", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 50
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 51
+ testRunner.Given("I have supplied 5 as artist Id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "BrandName",
+                            "Description",
+                            "Phrase",
+                            "SpecialtyId",
+                            "FirstName",
+                            "LastName"});
+                table6.AddRow(new string[] {
+                            "5",
+                            "SebSasaki 2.0",
+                            "Artista de china",
+                            "Solo hazlo!",
+                            "1",
+                            "Sebastian",
+                            "Sasaki"});
+#line 52
+ testRunner.Then("remove artist with Id 5 and removed artist details should be", ((string)(null)), table6, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

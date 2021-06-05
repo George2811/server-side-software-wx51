@@ -110,20 +110,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "ArtTitle",
                             "ArtDescription",
                             "ArtCost",
                             "LinkInfo",
                             "ArtistId"});
-                table4.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "Monalisa2",
                             "Nueva Representacion de la monalisa",
                             "45",
                             "http//monalisa2",
                             "1"});
 #line 6
-    testRunner.When("artwork required attributes provided", ((string)(null)), table4, "When ");
+    testRunner.When("artwork required attributes provided", ((string)(null)), table7, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -160,14 +160,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 13
 testRunner.Given("I have supplied 1 as artworkId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "ArtworkId",
                             "ArtTitle",
                             "ArtDescription",
                             "ArtCost",
                             "LinkInfo",
                             "ArtistId"});
-                table5.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "1",
                             "La noche estrellada 2",
                             "Nueva Representacion de la noche estrellada",
@@ -175,7 +175,7 @@ testRunner.Given("I have supplied 1 as artworkId", ((string)(null)), ((TechTalk.
                             "http//noche.estrellada",
                             "2"});
 #line 14
-testRunner.Then("artwork details should be", ((string)(null)), table5, "Then ");
+testRunner.Then("artwork details should be", ((string)(null)), table8, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -209,21 +209,21 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "ArtworkId",
                             "ArtTitle",
                             "ArtDescription",
                             "ArtCost",
                             "LinkInfo",
                             "ArtistId"});
-                table6.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "1",
                             "La noche estrellada 2",
                             "Nueva Representacion de la noche estrellada",
                             "90",
                             "http//noche.estrellada",
                             "2"});
-                table6.AddRow(new string[] {
+                table9.AddRow(new string[] {
                             "2",
                             "El Beso 2",
                             "Nueva Representacion de la obra de klimt",
@@ -231,7 +231,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "http//elbeso",
                             "2"});
 #line 19
-testRunner.When("No artwork supplied All artworks list should return", ((string)(null)), table6, "When ");
+testRunner.When("No artwork supplied All artworks list should return", ((string)(null)), table9, "When ");
 #line hidden
             }
             this.ScenarioCleanup();

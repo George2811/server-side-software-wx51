@@ -110,14 +110,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "EventTitle",
                             "DateStart",
                             "DateEnd",
                             "EventDescription",
                             "EventAditionalInfo",
                             "ArtistId"});
-                table7.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "El rey Lear",
                             "12/06/2021 12:00:00 AM",
                             "20/06/2021 12:00:00 AM",
@@ -125,7 +125,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "50 % de descuento los 2 primeros dias",
                             "1"});
 #line 6
-    testRunner.When("event required attributes provided", ((string)(null)), table7, "When ");
+    testRunner.When("event required attributes provided", ((string)(null)), table10, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -162,7 +162,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 13
 testRunner.Given("I have supplied 1 as eventId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "EventId",
                             "EventTitle",
                             "DateStart",
@@ -170,7 +170,7 @@ testRunner.Given("I have supplied 1 as eventId", ((string)(null)), ((TechTalk.Sp
                             "EventDescription",
                             "EventAditionalInfo",
                             "ArtistId"});
-                table8.AddRow(new string[] {
+                table11.AddRow(new string[] {
                             "1",
                             "Hilda",
                             "16/06/2021 12:00:00 AM",
@@ -179,7 +179,7 @@ testRunner.Given("I have supplied 1 as eventId", ((string)(null)), ((TechTalk.Sp
                             "Con tu carnet de universitario 20% de descuento",
                             "2"});
 #line 14
-testRunner.Then("events details should be", ((string)(null)), table8, "Then ");
+testRunner.Then("events details should be", ((string)(null)), table11, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -213,7 +213,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "EventId",
                             "EventTitle",
                             "DateStart",
@@ -221,7 +221,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "EventDescription",
                             "EventAditionalInfo",
                             "ArtistId"});
-                table9.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "1",
                             "Hilda",
                             "16/06/2021 12:00:00 AM",
@@ -229,7 +229,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Nueva Interpretacion de Hilda",
                             "Con tu carnet de universitario 20% de descuento",
                             "2"});
-                table9.AddRow(new string[] {
+                table12.AddRow(new string[] {
                             "2",
                             "Romeo y Julieta",
                             "1/07/2021 12:00:00 AM",
@@ -238,7 +238,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Con tu carnet de universitario 20% de descuento",
                             "2"});
 #line 20
-testRunner.When("No event supplied All events list should return", ((string)(null)), table9, "When ");
+testRunner.When("No event supplied All events list should return", ((string)(null)), table12, "When ");
 #line hidden
             }
             this.ScenarioCleanup();

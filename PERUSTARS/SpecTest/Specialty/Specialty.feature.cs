@@ -113,14 +113,14 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 testRunner.Given("I have supplied 1 as specialtyId", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table13.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "1",
                             "Specialty1"});
 #line 7
-testRunner.Then("specialty details should be", ((string)(null)), table13, "Then ");
+testRunner.Then("specialty details should be", ((string)(null)), table16, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -154,23 +154,23 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "Name"});
-                table14.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "1",
                             "Specialty1"});
-                table14.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "2",
                             "Specialty2"});
-                table14.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "3",
                             "Specialty3"});
-                table14.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "4",
                             "Specialty4"});
 #line 12
-testRunner.When("No specialty supplied All specialty list should return", ((string)(null)), table14, "When ");
+testRunner.When("No specialty supplied All specialty list should return", ((string)(null)), table17, "When ");
 #line hidden
             }
             this.ScenarioCleanup();
