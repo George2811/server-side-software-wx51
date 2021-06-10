@@ -94,6 +94,24 @@
 
 ## EventAssistances
 
+#### Get All Events By Hobbyist Id
+```
+/api/hobbyists/{hobbyistId}/events
+```
+
+#### Assign Event Assistance
+```
+/api/hobbyists/{hobbyistId}/events
+```
+
+#### Unassign Event Assistance
+```
+/api/hobbyists/{hobbyistId}/events/{eventId}
+```
+
+
+##Events
+
 #### List Events By Artist Id
 ```
 /api/artists/{artistId}/events
