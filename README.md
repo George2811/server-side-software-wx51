@@ -110,7 +110,7 @@
 ```
 
 
-##Events
+## Events
 
 #### List Events By Artist Id
 ```
