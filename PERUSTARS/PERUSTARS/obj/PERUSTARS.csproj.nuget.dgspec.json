@@ -1,26 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {}
+    "D:\\Desktop\\Aplicaciones Web 2.0\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {}
   },
   "projects": {
-    "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {
+    "D:\\Desktop\\Aplicaciones Web 2.0\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
+        "projectUniqueName": "D:\\Desktop\\Aplicaciones Web 2.0\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
         "projectName": "PERUSTARS",
-        "projectPath": "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
-        "packagesPath": "C:\\Users\\Diego Alonso\\.nuget\\packages\\",
-        "outputPath": "C:\\DIEGO\\Mermelada\\VISUAL STUDIO\\OFICIAL\\UNIVERSIDAD\\CICLO 5\\Z- PERU STARS\\ServerSideSoftware\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\obj\\",
+        "projectPath": "D:\\Desktop\\Aplicaciones Web 2.0\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\PERUSTARS.csproj",
+        "packagesPath": "C:\\Users\\JOYCE\\.nuget\\packages\\",
+        "outputPath": "D:\\Desktop\\Aplicaciones Web 2.0\\server-side-software-wx51\\PERUSTARS\\PERUSTARS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Diego Alonso\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\JOYCE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
