@@ -101,7 +101,7 @@
 
 #### Assign Event Assistance
 ```
-/api/hobbyists/{hobbyistId}/events
+/api/hobbyists/{hobbyistId}/events/{eventId}
 ```
 
 #### Unassign Event Assistance
@@ -147,7 +147,7 @@
 
 #### Assign Favorite Artwork
 ```
-/api/hobbyists/{hobbyistId}/artworks
+/api/hobbyists/{hobbyistId}/artworks/{artworkId}
 ```
 
 #### Unassign Favorite Artwork
@@ -160,17 +160,17 @@
 
 #### Assign Follower
 ```
-/api/artists/{artistId}/followers
-```
-
-#### Get All Hobbyist By Artist Id
-```
-/api/artists/{artistId}/followers
+/api/artists/{artistId}/followers/{hobbyistId}
 ```
 
 #### Unassign Follower
 ```
 /api/artists/{artistId}/followers/{hobbyistId}
+```
+
+#### Get All Hobbyist By Artist Id
+```
+/api/artists/{artistId}/followers
 ```
 
 #### Count Artists' Followers
@@ -279,4 +279,22 @@
 #### Get Specialty by Id
 ```
 /api/specialties/{specialtyId}
+```
+
+
+## Users
+
+#### List all Users
+```
+/api/users
+```
+
+#### Register User
+```
+/api/users
+```
+
+#### Authenticate User
+```
+/api/users/authenticate
 ```

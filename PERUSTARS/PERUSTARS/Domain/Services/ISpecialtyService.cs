@@ -11,7 +11,7 @@ namespace PERUSTARS.Domain.Services
     {
         Task<IEnumerable<Specialty>> ListAsync();
         Task<IEnumerable<Specialty>> ListByHobbyistIdAsync(int hobbyistId);
-        Task<SpecialtyResponse> GetByIdAsync(long id);       
+        Task<SpecialtyResponse> GetByIdAsync(long specialtyId);       
 
     }
 }

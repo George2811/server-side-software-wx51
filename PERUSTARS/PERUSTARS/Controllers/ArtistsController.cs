@@ -64,7 +64,7 @@ namespace PERUSTARS.Controllers
         [HttpGet("{artistId}")]
         [ProducesResponseType(typeof(ArtistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetByIdAsync(int artistId) {
+        public async Task<IActionResult> GetByIdAsync(long artistId) {
             var result = await _artistService.GetByIdAsync(artistId);
             if (!result.Success)
                 return BadRequest(result.Message);

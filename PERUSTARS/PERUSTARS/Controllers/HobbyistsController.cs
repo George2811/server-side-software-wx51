@@ -64,7 +64,7 @@ namespace PERUSTARS.Controllers
         [HttpGet("{hobbyistId}")]
         [ProducesResponseType(typeof(HobbyistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetByIdAsync(int hobbyistId)
+        public async Task<IActionResult> GetByIdAsync(long hobbyistId)
         {
             var result = await _hobbyistService.GetByIdAsync(hobbyistId);
             if (!result.Success)

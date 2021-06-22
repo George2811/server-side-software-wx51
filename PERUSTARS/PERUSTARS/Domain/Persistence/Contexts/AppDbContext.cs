@@ -28,7 +28,7 @@ namespace PERUSTARS.Domain.Persistence.Contexts
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<Interest> Interests { get; set; }
         public DbSet<FavoriteArtwork> FavoriteArtworks { get; set; }
-
+        public DbSet<User> Users { get; set; }
         public DbSet<ClaimTicket> ClaimTickets { get; set; }
 
 
@@ -252,37 +252,35 @@ namespace PERUSTARS.Domain.Persistence.Contexts
                 .HasForeignKey(pt => pt.EventId);
 
 
+
+                                //*******************************************//
+                                                /*USERS*/
+                                //*******************************************//
+
+            builder.Entity<User>().ToTable("Users");
+            builder.Entity<User>().HasKey(u => u.Id);
+            builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<User>().Property(u => u.Username).IsRequired();
+            builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
+            builder.Entity<User>().Ignore(u => u.Token);
+
+
+
             //*************************************************//
             //*Seed Data*//
             //*************************************************//
 
-
             builder.Entity<Specialty>().HasData
                (
-                   new Specialty { Id = 1, Name = "Specialty1" },
-                   new Specialty { Id = 2, Name = "Specialty2" },
-                   new Specialty { Id = 3, Name = "Specialty3" },
-                   new Specialty { Id = 4, Name = "Specialty4" }
+                   new Specialty { Id = 1, Name = "Pintura" },
+                   new Specialty { Id = 2, Name = "Escultura" },
+                   new Specialty { Id = 3, Name = "Canto" },
+                   new Specialty { Id = 4, Name = "Danza" },
+                   new Specialty { Id = 5, Name = "Teatro" },
+                   new Specialty { Id = 6, Name = "Producción" },
+                   new Specialty { Id = 7, Name = "Cine" },
+                   new Specialty { Id = 8, Name = "Música" }
                );
-
-            //  builder.Entity<Hobbyist>().HasData
-            //  (
-            //      new Hobbyist { Id = 3, Firstname = "Sebastian", Lastname = "Sasaku" },
-            //      new Hobbyist { Id = 4, Firstname = "Kelly", Lastname = "Vargas" }
-            //   );
-
-            //builder.Entity<Artist>().HasData
-            //    (
-            //     new Artist { Id = 1, BrandName = "SebasGx", Description = "Artista Nuevo en PeruStars", Phrase = "Solo se que nada se", Firstname = "Sebastian", Lastname = "Gonzales", SpecialtyId = 1},
-            //     new Artist { Id = 2, BrandName = "Dr.Chocolate", Description = "Escultor Nuevo en PeruStars", Phrase = "Ojos que no ven corazon que no siente", Firstname = "Diego Alonso", Lastname = "Chocolate", SpecialtyId = 4 }
-
-            //    );
-
-            //builder.Entity<Artwork>().HasData
-            //    (
-            //    new Artwork {ArtworkId = 1, ArtTitle = "La noche estrellada 2", ArtDescription = "Nueva Representacion de la noche estrellada",ArtCost = 90, LinkInfo = "http//noche.estrellada",ArtistId = 2 },
-            //    new Artwork { ArtworkId = 2, ArtTitle = "El Beso 2", ArtDescription = "Nueva Representacion de la obra de klimt", ArtCost = 70, LinkInfo = "http//elbeso ", ArtistId = 2 }
-            //    );
 
 
 

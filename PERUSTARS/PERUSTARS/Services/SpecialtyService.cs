@@ -22,9 +22,9 @@ namespace PERUSTARS.Services
             _interestRepository = interestRepository;
         }
 
-        public async Task<SpecialtyResponse> GetByIdAsync(long id)
+        public async Task<SpecialtyResponse> GetByIdAsync(long specialtyId)
         {
-            var existingSpecialty = await _specialtyRepository.FindById(id);
+            var existingSpecialty = await _specialtyRepository.FindById(specialtyId);
             if (existingSpecialty == null)
                 return new SpecialtyResponse("Specialty not found");
             return new SpecialtyResponse(existingSpecialty);

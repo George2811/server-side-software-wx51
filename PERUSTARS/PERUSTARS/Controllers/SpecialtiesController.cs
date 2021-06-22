@@ -51,7 +51,7 @@ namespace PERUSTARS.Controllers
         [HttpGet("{specialtyId}")]
         [ProducesResponseType(typeof(SpecialtyResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> GetByIdAsync(int specialtyId)
+        public async Task<IActionResult> GetByIdAsync(long specialtyId)
         {
             var result = await _specialtyService.GetByIdAsync(specialtyId);
             if (!result.Success)

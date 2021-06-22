@@ -37,7 +37,7 @@ namespace PERUSTARS.Controllers
            OperationId = "AssignFollower")]
         [SwaggerResponse(200, "Artist Assign Follower", typeof(ArtistResource))]
 
-        [HttpPost]
+        [HttpPost("{hobbyistId}")]
         [ProducesResponseType(typeof(ArtistResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IActionResult> AssignFollower(int hobbyistId, int artistId)
@@ -112,10 +112,10 @@ namespace PERUSTARS.Controllers
         [HttpGet("count")]
         [ProducesResponseType(typeof(int), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<int> CountFollowers(long artistId)
+        public async Task<IActionResult> CountFollowers(long artistId)
         {
             var count = await _followerService.CountFollowers(artistId);
-            return count;
+            return Ok(count);
         }
     }
 }

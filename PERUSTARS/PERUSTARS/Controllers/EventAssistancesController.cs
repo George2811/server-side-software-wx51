@@ -64,11 +64,11 @@ namespace PERUSTARS.Controllers
            OperationId = "Assign Event Assistance")]
         [SwaggerResponse(200, "Event Assigned", typeof(EventResource))]
 
-        [HttpPost]
+        [HttpPost("{eventId}")]
         [ProducesResponseType(typeof(EventResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IActionResult> AssignEventAssistance(long hobbyistId, long eventId, DateTime attendance) {
-            var result = await _eventAssistanceService.AssignEventAssistanceAsync(hobbyistId, eventId, attendance);
+        public async Task<IActionResult> AssignEventAssistance(long hobbyistId, long eventId, [FromBody]SaveEventAssistanceResource resource) {
+            var result = await _eventAssistanceService.AssignEventAssistanceAsync(hobbyistId, eventId, resource.AttendanceDay);
             if (!result.Success)
                 return BadRequest(result.Message);
             var eventResource = _mapper.Map<Event, EventResource>(result.Resource.Event);

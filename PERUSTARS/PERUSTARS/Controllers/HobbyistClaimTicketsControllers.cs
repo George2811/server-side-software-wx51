@@ -41,7 +41,7 @@ namespace PERUSTARS.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<ClaimTicketResource>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
-        public async Task<IEnumerable<ClaimTicketResource>> GetAllByArtistIdAsync(long hobbyistId)
+        public async Task<IEnumerable<ClaimTicketResource>> GetAllByHobbyistIdAsync(long hobbyistId)
         {
             var claimTicket = await _claimTicketService.ListAsyncByPersonId(hobbyistId);
             var resources = _mapper.Map<IEnumerable<ClaimTicket>, IEnumerable<ClaimTicketResource>>(claimTicket);

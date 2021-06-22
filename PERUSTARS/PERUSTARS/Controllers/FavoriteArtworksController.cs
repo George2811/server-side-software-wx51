@@ -63,7 +63,7 @@ namespace PERUSTARS.Controllers
            OperationId = "AssignFavoriteArtwork")]
         [SwaggerResponse(200, "Favorite Artwork Assigned", typeof(ArtworkResource))]
 
-        [HttpPost]
+        [HttpPost("{artworkId}")]
         [ProducesResponseType(typeof(ArtworkResource), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 404)]
         public async Task<IActionResult> AssignFavoriteArtwork(long hobbyistId, long artworkId)

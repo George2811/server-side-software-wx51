@@ -14,12 +14,12 @@ namespace PERUSTARS.Controllers
     [Route("api/hobbyists/{hobbyistId}/reports")]
     [Produces("application/json")]
     [ApiController]
-    public class HobbyistReports : ControllerBase
+    public class HobbyistReportsController : ControllerBase
     {
         private readonly IClaimTicketService _claimTicketService;
         private readonly IMapper _mapper;
 
-        public HobbyistReports(IClaimTicketService claimTicketService, IMapper mapper)
+        public HobbyistReportsController(IClaimTicketService claimTicketService, IMapper mapper)
         {
             _claimTicketService = claimTicketService;
             _mapper = mapper;
